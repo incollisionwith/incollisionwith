@@ -61,3 +61,5 @@ TEMPLATES = [
 
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.environ.get('DJANGO_STATIC_ROOT')
+
