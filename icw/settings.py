@@ -1,6 +1,7 @@
 import os
 
-DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split() if not DEBUG else ['*']
 
 TIME_ZONE = 'Europe/London'
 
