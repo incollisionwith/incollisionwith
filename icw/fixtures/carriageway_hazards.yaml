@@ -1,0 +1,33 @@
+- model: icw.CarriagewayHazards
+  pk: 0
+  fields:
+    label: None
+- model: icw.CarriagewayHazards
+  pk: 1
+  fields:
+    label: Vehicle load on road
+- model: icw.CarriagewayHazards
+  pk: 2
+  fields:
+    label: Other object on road
+- model: icw.CarriagewayHazards
+  pk: 3
+  fields:
+    label: Previous accident
+- model: icw.CarriagewayHazards
+  pk: 4
+  fields:
+    label: Dog on road
+- model: icw.CarriagewayHazards
+  pk: 5
+  fields:
+    label: Other animal on road
+- model: icw.CarriagewayHazards
+  pk: 6
+  fields:
+    label: Pedestrian in carriageway - not injured
+- model: icw.CarriagewayHazards
+  pk: 7
+  fields:
+    label: Any animal in carriageway (except ridden horse)
+

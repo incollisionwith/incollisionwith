@@ -1,0 +1,11 @@
+{% if page_obj.has_other_pages() %}
+        <div class="pagination">
+{% if page_obj.has_previous() -%}
+            <a href="?page={{ page_obj.previous_page_number() }}"><i class="fa fa-chevron-left" title="Previous page"> </i></a>
+{% endif -%}
+            <span class="pagination-current">Page {{ page_obj.number }} of {{ paginator.num_pages }}</span>
+{% if page_obj.has_next() -%}
+            <a href="?page={{ page_obj.next_page_number() }}"><i class="fa fa-chevron-right" title="Next page"> </i></a>
+{% endif -%}
+        </div>
+{% endif %}

@@ -1,0 +1,25 @@
+- model: icw.TowingAndArticulation
+  pk: 0
+  fields:
+    label: No tow/articulation
+- model: icw.TowingAndArticulation
+  pk: 1
+  fields:
+    label: Articulated vehicle
+- model: icw.TowingAndArticulation
+  pk: 2
+  fields:
+    label: Double or multiple trailer
+- model: icw.TowingAndArticulation
+  pk: 3
+  fields:
+    label: Caravan
+- model: icw.TowingAndArticulation
+  pk: 4
+  fields:
+    label: Single trailer
+- model: icw.TowingAndArticulation
+  pk: 5
+  fields:
+    label: Other tow
+

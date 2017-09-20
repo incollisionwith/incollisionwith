@@ -1,0 +1,29 @@
+- model: icw.RoadType
+  pk: 1
+  fields:
+    label: Roundabout
+- model: icw.RoadType
+  pk: 2
+  fields:
+    label: One way street
+- model: icw.RoadType
+  pk: 3
+  fields:
+    label: Dual carriageway
+- model: icw.RoadType
+  pk: 6
+  fields:
+    label: Single carriageway
+- model: icw.RoadType
+  pk: 7
+  fields:
+    label: Slip road
+- model: icw.RoadType
+  pk: 9
+  fields:
+    label: Unknown
+- model: icw.RoadType
+  pk: 12
+  fields:
+    label: One way street/Slip road
+

@@ -1,0 +1,42 @@
+- model: icw.PedestrianMovement
+  pk: 0
+  fields:
+    label: Not a Pedestrian
+- model: icw.PedestrianMovement
+  pk: 1
+  fields:
+    label: Crossing from driver's nearside
+- model: icw.PedestrianMovement
+  pk: 2
+  fields:
+    label: Crossing from nearside - masked by parked or stationary vehicle
+- model: icw.PedestrianMovement
+  pk: 3
+  fields:
+    label: Crossing from driver's offside
+- model: icw.PedestrianMovement
+  pk: 4
+  fields:
+    label: Crossing from offside - masked by  parked or stationary vehicle
+- model: icw.PedestrianMovement
+  pk: 5
+  fields:
+    label: In carriageway, stationary - not crossing  (standing or playing)
+- model: icw.PedestrianMovement
+  pk: 6
+  fields:
+    label: In carriageway, stationary - not crossing  (standing or playing) - masked
+      by parked or stationary vehicle
+- model: icw.PedestrianMovement
+  pk: 7
+  fields:
+    label: Walking along in carriageway, facing traffic
+- model: icw.PedestrianMovement
+  pk: 8
+  fields:
+    label: Walking along in carriageway, back to traffic
+- model: icw.PedestrianMovement
+  pk: 9
+  fields:
+    label: Unknown or other
+

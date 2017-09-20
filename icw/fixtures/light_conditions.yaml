@@ -1,0 +1,21 @@
+- model: icw.LightConditions
+  pk: 1
+  fields:
+    label: Daylight
+- model: icw.LightConditions
+  pk: 4
+  fields:
+    label: Darkness - lights lit
+- model: icw.LightConditions
+  pk: 5
+  fields:
+    label: Darkness - lights unlit
+- model: icw.LightConditions
+  pk: 6
+  fields:
+    label: Darkness - no lighting
+- model: icw.LightConditions
+  pk: 7
+  fields:
+    label: Darkness - lighting unknown
+

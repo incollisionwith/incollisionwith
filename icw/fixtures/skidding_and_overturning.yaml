@@ -1,0 +1,25 @@
+- model: icw.SkiddingAndOverturning
+  pk: 0
+  fields:
+    label: None
+- model: icw.SkiddingAndOverturning
+  pk: 1
+  fields:
+    label: Skidded
+- model: icw.SkiddingAndOverturning
+  pk: 2
+  fields:
+    label: Skidded and overturned
+- model: icw.SkiddingAndOverturning
+  pk: 3
+  fields:
+    label: Jackknifed
+- model: icw.SkiddingAndOverturning
+  pk: 4
+  fields:
+    label: Jackknifed and overturned
+- model: icw.SkiddingAndOverturning
+  pk: 5
+  fields:
+    label: Overturned
+

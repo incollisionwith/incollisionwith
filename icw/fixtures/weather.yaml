@@ -1,0 +1,37 @@
+- model: icw.Weather
+  pk: 1
+  fields:
+    label: Fine no high winds
+- model: icw.Weather
+  pk: 2
+  fields:
+    label: Raining no high winds
+- model: icw.Weather
+  pk: 3
+  fields:
+    label: Snowing no high winds
+- model: icw.Weather
+  pk: 4
+  fields:
+    label: Fine + high winds
+- model: icw.Weather
+  pk: 5
+  fields:
+    label: Raining + high winds
+- model: icw.Weather
+  pk: 6
+  fields:
+    label: Snowing + high winds
+- model: icw.Weather
+  pk: 7
+  fields:
+    label: Fog or mist
+- model: icw.Weather
+  pk: 8
+  fields:
+    label: Other
+- model: icw.Weather
+  pk: 9
+  fields:
+    label: Unknown
+

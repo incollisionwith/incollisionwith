@@ -1,0 +1,37 @@
+- model: icw.JunctionDetail
+  pk: 0
+  fields:
+    label: Not at junction or within 20 metres
+- model: icw.JunctionDetail
+  pk: 1
+  fields:
+    label: Roundabout
+- model: icw.JunctionDetail
+  pk: 2
+  fields:
+    label: Mini-roundabout
+- model: icw.JunctionDetail
+  pk: 3
+  fields:
+    label: T or staggered junction
+- model: icw.JunctionDetail
+  pk: 5
+  fields:
+    label: Slip road
+- model: icw.JunctionDetail
+  pk: 6
+  fields:
+    label: Crossroads
+- model: icw.JunctionDetail
+  pk: 7
+  fields:
+    label: More than 4 arms (not roundabout)
+- model: icw.JunctionDetail
+  pk: 8
+  fields:
+    label: Private drive or entrance
+- model: icw.JunctionDetail
+  pk: 9
+  fields:
+    label: Other junction
+

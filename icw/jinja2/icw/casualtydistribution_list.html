@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block article %}
+
+        <div class="pure-u-1-1">
+            <div class="box-padding">
+                <h1>Casualty distributions</h1>
+            </div>
+        </div>
+        <p>{{ paginator.count }} casualty distributions found</p>
+        {% include "icw/pagination.html" -%}
+        <table class="pure-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Distribution</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for casualty_distribution in object_list -%}
+                <tr>
+                    <td><a href="{{ url("accident-list") }}?casualty_distribution={{ casualty_distribution.id }}">{{ casualty_distribution.id }}</a></td>
+                    <td>{% for type, severity_id in casualty_distribution.unparse() %}<i title="{{ type.label }}" class="fa fa-{{ type.font_awesome or 'circle' }} casualty-severity-{{ severity_id }}"> </i> {% endfor %}</td>
+                    <td>{{ casualty_distribution.count }}</td>
+                </tr>
+            {% endfor -%}
+            </tbody>
+        </table>
+        {% include "icw/pagination.html" -%}
+    </div>
+{% endblock %}

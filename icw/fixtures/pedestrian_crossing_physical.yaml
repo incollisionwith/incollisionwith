@@ -1,0 +1,25 @@
+- model: icw.PedestrianCrossingPhysical
+  pk: 0
+  fields:
+    label: No physical crossing facilities within 50 metres
+- model: icw.PedestrianCrossingPhysical
+  pk: 1
+  fields:
+    label: Zebra
+- model: icw.PedestrianCrossingPhysical
+  pk: 4
+  fields:
+    label: Pelican, puffin, toucan or similar non-junction pedestrian light crossing
+- model: icw.PedestrianCrossingPhysical
+  pk: 5
+  fields:
+    label: Pedestrian phase at traffic signal junction
+- model: icw.PedestrianCrossingPhysical
+  pk: 7
+  fields:
+    label: Footbridge or subway
+- model: icw.PedestrianCrossingPhysical
+  pk: 8
+  fields:
+    label: Central refuge
+

@@ -1,0 +1,49 @@
+- model: icw.HitObjectOffCarriageway
+  pk: 0
+  fields:
+    label: None
+- model: icw.HitObjectOffCarriageway
+  pk: 1
+  fields:
+    label: Road sign or traffic signal
+- model: icw.HitObjectOffCarriageway
+  pk: 2
+  fields:
+    label: Lamp post
+- model: icw.HitObjectOffCarriageway
+  pk: 3
+  fields:
+    label: Telegraph or electricity pole
+- model: icw.HitObjectOffCarriageway
+  pk: 4
+  fields:
+    label: Tree
+- model: icw.HitObjectOffCarriageway
+  pk: 5
+  fields:
+    label: Bus stop or bus shelter
+- model: icw.HitObjectOffCarriageway
+  pk: 6
+  fields:
+    label: Central crash barrier
+- model: icw.HitObjectOffCarriageway
+  pk: 7
+  fields:
+    label: Near/Offside crash barrier
+- model: icw.HitObjectOffCarriageway
+  pk: 8
+  fields:
+    label: Submerged in water
+- model: icw.HitObjectOffCarriageway
+  pk: 9
+  fields:
+    label: Entered ditch
+- model: icw.HitObjectOffCarriageway
+  pk: 10
+  fields:
+    label: Other permanent object
+- model: icw.HitObjectOffCarriageway
+  pk: 11
+  fields:
+    label: Wall or fence
+

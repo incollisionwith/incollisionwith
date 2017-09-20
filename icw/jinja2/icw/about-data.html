@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% set description = "UK road traffic incident injury data and statistics, cross-linked to news articles" %}
+
+{% block article %}
+
+
+<div class="pure-g">
+    <div class="pure-u-md-1-4"></div>
+    <div class="pure-u-1 pure-u-md-1-2">
+        <div class="box-padding">
+            <h1>Data and API</h1>
+            <h2>API</h2>
+            <p>The API is available at <a href="{{ api_url }}">{{ api_url }}</a>.</p>
+            <dl>
+                <dt><a href="{{ api_url }}accident">/accident</a></dt>
+                <dd>
+                    <p>Presents paginated accident data as JSON. It has a fixed pagination size of 100, and supports
+                        the following parameters:</p>
+                    <dl>
+                        <dt><code>sort</code></dt>
+                        <dd>Defines the sort order. Can be one of: <code>date</code>,
+                            <code>number_of_casualties</code>, <code>number_of_vehicles</code></dd>
+                        <dt><code>involvedVehicleType</code></dt>
+                        <dd>A vehicle type code, as listed in the
+                            <a href="http://data.dft.gov.uk/road-accidents-safety-data/Road-Accident-Safety-Data-Guide.xls">reference
+                                data</a>. Can be repeated to find accidents involving multiple types of vehicle.</dd>
+
+                        <dt><code>involvedCasualtyType</code></dt>
+                        <dd>A casualty type code, as listed in the
+                            <a href="http://data.dft.gov.uk/road-accidents-safety-data/Road-Accident-Safety-Data-Guide.xls">reference
+                                data</a>. Can be repeated to find accidents involving multiple types of casualty.</dd>
+                        <dt><code>severity</code></dt>
+                        <dd>Either <code>1</code> (fatal), <code>2</code> (serious) or <code>3</code> (slight). Can
+                            be repeated to find accidents of any of the given severities.</dd>
+                        <dt><code>p</code></dt>
+                        <dd>The page number. There are also links to the previous and next pages in the data.</dd>
+                        <dt><code>dateTimeLower</code></dt>
+                        <dd>A datetime lowerbound, e.g. '2012-12-12' or '2012-12-12T12:00:00'.</dd>
+                        <dt><code>dateTimeUpper</code></dt>
+                        <dd>A datetime upperbound, e.g. '2012-12-12' or '2012-12-12T12:00:00'.</dd>
+                        <dt><code>bbox</code></dt>
+                        <dd>Four co-ordinates for a bounding box to retrieve results about. Specify as
+                            <code>{lon1},{lat1},{lon2},{lat2}</code>.</dd>
+                        <dt><code>highwayAuthority</code></dt>
+                        <dd>A highway authority identifier (e.g. <code>E10000025</code> for Oxfordshire), as listed in the
+                            <a href="http://data.dft.gov.uk/road-accidents-safety-data/Road-Accident-Safety-Data-Guide.xls">reference
+                                data</a>.</dd>
+                    </dl>
+                </dd>
+                <dt><a href="{{ api_url }}accident/2014921401161"><code>/accident/{id}</code></a></dt>
+                <dd><p>JSON for a given accident ID.</p></dd>
+                <dt><a href="{{ api_url }}citation"><code>citation</code></a></dt>
+                <dd>
+                    <p>Endpoint for adding a news link to an accident. To use, POST with the following form
+                        parameters:</p>
+
+                    <dl>
+                        <dt><code>accident_id</code></dt>
+                        <dd>The accident identifier against which to record a news link.</dd>
+                        <dt><code>url</code></dt>
+                        <dd>The URL for the news link.</dd>
+                    </dl>
+                    <p>Periodically, a job is run to fetch metadata from the given URL to include in the page. The
+                        citation functionality requires a lot more work to make it easier to use and moderate.</p>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="pure-u-md-1-4"></div>
+</div>
+
+{% endblock %}

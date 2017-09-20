@@ -1,0 +1,13 @@
+- model: icw.UrbanRural
+  pk: 1
+  fields:
+    label: Urban
+- model: icw.UrbanRural
+  pk: 2
+  fields:
+    label: Rural
+- model: icw.UrbanRural
+  pk: 3
+  fields:
+    label: Unallocated
+

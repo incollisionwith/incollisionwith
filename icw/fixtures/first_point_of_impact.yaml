@@ -1,0 +1,21 @@
+- model: icw.FirstPointOfImpact
+  pk: 0
+  fields:
+    label: Did not impact
+- model: icw.FirstPointOfImpact
+  pk: 1
+  fields:
+    label: Front
+- model: icw.FirstPointOfImpact
+  pk: 2
+  fields:
+    label: Back
+- model: icw.FirstPointOfImpact
+  pk: 3
+  fields:
+    label: Offside
+- model: icw.FirstPointOfImpact
+  pk: 4
+  fields:
+    label: Nearside
+

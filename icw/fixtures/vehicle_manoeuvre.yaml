@@ -1,0 +1,73 @@
+- model: icw.VehicleManoeuvre
+  pk: 1
+  fields:
+    label: Reversing
+- model: icw.VehicleManoeuvre
+  pk: 2
+  fields:
+    label: Parked
+- model: icw.VehicleManoeuvre
+  pk: 3
+  fields:
+    label: Waiting to go - held up
+- model: icw.VehicleManoeuvre
+  pk: 4
+  fields:
+    label: Slowing or stopping
+- model: icw.VehicleManoeuvre
+  pk: 5
+  fields:
+    label: Moving off
+- model: icw.VehicleManoeuvre
+  pk: 6
+  fields:
+    label: U-turn
+- model: icw.VehicleManoeuvre
+  pk: 7
+  fields:
+    label: Turning left
+- model: icw.VehicleManoeuvre
+  pk: 8
+  fields:
+    label: Waiting to turn left
+- model: icw.VehicleManoeuvre
+  pk: 9
+  fields:
+    label: Turning right
+- model: icw.VehicleManoeuvre
+  pk: 10
+  fields:
+    label: Waiting to turn right
+- model: icw.VehicleManoeuvre
+  pk: 11
+  fields:
+    label: Changing lane to left
+- model: icw.VehicleManoeuvre
+  pk: 12
+  fields:
+    label: Changing lane to right
+- model: icw.VehicleManoeuvre
+  pk: 13
+  fields:
+    label: Overtaking moving vehicle - offside
+- model: icw.VehicleManoeuvre
+  pk: 14
+  fields:
+    label: Overtaking static vehicle - offside
+- model: icw.VehicleManoeuvre
+  pk: 15
+  fields:
+    label: Overtaking - nearside
+- model: icw.VehicleManoeuvre
+  pk: 16
+  fields:
+    label: Going ahead left-hand bend
+- model: icw.VehicleManoeuvre
+  pk: 17
+  fields:
+    label: Going ahead right-hand bend
+- model: icw.VehicleManoeuvre
+  pk: 18
+  fields:
+    label: Going ahead other
+

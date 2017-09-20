@@ -1,0 +1,13 @@
+- model: icw.CasualtyClass
+  pk: 1
+  fields:
+    label: driver or rider
+- model: icw.CasualtyClass
+  pk: 2
+  fields:
+    label: passenger
+- model: icw.CasualtyClass
+  pk: 3
+  fields:
+    label: pedestrian
+

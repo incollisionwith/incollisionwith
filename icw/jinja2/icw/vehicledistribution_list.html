@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block article %}
+
+        <div class="pure-u-1-1">
+            <div class="box-padding">
+                <h1>Vehicle distributions</h1>
+            </div>
+        </div>
+        <p>{{ paginator.count }} vehicle distributions found</p>
+        {% include "icw/pagination.html" -%}
+        <table class="pure-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Distribution</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for vehicle_distribution in object_list -%}
+                <tr>
+                    <td><a href="{{ url("accident-list") }}?vehicle_distribution={{ vehicle_distribution.id }}">{{ vehicle_distribution.id }}</a></td>
+                    <td>{% for type in vehicle_distribution.unparse() %}<i title="{{ type.label }}" class="fa fa-{{ type.font_awesome or 'circle' }}"> </i> {% endfor %}</td>
+                    <td>{{ vehicle_distribution.count }}</td>
+                </tr>
+            {% endfor -%}
+            </tbody>
+        </table>
+        {% include "icw/pagination.html" -%}
+    </div>
+{% endblock %}

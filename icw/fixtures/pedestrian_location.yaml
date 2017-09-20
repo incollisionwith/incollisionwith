@@ -1,0 +1,45 @@
+- model: icw.PedestrianLocation
+  pk: 0
+  fields:
+    label: Not a Pedestrian
+- model: icw.PedestrianLocation
+  pk: 1
+  fields:
+    label: Crossing on pedestrian crossing facility
+- model: icw.PedestrianLocation
+  pk: 2
+  fields:
+    label: Crossing in zig-zag approach lines
+- model: icw.PedestrianLocation
+  pk: 3
+  fields:
+    label: Crossing in zig-zag exit lines
+- model: icw.PedestrianLocation
+  pk: 4
+  fields:
+    label: Crossing elsewhere within 50m. of pedestrian crossing
+- model: icw.PedestrianLocation
+  pk: 5
+  fields:
+    label: In carriageway, crossing elsewhere
+- model: icw.PedestrianLocation
+  pk: 6
+  fields:
+    label: On footway or verge
+- model: icw.PedestrianLocation
+  pk: 7
+  fields:
+    label: On refuge, central island or central reservation
+- model: icw.PedestrianLocation
+  pk: 8
+  fields:
+    label: In centre of carriageway - not on refuge, island or central reservation
+- model: icw.PedestrianLocation
+  pk: 9
+  fields:
+    label: In carriageway, not crossing
+- model: icw.PedestrianLocation
+  pk: 10
+  fields:
+    label: Unknown or other
+

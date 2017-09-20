@@ -1,0 +1,37 @@
+- model: icw.VehicleLeavingCarriageway
+  pk: 0
+  fields:
+    label: Did not leave carriageway
+- model: icw.VehicleLeavingCarriageway
+  pk: 1
+  fields:
+    label: Nearside
+- model: icw.VehicleLeavingCarriageway
+  pk: 2
+  fields:
+    label: Nearside and rebounded
+- model: icw.VehicleLeavingCarriageway
+  pk: 3
+  fields:
+    label: Straight ahead at junction
+- model: icw.VehicleLeavingCarriageway
+  pk: 4
+  fields:
+    label: Offside on to central reservation
+- model: icw.VehicleLeavingCarriageway
+  pk: 5
+  fields:
+    label: Offside on to centrl res + rebounded
+- model: icw.VehicleLeavingCarriageway
+  pk: 6
+  fields:
+    label: Offside - crossed central reservation
+- model: icw.VehicleLeavingCarriageway
+  pk: 7
+  fields:
+    label: Offside
+- model: icw.VehicleLeavingCarriageway
+  pk: 8
+  fields:
+    label: Offside and rebounded
+

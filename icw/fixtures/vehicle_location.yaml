@@ -1,0 +1,45 @@
+- model: icw.VehicleLocation
+  pk: 0
+  fields:
+    label: On main carriageway - not in restricted lane
+- model: icw.VehicleLocation
+  pk: 1
+  fields:
+    label: Tram/Light rail track
+- model: icw.VehicleLocation
+  pk: 2
+  fields:
+    label: Bus lane
+- model: icw.VehicleLocation
+  pk: 3
+  fields:
+    label: Busway (including guided busway)
+- model: icw.VehicleLocation
+  pk: 4
+  fields:
+    label: Cycle lane (on main carriageway)
+- model: icw.VehicleLocation
+  pk: 5
+  fields:
+    label: Cycleway or shared use footway (not part of main carriageway)
+- model: icw.VehicleLocation
+  pk: 6
+  fields:
+    label: On lay-by or hard shoulder
+- model: icw.VehicleLocation
+  pk: 7
+  fields:
+    label: Entering lay-by or hard shoulder
+- model: icw.VehicleLocation
+  pk: 8
+  fields:
+    label: Leaving lay-by or hard shoulder
+- model: icw.VehicleLocation
+  pk: 9
+  fields:
+    label: Footway (pavement)
+- model: icw.VehicleLocation
+  pk: 10
+  fields:
+    label: Not on carriageway
+

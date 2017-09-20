@@ -1,0 +1,13 @@
+- model: icw.PedestrianCrossingHuman
+  pk: 0
+  fields:
+    label: None within 50 metres
+- model: icw.PedestrianCrossingHuman
+  pk: 1
+  fields:
+    label: Control by school crossing patrol
+- model: icw.PedestrianCrossingHuman
+  pk: 2
+  fields:
+    label: Control by other authorised person
+

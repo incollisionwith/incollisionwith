@@ -1,0 +1,29 @@
+- model: icw.RoadSurface
+  pk: 1
+  fields:
+    label: Dry
+- model: icw.RoadSurface
+  pk: 2
+  fields:
+    label: Wet or damp
+- model: icw.RoadSurface
+  pk: 3
+  fields:
+    label: Snow
+- model: icw.RoadSurface
+  pk: 4
+  fields:
+    label: Frost or ice
+- model: icw.RoadSurface
+  pk: 5
+  fields:
+    label: Flood over 3cm. deep
+- model: icw.RoadSurface
+  pk: 6
+  fields:
+    label: Oil or diesel
+- model: icw.RoadSurface
+  pk: 7
+  fields:
+    label: Mud
+

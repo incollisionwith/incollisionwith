@@ -1,0 +1,37 @@
+- model: icw.JunctionLocation
+  pk: 0
+  fields:
+    label: Not at or within 20 metres of junction
+- model: icw.JunctionLocation
+  pk: 1
+  fields:
+    label: Approaching junction or waiting/parked at junction approach
+- model: icw.JunctionLocation
+  pk: 2
+  fields:
+    label: Cleared junction or waiting/parked at junction exit
+- model: icw.JunctionLocation
+  pk: 3
+  fields:
+    label: Leaving roundabout
+- model: icw.JunctionLocation
+  pk: 4
+  fields:
+    label: Entering roundabout
+- model: icw.JunctionLocation
+  pk: 5
+  fields:
+    label: Leaving main road
+- model: icw.JunctionLocation
+  pk: 6
+  fields:
+    label: Entering main road
+- model: icw.JunctionLocation
+  pk: 7
+  fields:
+    label: Entering from slip road
+- model: icw.JunctionLocation
+  pk: 8
+  fields:
+    label: Mid Junction - on roundabout or on main road
+

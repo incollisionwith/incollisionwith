@@ -1,0 +1,34 @@
+- model: icw.RoadClass
+  pk: 0
+  fields:
+    label: Not at junction or within 20 metres
+- model: icw.RoadClass
+  pk: 1
+  fields:
+    label: Motorway
+    pattern: M{}
+- model: icw.RoadClass
+  pk: 2
+  fields:
+    label: A(M)
+    pattern: A{}(M)
+- model: icw.RoadClass
+  pk: 3
+  fields:
+    label: A
+    pattern: A{}
+- model: icw.RoadClass
+  pk: 4
+  fields:
+    label: B
+    pattern: B{}
+- model: icw.RoadClass
+  pk: 5
+  fields:
+    label: C
+    pattern: C{}
+- model: icw.RoadClass
+  pk: 6
+  fields:
+    label: Unclassified
+

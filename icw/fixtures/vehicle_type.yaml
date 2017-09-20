@@ -1,0 +1,116 @@
+- model: icw.VehicleType
+  pk: 0
+  fields:
+    label: pedestrian
+    font_awesome: male
+- model: icw.VehicleType
+  pk: 1
+  fields:
+    label: pedal cycle
+    font_awesome: bicycle
+    class_driver: cyclist
+    class_passenger: cycle passenger or additional rider
+- model: icw.VehicleType
+  pk: 2
+  fields:
+    label: motorcycle (50cc and under)
+    font_awesome: motorcycle
+    class_driver: motorcyclist
+    class_passenger: motorcycle pillion
+- model: icw.VehicleType
+  pk: 3
+  fields:
+    label: motorcycle (125cc and under)
+    font_awesome: motorcycle
+    class_driver: motorcycle rider
+    class_passenger: motorcycle pillion
+- model: icw.VehicleType
+  pk: 4
+  fields:
+    label: motorcycle (over 125cc and up to 500cc)
+    font_awesome: motorcycle
+    class_driver: motorcycle rider
+    class_passenger: motorcycle pillion
+- model: icw.VehicleType
+  pk: 5
+  fields:
+    label: motorcycle (over 500cc)
+    font_awesome: motorcycle
+    class_driver: motorcycle rider
+    class_passenger: motorcycle pillion
+- model: icw.VehicleType
+  pk: 8
+  fields:
+    label: taxi or private hire car
+    font_awesome: taxi
+- model: icw.VehicleType
+  pk: 9
+  fields:
+    label: car
+    font_awesome: car
+- model: icw.VehicleType
+  pk: 10
+  fields:
+    label: "minibus (8\u201316 passenger seats)"
+    font_awesome: bus
+- model: icw.VehicleType
+  pk: 11
+  fields:
+    label: bus or coach (17 or more passenger seats)
+    font_awesome: bus
+- model: icw.VehicleType
+  pk: 16
+  fields:
+    label: ridden horse
+    class_driver: horse rider
+    class_passenger: horse pillion
+- model: icw.VehicleType
+  pk: 17
+  fields:
+    label: agricultural vehicle
+- model: icw.VehicleType
+  pk: 18
+  fields:
+    label: tram
+    font_awesome: subway
+- model: icw.VehicleType
+  pk: 19
+  fields:
+    label: van or goods vehicle (3.5t mgw or under)
+    font_awesome: truck
+- model: icw.VehicleType
+  pk: 20
+  fields:
+    label: goods vehicle (over 3.5t and under 7.5t)
+    font_awesome: truck
+- model: icw.VehicleType
+  pk: 21
+  fields:
+    label: goods vehicle (7.5t mgw and over)
+    font_awesome: truck
+- model: icw.VehicleType
+  pk: 22
+  fields:
+    label: mobility scooter
+    class_driver: mobility scooter rider
+- model: icw.VehicleType
+  pk: 23
+  fields:
+    label: electric motorcycle
+    font_awesome: motorcycle
+- model: icw.VehicleType
+  pk: 90
+  fields:
+    label: other vehicle
+    font_awesome: question
+- model: icw.VehicleType
+  pk: 97
+  fields:
+    label: motorcycle (unknown cc)
+    font_awesome: motorcycle
+- model: icw.VehicleType
+  pk: 98
+  fields:
+    label: goods vehicle (unknown weight)
+    font_awesome: truck
+

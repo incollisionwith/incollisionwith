@@ -1,0 +1,11 @@
+astral
+psycopg2
+Django
+celery
+rdflib
+
+Shapely
+SPARQLWrapper
+python-dateutil
+Jinja2
+django-filter

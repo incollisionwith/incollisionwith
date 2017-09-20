@@ -1,0 +1,13 @@
+- model: icw.Sex
+  pk: 1
+  fields:
+    label: male
+- model: icw.Sex
+  pk: 2
+  fields:
+    label: female
+- model: icw.Sex
+  pk: 9
+  fields:
+    label: not applicable
+

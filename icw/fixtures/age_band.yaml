@@ -1,0 +1,66 @@
+- model: icw.AgeBand
+  pk: 1
+  fields:
+    label: "0\u20135"
+    gte: 0
+    lt: 6
+- model: icw.AgeBand
+  pk: 2
+  fields:
+    label: "6\u201310"
+    gte: 6
+    lt: 11
+- model: icw.AgeBand
+  pk: 3
+  fields:
+    label: "11\u201315"
+    gte: 11
+    lt: 16
+- model: icw.AgeBand
+  pk: 4
+  fields:
+    label: "16\u201320"
+    gte: 16
+    lt: 21
+- model: icw.AgeBand
+  pk: 5
+  fields:
+    label: "21\u201325"
+    gte: 21
+    lt: 26
+- model: icw.AgeBand
+  pk: 6
+  fields:
+    label: "26\u201335"
+    gte: 26
+    lt: 36
+- model: icw.AgeBand
+  pk: 7
+  fields:
+    label: "36\u201345"
+    gte: 36
+    lt: 46
+- model: icw.AgeBand
+  pk: 8
+  fields:
+    label: "46\u201355"
+    gte: 46
+    lt: 56
+- model: icw.AgeBand
+  pk: 9
+  fields:
+    label: "56\u201365"
+    gte: 56
+    lt: 66
+- model: icw.AgeBand
+  pk: 10
+  fields:
+    label: "66\u201375"
+    gte: 66
+    lt: 76
+- model: icw.AgeBand
+  pk: 11
+  fields:
+    label: Over 75
+    gte: 76
+

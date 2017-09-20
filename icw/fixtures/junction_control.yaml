@@ -1,0 +1,21 @@
+- model: icw.JunctionControl
+  pk: 0
+  fields:
+    label: Not at junction or within 20 metres
+- model: icw.JunctionControl
+  pk: 1
+  fields:
+    label: Authorised person
+- model: icw.JunctionControl
+  pk: 2
+  fields:
+    label: Auto traffic signal
+- model: icw.JunctionControl
+  pk: 3
+  fields:
+    label: Stop sign
+- model: icw.JunctionControl
+  pk: 4
+  fields:
+    label: Give way or uncontrolled
+

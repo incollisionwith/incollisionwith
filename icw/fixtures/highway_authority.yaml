@@ -1,0 +1,829 @@
+- model: icw.HighwayAuthority
+  pk: S12000033
+  fields:
+    label: Aberdeen City
+- model: icw.HighwayAuthority
+  pk: S12000034
+  fields:
+    label: Aberdeenshire
+- model: icw.HighwayAuthority
+  pk: S12000041
+  fields:
+    label: Angus
+- model: icw.HighwayAuthority
+  pk: S12000035
+  fields:
+    label: Argyll & Bute
+- model: icw.HighwayAuthority
+  pk: E09000002
+  fields:
+    label: Barking and Dagenham
+- model: icw.HighwayAuthority
+  pk: E09000003
+  fields:
+    label: Barnet
+- model: icw.HighwayAuthority
+  pk: E08000016
+  fields:
+    label: Barnsley
+- model: icw.HighwayAuthority
+  pk: E06000022
+  fields:
+    label: Bath and North East Somerset
+- model: icw.HighwayAuthority
+  pk: E06000055
+  fields:
+    label: Bedford
+- model: icw.HighwayAuthority
+  pk: E09000004
+  fields:
+    label: Bexley
+- model: icw.HighwayAuthority
+  pk: E08000025
+  fields:
+    label: Birmingham
+- model: icw.HighwayAuthority
+  pk: E06000008
+  fields:
+    label: Blackburn with Darwen
+- model: icw.HighwayAuthority
+  pk: E06000009
+  fields:
+    label: Blackpool
+- model: icw.HighwayAuthority
+  pk: W06000019
+  fields:
+    label: Blaenau Gwent
+- model: icw.HighwayAuthority
+  pk: E08000001
+  fields:
+    label: Bolton
+- model: icw.HighwayAuthority
+  pk: E06000028
+  fields:
+    label: Bournemouth
+- model: icw.HighwayAuthority
+  pk: E06000036
+  fields:
+    label: Bracknell Forest
+- model: icw.HighwayAuthority
+  pk: E08000032
+  fields:
+    label: Bradford
+- model: icw.HighwayAuthority
+  pk: E09000005
+  fields:
+    label: Brent
+- model: icw.HighwayAuthority
+  pk: W06000013
+  fields:
+    label: Bridgend
+- model: icw.HighwayAuthority
+  pk: E06000043
+  fields:
+    label: Brighton and Hove
+- model: icw.HighwayAuthority
+  pk: E06000023
+  fields:
+    label: Bristol, City of
+- model: icw.HighwayAuthority
+  pk: E09000006
+  fields:
+    label: Bromley
+- model: icw.HighwayAuthority
+  pk: E10000002
+  fields:
+    label: Buckinghamshire
+- model: icw.HighwayAuthority
+  pk: E08000002
+  fields:
+    label: Bury
+- model: icw.HighwayAuthority
+  pk: W06000018
+  fields:
+    label: Caerphilly
+- model: icw.HighwayAuthority
+  pk: E08000033
+  fields:
+    label: Calderdale
+- model: icw.HighwayAuthority
+  pk: E10000003
+  fields:
+    label: Cambridgeshire
+- model: icw.HighwayAuthority
+  pk: E09000007
+  fields:
+    label: Camden
+- model: icw.HighwayAuthority
+  pk: W06000015
+  fields:
+    label: Cardiff
+- model: icw.HighwayAuthority
+  pk: W06000010
+  fields:
+    label: Carmarthenshire
+- model: icw.HighwayAuthority
+  pk: E06000056
+  fields:
+    label: Central Bedfordshire
+- model: icw.HighwayAuthority
+  pk: W06000008
+  fields:
+    label: Ceredigion
+- model: icw.HighwayAuthority
+  pk: E06000049
+  fields:
+    label: Cheshire East
+- model: icw.HighwayAuthority
+  pk: E06000050
+  fields:
+    label: Cheshire West and Chester
+- model: icw.HighwayAuthority
+  pk: E09000001
+  fields:
+    label: City of London
+- model: icw.HighwayAuthority
+  pk: S12000005
+  fields:
+    label: Clackmannanshire
+- model: icw.HighwayAuthority
+  pk: W06000003
+  fields:
+    label: Conwy
+- model: icw.HighwayAuthority
+  pk: E06000052
+  fields:
+    label: Cornwall
+- model: icw.HighwayAuthority
+  pk: E06000047
+  fields:
+    label: County Durham
+- model: icw.HighwayAuthority
+  pk: E08000026
+  fields:
+    label: Coventry
+- model: icw.HighwayAuthority
+  pk: E09000008
+  fields:
+    label: Croydon
+- model: icw.HighwayAuthority
+  pk: E10000006
+  fields:
+    label: Cumbria
+- model: icw.HighwayAuthority
+  pk: E06000005
+  fields:
+    label: Darlington
+- model: icw.HighwayAuthority
+  pk: W06000004
+  fields:
+    label: Denbighshire
+- model: icw.HighwayAuthority
+  pk: E06000015
+  fields:
+    label: Derby
+- model: icw.HighwayAuthority
+  pk: E10000007
+  fields:
+    label: Derbyshire
+- model: icw.HighwayAuthority
+  pk: E10000008
+  fields:
+    label: Devon
+- model: icw.HighwayAuthority
+  pk: E08000017
+  fields:
+    label: Doncaster
+- model: icw.HighwayAuthority
+  pk: E10000009
+  fields:
+    label: Dorset
+- model: icw.HighwayAuthority
+  pk: E08000027
+  fields:
+    label: Dudley
+- model: icw.HighwayAuthority
+  pk: S12000006
+  fields:
+    label: Dumfries & Galloway
+- model: icw.HighwayAuthority
+  pk: S12000042
+  fields:
+    label: Dundee City
+- model: icw.HighwayAuthority
+  pk: E09000009
+  fields:
+    label: Ealing
+- model: icw.HighwayAuthority
+  pk: S12000008
+  fields:
+    label: East Ayrshire
+- model: icw.HighwayAuthority
+  pk: S12000009
+  fields:
+    label: East Dunbartonshire
+- model: icw.HighwayAuthority
+  pk: S12000010
+  fields:
+    label: East Lothian
+- model: icw.HighwayAuthority
+  pk: S12000011
+  fields:
+    label: East Renfrewshire
+- model: icw.HighwayAuthority
+  pk: E06000011
+  fields:
+    label: East Riding of Yorkshire
+- model: icw.HighwayAuthority
+  pk: E10000011
+  fields:
+    label: East Sussex
+- model: icw.HighwayAuthority
+  pk: S12000036
+  fields:
+    label: Edinburgh, City of
+- model: icw.HighwayAuthority
+  pk: E09000010
+  fields:
+    label: Enfield
+- model: icw.HighwayAuthority
+  pk: E10000012
+  fields:
+    label: Essex
+- model: icw.HighwayAuthority
+  pk: S12000014
+  fields:
+    label: Falkirk
+- model: icw.HighwayAuthority
+  pk: S12000015
+  fields:
+    label: Fife
+- model: icw.HighwayAuthority
+  pk: W06000005
+  fields:
+    label: Flintshire
+- model: icw.HighwayAuthority
+  pk: E08000020
+  fields:
+    label: Gateshead
+- model: icw.HighwayAuthority
+  pk: S12000043
+  fields:
+    label: Glasgow City
+- model: icw.HighwayAuthority
+  pk: E10000013
+  fields:
+    label: Gloucestershire
+- model: icw.HighwayAuthority
+  pk: E09000011
+  fields:
+    label: Greenwich
+- model: icw.HighwayAuthority
+  pk: W06000002
+  fields:
+    label: Gwynedd
+- model: icw.HighwayAuthority
+  pk: E09000012
+  fields:
+    label: Hackney
+- model: icw.HighwayAuthority
+  pk: E06000006
+  fields:
+    label: Halton
+- model: icw.HighwayAuthority
+  pk: E09000013
+  fields:
+    label: Hammersmith and Fulham
+- model: icw.HighwayAuthority
+  pk: E10000014
+  fields:
+    label: Hampshire
+- model: icw.HighwayAuthority
+  pk: E09000014
+  fields:
+    label: Haringey
+- model: icw.HighwayAuthority
+  pk: E09000015
+  fields:
+    label: Harrow
+- model: icw.HighwayAuthority
+  pk: E06000001
+  fields:
+    label: Hartlepool
+- model: icw.HighwayAuthority
+  pk: E09000016
+  fields:
+    label: Havering
+- model: icw.HighwayAuthority
+  pk: E06000019
+  fields:
+    label: Herefordshire, County of
+- model: icw.HighwayAuthority
+  pk: E10000015
+  fields:
+    label: Hertfordshire
+- model: icw.HighwayAuthority
+  pk: S12000017
+  fields:
+    label: Highland
+- model: icw.HighwayAuthority
+  pk: E09000017
+  fields:
+    label: Hillingdon
+- model: icw.HighwayAuthority
+  pk: E09000018
+  fields:
+    label: Hounslow
+- model: icw.HighwayAuthority
+  pk: S12000018
+  fields:
+    label: Inverclyde
+- model: icw.HighwayAuthority
+  pk: W06000001
+  fields:
+    label: Isle of Anglesey
+- model: icw.HighwayAuthority
+  pk: E06000046
+  fields:
+    label: Isle of Wight
+- model: icw.HighwayAuthority
+  pk: E06000053
+  fields:
+    label: Isles of Scilly
+- model: icw.HighwayAuthority
+  pk: E09000019
+  fields:
+    label: Islington
+- model: icw.HighwayAuthority
+  pk: E09000020
+  fields:
+    label: Kensington and Chelsea
+- model: icw.HighwayAuthority
+  pk: E10000016
+  fields:
+    label: Kent
+- model: icw.HighwayAuthority
+  pk: E06000010
+  fields:
+    label: Kingston upon Hull, City of
+- model: icw.HighwayAuthority
+  pk: E09000021
+  fields:
+    label: Kingston upon Thames
+- model: icw.HighwayAuthority
+  pk: E08000034
+  fields:
+    label: Kirklees
+- model: icw.HighwayAuthority
+  pk: E08000011
+  fields:
+    label: Knowsley
+- model: icw.HighwayAuthority
+  pk: E09000022
+  fields:
+    label: Lambeth
+- model: icw.HighwayAuthority
+  pk: E10000017
+  fields:
+    label: Lancashire
+- model: icw.HighwayAuthority
+  pk: E08000035
+  fields:
+    label: Leeds
+- model: icw.HighwayAuthority
+  pk: E06000016
+  fields:
+    label: Leicester
+- model: icw.HighwayAuthority
+  pk: E10000018
+  fields:
+    label: Leicestershire
+- model: icw.HighwayAuthority
+  pk: E09000023
+  fields:
+    label: Lewisham
+- model: icw.HighwayAuthority
+  pk: E10000019
+  fields:
+    label: Lincolnshire
+- model: icw.HighwayAuthority
+  pk: E08000012
+  fields:
+    label: Liverpool
+- model: icw.HighwayAuthority
+  pk: EHEATHROW
+  fields:
+    label: London Airport (Heathrow)
+- model: icw.HighwayAuthority
+  pk: E06000032
+  fields:
+    label: Luton
+- model: icw.HighwayAuthority
+  pk: E08000003
+  fields:
+    label: Manchester
+- model: icw.HighwayAuthority
+  pk: E06000035
+  fields:
+    label: Medway
+- model: icw.HighwayAuthority
+  pk: W06000024
+  fields:
+    label: Merthyr Tydfil
+- model: icw.HighwayAuthority
+  pk: E09000024
+  fields:
+    label: Merton
+- model: icw.HighwayAuthority
+  pk: E06000002
+  fields:
+    label: Middlesbrough
+- model: icw.HighwayAuthority
+  pk: S12000019
+  fields:
+    label: Midlothian
+- model: icw.HighwayAuthority
+  pk: E06000042
+  fields:
+    label: Milton Keynes
+- model: icw.HighwayAuthority
+  pk: W06000021
+  fields:
+    label: Monmouthshire
+- model: icw.HighwayAuthority
+  pk: S12000020
+  fields:
+    label: Moray
+- model: icw.HighwayAuthority
+  pk: S12000013
+  fields:
+    label: Na h-Eileanan an Iar (Western Isles)
+- model: icw.HighwayAuthority
+  pk: W06000012
+  fields:
+    label: Neath Port Talbot
+- model: icw.HighwayAuthority
+  pk: E08000021
+  fields:
+    label: Newcastle upon Tyne
+- model: icw.HighwayAuthority
+  pk: E09000025
+  fields:
+    label: Newham
+- model: icw.HighwayAuthority
+  pk: W06000022
+  fields:
+    label: Newport
+- model: icw.HighwayAuthority
+  pk: E10000020
+  fields:
+    label: Norfolk
+- model: icw.HighwayAuthority
+  pk: S12000021
+  fields:
+    label: North Ayrshire
+- model: icw.HighwayAuthority
+  pk: E06000012
+  fields:
+    label: North East Lincolnshire
+- model: icw.HighwayAuthority
+  pk: S12000044
+  fields:
+    label: North Lanarkshire
+- model: icw.HighwayAuthority
+  pk: E06000013
+  fields:
+    label: North Lincolnshire
+- model: icw.HighwayAuthority
+  pk: E06000024
+  fields:
+    label: North Somerset
+- model: icw.HighwayAuthority
+  pk: E08000022
+  fields:
+    label: North Tyneside
+- model: icw.HighwayAuthority
+  pk: E10000023
+  fields:
+    label: North Yorkshire
+- model: icw.HighwayAuthority
+  pk: E10000021
+  fields:
+    label: Northamptonshire
+- model: icw.HighwayAuthority
+  pk: E06000048
+  fields:
+    label: Northumberland
+- model: icw.HighwayAuthority
+  pk: E06000018
+  fields:
+    label: Nottingham
+- model: icw.HighwayAuthority
+  pk: E10000024
+  fields:
+    label: Nottinghamshire
+- model: icw.HighwayAuthority
+  pk: E08000004
+  fields:
+    label: Oldham
+- model: icw.HighwayAuthority
+  pk: S12000023
+  fields:
+    label: Orkney Islands
+- model: icw.HighwayAuthority
+  pk: E10000025
+  fields:
+    label: Oxfordshire
+- model: icw.HighwayAuthority
+  pk: W06000009
+  fields:
+    label: Pembrokeshire
+- model: icw.HighwayAuthority
+  pk: S12000024
+  fields:
+    label: Perth and Kinross
+- model: icw.HighwayAuthority
+  pk: E06000031
+  fields:
+    label: Peterborough
+- model: icw.HighwayAuthority
+  pk: E06000026
+  fields:
+    label: Plymouth
+- model: icw.HighwayAuthority
+  pk: E06000029
+  fields:
+    label: Poole
+- model: icw.HighwayAuthority
+  pk: E06000044
+  fields:
+    label: Portsmouth
+- model: icw.HighwayAuthority
+  pk: W06000023
+  fields:
+    label: Powys
+- model: icw.HighwayAuthority
+  pk: E06000038
+  fields:
+    label: Reading
+- model: icw.HighwayAuthority
+  pk: E09000026
+  fields:
+    label: Redbridge
+- model: icw.HighwayAuthority
+  pk: E06000003
+  fields:
+    label: Redcar and Cleveland
+- model: icw.HighwayAuthority
+  pk: S12000038
+  fields:
+    label: Renfrewshire
+- model: icw.HighwayAuthority
+  pk: W06000016
+  fields:
+    label: Rhondda, Cynon, Taff
+- model: icw.HighwayAuthority
+  pk: E09000027
+  fields:
+    label: Richmond upon Thames
+- model: icw.HighwayAuthority
+  pk: E08000005
+  fields:
+    label: Rochdale
+- model: icw.HighwayAuthority
+  pk: E08000018
+  fields:
+    label: Rotherham
+- model: icw.HighwayAuthority
+  pk: E06000017
+  fields:
+    label: Rutland
+- model: icw.HighwayAuthority
+  pk: E08000006
+  fields:
+    label: Salford
+- model: icw.HighwayAuthority
+  pk: E08000028
+  fields:
+    label: Sandwell
+- model: icw.HighwayAuthority
+  pk: S12000026
+  fields:
+    label: Scottish Borders
+- model: icw.HighwayAuthority
+  pk: E08000014
+  fields:
+    label: Sefton
+- model: icw.HighwayAuthority
+  pk: E08000019
+  fields:
+    label: Sheffield
+- model: icw.HighwayAuthority
+  pk: S12000027
+  fields:
+    label: Shetland Islands
+- model: icw.HighwayAuthority
+  pk: E06000051
+  fields:
+    label: Shropshire
+- model: icw.HighwayAuthority
+  pk: E06000039
+  fields:
+    label: Slough
+- model: icw.HighwayAuthority
+  pk: E08000029
+  fields:
+    label: Solihull
+- model: icw.HighwayAuthority
+  pk: E10000027
+  fields:
+    label: Somerset
+- model: icw.HighwayAuthority
+  pk: S12000028
+  fields:
+    label: South Ayrshire
+- model: icw.HighwayAuthority
+  pk: E06000025
+  fields:
+    label: South Gloucestershire
+- model: icw.HighwayAuthority
+  pk: S12000029
+  fields:
+    label: South Lanarkshire
+- model: icw.HighwayAuthority
+  pk: E08000023
+  fields:
+    label: South Tyneside
+- model: icw.HighwayAuthority
+  pk: E06000045
+  fields:
+    label: Southampton
+- model: icw.HighwayAuthority
+  pk: E06000033
+  fields:
+    label: Southend-on-Sea
+- model: icw.HighwayAuthority
+  pk: E09000028
+  fields:
+    label: Southwark
+- model: icw.HighwayAuthority
+  pk: E08000013
+  fields:
+    label: St. Helens
+- model: icw.HighwayAuthority
+  pk: E10000028
+  fields:
+    label: Staffordshire
+- model: icw.HighwayAuthority
+  pk: S12000030
+  fields:
+    label: Stirling
+- model: icw.HighwayAuthority
+  pk: E08000007
+  fields:
+    label: Stockport
+- model: icw.HighwayAuthority
+  pk: E06000004
+  fields:
+    label: Stockton-on-Tees
+- model: icw.HighwayAuthority
+  pk: E06000021
+  fields:
+    label: Stoke-on-Trent
+- model: icw.HighwayAuthority
+  pk: E10000029
+  fields:
+    label: Suffolk
+- model: icw.HighwayAuthority
+  pk: E08000024
+  fields:
+    label: Sunderland
+- model: icw.HighwayAuthority
+  pk: E10000030
+  fields:
+    label: Surrey
+- model: icw.HighwayAuthority
+  pk: E09000029
+  fields:
+    label: Sutton
+- model: icw.HighwayAuthority
+  pk: W06000011
+  fields:
+    label: Swansea
+- model: icw.HighwayAuthority
+  pk: E06000030
+  fields:
+    label: Swindon
+- model: icw.HighwayAuthority
+  pk: E08000008
+  fields:
+    label: Tameside
+- model: icw.HighwayAuthority
+  pk: E06000020
+  fields:
+    label: Telford and Wrekin
+- model: icw.HighwayAuthority
+  pk: W06000014
+  fields:
+    label: The Vale of Glamorgan
+- model: icw.HighwayAuthority
+  pk: E06000034
+  fields:
+    label: Thurrock
+- model: icw.HighwayAuthority
+  pk: E06000027
+  fields:
+    label: Torbay
+- model: icw.HighwayAuthority
+  pk: W06000020
+  fields:
+    label: Torfaen
+- model: icw.HighwayAuthority
+  pk: E09000030
+  fields:
+    label: Tower Hamlets
+- model: icw.HighwayAuthority
+  pk: E08000009
+  fields:
+    label: Trafford
+- model: icw.HighwayAuthority
+  pk: E08000036
+  fields:
+    label: Wakefield
+- model: icw.HighwayAuthority
+  pk: E08000030
+  fields:
+    label: Walsall
+- model: icw.HighwayAuthority
+  pk: E09000031
+  fields:
+    label: Waltham Forest
+- model: icw.HighwayAuthority
+  pk: E09000032
+  fields:
+    label: Wandsworth
+- model: icw.HighwayAuthority
+  pk: E06000007
+  fields:
+    label: Warrington
+- model: icw.HighwayAuthority
+  pk: E10000031
+  fields:
+    label: Warwickshire
+- model: icw.HighwayAuthority
+  pk: E06000037
+  fields:
+    label: West Berkshire
+- model: icw.HighwayAuthority
+  pk: S12000039
+  fields:
+    label: West Dunbartonshire
+- model: icw.HighwayAuthority
+  pk: S12000040
+  fields:
+    label: West Lothian
+- model: icw.HighwayAuthority
+  pk: E10000032
+  fields:
+    label: West Sussex
+- model: icw.HighwayAuthority
+  pk: E09000033
+  fields:
+    label: Westminster
+- model: icw.HighwayAuthority
+  pk: E08000010
+  fields:
+    label: Wigan
+- model: icw.HighwayAuthority
+  pk: E06000054
+  fields:
+    label: Wiltshire
+- model: icw.HighwayAuthority
+  pk: E06000040
+  fields:
+    label: Windsor and Maidenhead
+- model: icw.HighwayAuthority
+  pk: E08000015
+  fields:
+    label: Wirral
+- model: icw.HighwayAuthority
+  pk: E06000041
+  fields:
+    label: Wokingham
+- model: icw.HighwayAuthority
+  pk: E08000031
+  fields:
+    label: Wolverhampton
+- model: icw.HighwayAuthority
+  pk: E10000034
+  fields:
+    label: Worcestershire
+- model: icw.HighwayAuthority
+  pk: W06000006
+  fields:
+    label: Wrexham
+- model: icw.HighwayAuthority
+  pk: E06000014
+  fields:
+    label: York
+

@@ -1,0 +1,60 @@
+- model: icw.HitObjectInCarriageway
+  pk: 0
+  fields:
+    label: None
+- model: icw.HitObjectInCarriageway
+  pk: 1
+  fields:
+    label: Previous accident
+    sentence_part: collided with a previous accident
+- model: icw.HitObjectInCarriageway
+  pk: 2
+  fields:
+    label: Road works
+    sentence_part: collided with road works
+- model: icw.HitObjectInCarriageway
+  pk: 4
+  fields:
+    label: Parked vehicle
+    sentence_part: collided with a parked vehicle
+- model: icw.HitObjectInCarriageway
+  pk: 5
+  fields:
+    label: Bridge (roof)
+    sentence_part: collided with the roof of a bridge
+- model: icw.HitObjectInCarriageway
+  pk: 6
+  fields:
+    label: Bridge (side)
+    sentence_part: collided with the side of a bridge
+- model: icw.HitObjectInCarriageway
+  pk: 7
+  fields:
+    label: Bollard or refuge
+    sentence_part: collided with a bollard or refuge
+- model: icw.HitObjectInCarriageway
+  pk: 8
+  fields:
+    label: Open door of vehicle
+    sentence_part: collided with an open vehicle door
+- model: icw.HitObjectInCarriageway
+  pk: 9
+  fields:
+    label: Central island of roundabout
+    sentence_part: collided with the central island of a roundabout
+- model: icw.HitObjectInCarriageway
+  pk: 10
+  fields:
+    label: Kerb
+    sentence_part: hit a kerb
+- model: icw.HitObjectInCarriageway
+  pk: 11
+  fields:
+    label: Other object
+    sentence_part: collided with an object in the carriageway
+- model: icw.HitObjectInCarriageway
+  pk: 12
+  fields:
+    label: Any animal (except ridden horse)
+    sentence_part: collided with an animal in the carriageway
+

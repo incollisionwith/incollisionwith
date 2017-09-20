@@ -1,0 +1,33 @@
+- model: icw.SpecialConditions
+  pk: 0
+  fields:
+    label: None
+- model: icw.SpecialConditions
+  pk: 1
+  fields:
+    label: Auto traffic signal - out
+- model: icw.SpecialConditions
+  pk: 2
+  fields:
+    label: Auto signal part defective
+- model: icw.SpecialConditions
+  pk: 3
+  fields:
+    label: Road sign or marking defective or obscured
+- model: icw.SpecialConditions
+  pk: 4
+  fields:
+    label: Roadworks
+- model: icw.SpecialConditions
+  pk: 5
+  fields:
+    label: Road surface defective
+- model: icw.SpecialConditions
+  pk: 6
+  fields:
+    label: Oil or diesel
+- model: icw.SpecialConditions
+  pk: 7
+  fields:
+    label: Mud
+
