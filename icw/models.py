@@ -79,9 +79,11 @@ class HighwayAuthority(ReferenceModel):
     id = models.CharField(max_length=20, primary_key=True)
 
 
+
 class AgeBand(ReferenceModel):
     gte = models.SmallIntegerField(null=True, blank=True)
     lt = models.SmallIntegerField(null=True, blank=True)
+
 
 class CasualtyClass(ReferenceModel):
     pass
@@ -94,6 +96,8 @@ class CasualtySeverity(ReferenceModel):
 
 class FirstPointOfImpact(ReferenceModel):
     pass
+
+
 class HitObjectInCarriageway(ReferenceModel):
     sentence_part = models.TextField()
 
@@ -104,22 +108,40 @@ class HitObjectOffCarriageway(ReferenceModel):
 
 class PedestrianLocation(ReferenceModel):
     pass
+
+
 class PedestrianMovement(ReferenceModel):
     pass
+
+
 class Sex(ReferenceModel):
     pass
+
+
 class SkiddingAndOverturning(ReferenceModel):
     pass
+
+
 class TowingAndArticulation(ReferenceModel):
     pass
+
+
 class VehicleLeavingCarriageway(ReferenceModel):
     pass
+
+
 class VehicleLocation(ReferenceModel):
     pass
+
+
 class JunctionLocation(ReferenceModel):
     pass
+
+
 class VehicleManoeuvre(ReferenceModel):
     pass
+
+
 class VehicleType(ReferenceModel):
     font_awesome = models.CharField(max_length=30)
     class_driver = models.CharField(max_length=40)
