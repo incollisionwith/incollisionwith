@@ -5,7 +5,7 @@ from . import models
 
 class AccidentFilter(django_filters.FilterSet):
     date = django_filters.DateFilter()
-    date_range = django_filters.DateFromToRangeFilter(label='Date range')
+    date_range = django_filters.DateFromToRangeFilter(name='date', label='Date range')
     casualty_distribution = django_filters.ModelMultipleChoiceFilter(queryset=models.CasualtyDistribution.objects.order_by('-count'))
     vehicle_distribution = django_filters.ModelMultipleChoiceFilter(queryset=models.VehicleDistribution.objects.order_by('-count'))
 

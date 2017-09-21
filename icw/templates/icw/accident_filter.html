@@ -25,8 +25,8 @@
                     <tr>
                         <td><a href="{{ url("accident-detail", args=(accident.id,)) }}">{{ accident.id }}</a></td>
                         <td>{{ accident.dateTime if accident.dateTime else accident.date }}</td>
-                        <td>{{ accident.number_of_vehicles }} {% for vehicle in accident.vehicles.order_by('-type_id') %}<i title="{{ vehicle.type.label }}" class="fa fa-{{ vehicle.type.font_awesome or 'circle' }}"> </i> {% endfor %}</td>
-                        <td>{{ accident.number_of_casualties }} {% for casualty in accident.casualties.order_by('severity_id') %}<i title="{{ casualty.type.label }}" class="fa fa-{{ casualty.type.font_awesome or 'circle' }} casualty-severity-{{ casualty.severity.id }}"> </i> {% endfor %}</td>
+                        <td>{{ accident.number_of_vehicles }} {{ accident.vehicle_distribution.as_html|safe }}</td>
+                        <td>{{ accident.number_of_casualties }} {{ accident.casualty_distribution.as_html|safe }}</td>
                         <td>{{ accident.severity.label }}</td>
                         <td>{{ 'yes' if accident.citations else 'no' }}</td>
                     </tr>

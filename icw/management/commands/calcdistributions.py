@@ -9,12 +9,20 @@ from ... import models
 from ...util import indexed, sex_indexed
 
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
+logging.getLogger('django.db.backends').disabled = False
+logging.getLogger('django.db.backends').setLevel(logging.DEBUG)
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        vcounts, ccounts = collections.defaultdict(int), collections.defaultdict(int)
-        vdistributions = {cd.distribution: cd for cd in models.VehicleDistribution.objects.all()}
-        cdistributions = {cd.distribution: cd for cd in models.CasualtyDistribution.objects.all()}
-        for accident in models.Accident.objects.all():
+        self.vcounts, self.ccounts = collections.defaultdict(int), collections.defaultdict(int)
+        self.to_update = set()
+        self.vupdates, self.cupdates = collections.defaultdict(set), collections.defaultdict(set)
+        self.vdistributions = {cd.distribution: cd for cd in models.VehicleDistribution.objects.all()}
+        self.cdistributions = {cd.distribution: cd for cd in models.CasualtyDistribution.objects.all()}
+
+        for i, accident in enumerate(models.Accident.objects.all()):
             vdistribution = collections.defaultdict(int)
             cdistribution = collections.defaultdict(int)
 
@@ -26,22 +34,41 @@ class Command(BaseCommand):
             vdistribution = ', '.join('{}: {}'.format(k, v) for k, v in sorted(vdistribution.items()))
             cdistribution = ', '.join('{} {}: {}'.format(k[0], k[1], v) for k, v in sorted(cdistribution.items()))
 
-            vcounts[vdistribution] += 1
-            ccounts[cdistribution] += 1
+            self.vcounts[vdistribution] += 1
+            self.ccounts[cdistribution] += 1
 
-            if vdistribution in vdistributions:
-                vd = vdistributions[vdistribution]
+            if vdistribution in self.vdistributions:
+                vd = self.vdistributions[vdistribution]
             else:
-                vd = vdistributions[vdistribution] = models.VehicleDistribution.objects.create(distribution=vdistribution)
+                vd = self.vdistributions[vdistribution] = models.VehicleDistribution.objects.create(distribution=vdistribution)
 
-            if cdistribution in cdistributions:
-                cd = cdistributions[cdistribution]
+            if cdistribution in self.cdistributions:
+                cd = self.cdistributions[cdistribution]
             else:
-                cd = cdistributions[cdistribution] = models.CasualtyDistribution.objects.create(distribution=cdistribution)
+                cd = self.cdistributions[cdistribution] = models.CasualtyDistribution.objects.create(distribution=cdistribution)
 
-            models.Accident.objects.filter(id=accident.id).update(casualty_distribution_id=cd.id,
-                                                                  vehicle_distribution=vd.id)
-            models.VehicleDistribution.objects.filter(id=vd.id).update(count=vcounts[vdistribution])
-            models.CasualtyDistribution.objects.filter(id=cd.id).update(count=ccounts[cdistribution])
+            self.vupdates[vd.id].add(accident.id)
+            self.cupdates[cd.id].add(accident.id)
 
-            print(len(vcounts), len(ccounts))
+            vd.count = self.vcounts[vdistribution]
+            cd.count = self.ccounts[vdistribution]
+
+            self.to_update.add(vd)
+            self.to_update.add(cd)
+
+            if (i % 10000) == 0:
+                self.update_counts(i)
+
+        self.update_counts(i)
+
+    def update_counts(self, i):
+        print(i, len(self.vcounts), len(self.ccounts))
+        for distribution in self.to_update:
+            distribution.save(force_update=True)
+        for vd_id, ids in self.vupdates.items():
+            models.Accident.objects.filter(id__in=ids).update(vehicle_distribution_id=vd_id)
+        for cd_id, ids in self.cupdates.items():
+            models.Accident.objects.filter(id__in=ids).update(casualty_distribution_id=cd_id)
+        self.to_update.clear()
+        self.vupdates.clear()
+        self.cupdates.clear()

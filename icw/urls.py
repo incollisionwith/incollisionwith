@@ -1,4 +1,5 @@
-from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls import url, include
 from django.contrib import admin
 
 from . import views
@@ -14,3 +15,10 @@ urlpatterns = [
     url(r'^incident/(?P<pk>[A-Z0-9]{13})/$', views.AccidentDetailView.as_view(), name='accident-detail'),
     url(r'^admin/', admin.site.urls),
 ]
+
+
+if settings.DEBUG and 'debug_toolbar' in settings.INSTALLED_APPS:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

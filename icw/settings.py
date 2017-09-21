@@ -7,6 +7,8 @@ TIME_ZONE = 'Europe/London'
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'very secret key')
 
+INTERNAL_IPS = ['127.0.0.1']
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -27,13 +29,22 @@ DATABASES = {
 
 ROOT_URLCONF = 'icw.urls'
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
 ]
+
+try:
+    import debug_toolbar
+except ImportError:
+    pass
+else:
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+
 
 
 TEMPLATES = [
@@ -44,7 +55,7 @@ TEMPLATES = [
         'OPTIONS': {
             # Match the template names ending in .html but not the ones in the admin folder.
             "match_extension": ".html",
-            "match_regex": r"^(?!admin/).*",
+            "match_regex": r"^(?!(admin|debug_toolbar)/).*",
             "app_dirname": "templates",
             'filters': {
                 'add_class': 'widget_tweaks.templatetags.widget_tweaks.add_class',

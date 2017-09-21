@@ -153,63 +153,73 @@ class VehicleDistribution(models.Model):
     distribution = models.TextField(unique=True)
     count = models.IntegerField(default=0)
 
-    def unparse(self):
-        results = []
-        ds = self.distribution.split(', ')
-        for d in ds:
-            type_id, count = d.split(': ')
-            type_id, count = int(type_id), int(count)
-            for i in range(count):
-                results.append(VehicleType.objects.filter(id=type_id).first())
-        return results
+    as_text = models.TextField()
+    as_html = models.TextField()
+
+    def save(self, *args, **kwargs):
+        if not self.as_html:
+            as_html, as_text = [], []
+            ds = self.distribution.split(', ')
+            groups = []
+            for d in ds:
+                groups.append(tuple(map(int, d.split(': '))))
+            for type_id, count in sorted(groups, reverse=True):
+                try:
+                    vehicle_type = VehicleType.objects.get(id=type_id)
+                except VehicleType.DoesNotExist:
+                    vehicle_type = VehicleType(label='Unknown vehicle', character='❓', font_awesome='circle')
+                for i in range(count):
+                    as_html.append('<i class="fa fa-{}" title="{}"> </i>'.format(vehicle_type.font_awesome,
+                                                                                 vehicle_type.label))
+                    as_text.append(vehicle_type.character)
+                self.as_html = ''.join(as_html)
+                self.as_text = ''.join(as_text)
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        results = []
-        ds = self.distribution.split(', ')
-        for d in ds:
-            type_id, count = d.split(': ')
-            type_id, count = int(type_id), int(count)
-            try:
-                character = VehicleType.objects.get(id=type_id).character or '●'
-            except VehicleType.DoesNotExist:
-                character = '❓'
-            results.append(character * count)
-        return ''.join(reversed(results))
+        return self.as_text
+
 
 class CasualtyDistribution(models.Model):
     distribution = models.TextField(unique=True)
     count = models.IntegerField(default=0)
 
-    def unparse(self):
-        results = []
-        ds = self.distribution.split(', ')
-        for d in ds:
-            d, count = d.split(': ')
-            type_id, severity_id = d.split(' ')
-            type_id, severity_id, count = int(type_id), int(severity_id), int(count)
-            for i in range(count):
-                results.append((VehicleType.objects.get(id=type_id), severity_id))
-        return results
+    as_text = models.TextField()
+    as_html = models.TextField()
+
+    def save(self, *args, **kwargs):
+        if not self.as_html:
+            as_html, as_text = [], []
+            ds = self.distribution.split(', ')
+            current_severity_id = None
+            groups = []
+            for d in ds:
+                d, count = d.split(': ')
+                type_id, severity_id = d.split(' ')
+                type_id, severity_id, count = int(type_id), int(severity_id), int(count)
+                groups.append(((severity_id, -type_id), severity_id, type_id, count))
+            for _, severity_id, type_id, count in sorted(groups):
+                try:
+                    vehicle_type = VehicleType.objects.get(id=type_id)
+                except VehicleType.DoesNotExist:
+                    vehicle_type = VehicleType(label='Unknown vehicle', character='❓', font_awesome='circle')
+                if severity_id != current_severity_id:
+                    if as_text:
+                        as_text.append(', ')
+                    as_text.append({1: 'Fatal: ', 2: 'Serious: ', 3: 'Slight: '}[severity_id])
+                    current_severity_id = severity_id
+                for i in range(count):
+                    as_html.append('<i class="fa fa-{} casualty-severity-{}" title="{}"> </i>'.format(
+                        vehicle_type.font_awesome,
+                        severity_id,
+                        vehicle_type.label))
+                    as_text.append(vehicle_type.character)
+                self.as_html = ''.join(as_html)
+                self.as_text = ''.join(as_text)
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        results = []
-        ds = self.distribution.split(', ')
-        current_severity_id = None
-        for d in ds:
-            d, count = d.split(': ')
-            type_id, severity_id = d.split(' ')
-            type_id, severity_id, count = int(type_id), int(severity_id), int(count)
-            try:
-                character = VehicleType.objects.get(id=type_id).character or '●'
-            except VehicleType.DoesNotExist:
-                character = '❓'
-            if severity_id != current_severity_id:
-                if results:
-                    results.append(', ')
-                results.append({1: 'Fatal: ', 2: 'Serious: ', 3: 'Slight: '}[severity_id])
-                current_severity_id = severity_id
-            results.append(character * count)
-        return ''.join(results)
+        return self.as_text
 
 
 class Accident(models.Model):

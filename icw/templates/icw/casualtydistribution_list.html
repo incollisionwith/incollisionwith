@@ -21,7 +21,7 @@
             {% for casualty_distribution in object_list -%}
                 <tr>
                     <td><a href="{{ url("accident-list") }}?casualty_distribution={{ casualty_distribution.id }}">{{ casualty_distribution.id }}</a></td>
-                    <td>{% for type, severity_id in casualty_distribution.unparse() %}<i title="{{ type.label }}" class="fa fa-{{ type.font_awesome or 'circle' }} casualty-severity-{{ severity_id }}"> </i> {% endfor %}</td>
+                    <td>{{ casualty_distribution.as_html|safe }}</td>
                     <td>{{ casualty_distribution.count }}</td>
                 </tr>
             {% endfor -%}

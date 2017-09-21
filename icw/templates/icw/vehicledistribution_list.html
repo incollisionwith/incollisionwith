@@ -21,7 +21,7 @@
             {% for vehicle_distribution in object_list -%}
                 <tr>
                     <td><a href="{{ url("accident-list") }}?vehicle_distribution={{ vehicle_distribution.id }}">{{ vehicle_distribution.id }}</a></td>
-                    <td>{% for type in vehicle_distribution.unparse() %}<i title="{{ type.label }}" class="fa fa-{{ type.font_awesome or 'circle' }}"> </i> {% endfor %}</td>
+                    <td>{{ vehicle_distribution.as_html|safe }}</td>
                     <td>{{ vehicle_distribution.count }}</td>
                 </tr>
             {% endfor -%}
