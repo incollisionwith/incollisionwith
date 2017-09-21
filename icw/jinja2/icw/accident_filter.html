@@ -14,72 +14,9 @@
         <div class="box-padding">
             <h2>Filter</h2>
             <form method="get">
-                <dl>
-                    <dt>Severity:</dt>
-                    <dd>
-                        <input type="checkbox" name="severity" value="1" id="severity-1"{% if '1' in severity %} checked{% endif %}> <label for="severity-1">Fatal</label><br>
-                        <input type="checkbox" name="severity" value="2" id="severity-2"{% if '2' in severity %} checked{% endif %}> <label for="severity-2">Serious</label><br>
-                        <input type="checkbox" name="severity" value="3" id="severity-3"{% if '3' in severity %} checked{% endif %}> <label for="severity-3">Slight</label><br>
-                    </dd>
-                    <dt>Dates:</dt>
-                    <dd>
-                        <input type="date" name="dateTimeLower" id="datetime-lower" value="{{ dateTimeLower }}" placeholder="YYYY-MM-DD (from)"> –
-                        <input type="date" name="dateTimeUpper" id="datetime-upper" value="{{ dateTimeUpper }}" placeholder="YYYY-MM-DD (to)">
-                    </dd>
-                    <dt>Related news articles:</dt>
-                    <dd>
-                        <input type="checkbox" name="news" value="yes" id="news"{% if news == 'yes' %} checked{% endif %}> <label for="news">Yes</label>
-                    </dd>
-                    <dt>Highway authority:</dt>
-                    <dd>
-                        <select name="highwayAuthority">
-                            <option value="">—</option>{% for value in referenceData.HighwayAuthority.values() %}
-                            <option value="{{ value.id }}"{% if value.id == highwayAuthority %}
-                                    selected{% endif %}>{{ value.label }}</option>{% endfor %}
-                        </select>
-                    </dd>
-                    <dt>Police force:</dt>
-                    <dd>
-                        <select name="policeForce">
-                            <option value="">—</option>{% for value in referenceData.PoliceForce.values() %}{% if value.label %}
-                            <option value="{{ value.id }}"{% if value.id == policeForce %}
-                                    selected{% endif %}>{{ value.label }}</option>{% endif %}{% endfor %}
-                        </select>
-                    </dd>
-                    <dt>Police attended?</dt>
-                    <dd>
-                        <input type="checkbox" name="policeAttended" value="yes" id="policeAttended"{% if policeAttended == 'yes' %} checked{% endif %}> <label for="policeAttended">Yes</label>
-                    </dd>
-                    <dt>Involved vehicle and casualty types:</dt>
-                    <dd>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th><abbr title="vehicle">V</abbr></th>
-                                <th><abbr title="casualty">C</abbr></th>
-                                <th>Type</th>
-                            </tr>
-                            </thead>
-                            <tbody>{% for vehicleTypeId, vehicleType in referenceData.VehicleType.items()|sort %}
-                                <tr>
-                                    <td>{% if vehicleTypeId != '0' %}
-                                        <input type="checkbox" name="involvedVehicleType"
-                                               id="involvedVehicleType-{{ vehicleTypeId }}"
-                                               value="{{ vehicleTypeId }}"
-                                                {% if vehicleTypeId in involvedVehicleType %} checked{% endif %}>
-                                    {% endif %}</td>
-                                    <td>
-                                        <input type="checkbox" name="involvedCasualtyType"
-                                               id="involvedCasualtyType-{{ vehicleTypeId }}"
-                                               value="{{ vehicleTypeId }}"
-                                                {% if vehicleTypeId in involvedCasualtyType %} checked{% endif %}>
-                                    </td>
-                                    <td>{{ vehicleType.label }}</td>
-                                </tr>{% endfor %}
-                            </tbody>
-                        </table>
-                    </dd>
-                </dl>
+            <table class="pure-form">
+                    {{ filter.form }}
+            </table>
                 <input type="submit" value="Filter">
             </form>
         </div>

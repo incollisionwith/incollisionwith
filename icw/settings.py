@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django_filters',
     'icw',
 ]
 
