@@ -3,7 +3,7 @@ psycopg2
 Django
 celery
 rdflib
-
+PyYAML
 Shapely
 SPARQLWrapper
 python-dateutil
