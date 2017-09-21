@@ -3,6 +3,7 @@
   fields:
     label: pedestrian
     font_awesome: male
+    character: 🚶
 - model: icw.VehicleType
   pk: 1
   fields:
@@ -10,6 +11,7 @@
     font_awesome: bicycle
     class_driver: cyclist
     class_passenger: cycle passenger or additional rider
+    character: 🚴
 - model: icw.VehicleType
   pk: 2
   fields:
@@ -17,6 +19,7 @@
     font_awesome: motorcycle
     class_driver: motorcyclist
     class_passenger: motorcycle pillion
+    character: 🛵
 - model: icw.VehicleType
   pk: 3
   fields:
@@ -24,6 +27,7 @@
     font_awesome: motorcycle
     class_driver: motorcycle rider
     class_passenger: motorcycle pillion
+    character: 🛵
 - model: icw.VehicleType
   pk: 4
   fields:
@@ -31,6 +35,7 @@
     font_awesome: motorcycle
     class_driver: motorcycle rider
     class_passenger: motorcycle pillion
+    character: 🏍
 - model: icw.VehicleType
   pk: 5
   fields:
@@ -38,56 +43,67 @@
     font_awesome: motorcycle
     class_driver: motorcycle rider
     class_passenger: motorcycle pillion
+    character: 🏍
 - model: icw.VehicleType
   pk: 8
   fields:
     label: taxi or private hire car
     font_awesome: taxi
+    character: 🚕
 - model: icw.VehicleType
   pk: 9
   fields:
     label: car
     font_awesome: car
+    character: 🚗
 - model: icw.VehicleType
   pk: 10
   fields:
     label: "minibus (8\u201316 passenger seats)"
     font_awesome: bus
+    character: 🚐
 - model: icw.VehicleType
   pk: 11
   fields:
     label: bus or coach (17 or more passenger seats)
     font_awesome: bus
+    character: 🚌
 - model: icw.VehicleType
   pk: 16
   fields:
     label: ridden horse
     class_driver: horse rider
     class_passenger: horse pillion
+    character: 🐴
 - model: icw.VehicleType
   pk: 17
   fields:
     label: agricultural vehicle
+    character: 🚜
 - model: icw.VehicleType
   pk: 18
   fields:
     label: tram
     font_awesome: subway
+    character: 🚋
 - model: icw.VehicleType
   pk: 19
   fields:
     label: van or goods vehicle (3.5t mgw or under)
     font_awesome: truck
+    character: 🚚
 - model: icw.VehicleType
   pk: 20
   fields:
     label: goods vehicle (over 3.5t and under 7.5t)
     font_awesome: truck
+    character: 🚚
 - model: icw.VehicleType
   pk: 21
   fields:
     label: goods vehicle (7.5t mgw and over)
     font_awesome: truck
+    character: 🚛
 - model: icw.VehicleType
   pk: 22
   fields:
@@ -98,6 +114,7 @@
   fields:
     label: electric motorcycle
     font_awesome: motorcycle
+    character: 🏍
 - model: icw.VehicleType
   pk: 90
   fields:
@@ -108,9 +125,11 @@
   fields:
     label: motorcycle (unknown cc)
     font_awesome: motorcycle
+    character: 🏍
 - model: icw.VehicleType
   pk: 98
   fields:
     label: goods vehicle (unknown weight)
     font_awesome: truck
+    character: 🚛
 

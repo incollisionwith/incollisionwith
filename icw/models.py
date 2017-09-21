@@ -143,9 +143,10 @@ class VehicleManoeuvre(ReferenceModel):
 
 
 class VehicleType(ReferenceModel):
-    font_awesome = models.CharField(max_length=30)
+    font_awesome = models.CharField(max_length=30, blank=True)
     class_driver = models.CharField(max_length=40)
     class_passenger = models.CharField(max_length=40)
+    character = models.CharField(max_length=4, blank=True)
 
 
 class VehicleDistribution(models.Model):
