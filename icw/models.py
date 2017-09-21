@@ -163,6 +163,18 @@ class VehicleDistribution(models.Model):
                 results.append(VehicleType.objects.filter(id=type_id).first())
         return results
 
+    def __str__(self):
+        results = []
+        ds = self.distribution.split(', ')
+        for d in ds:
+            type_id, count = d.split(': ')
+            type_id, count = int(type_id), int(count)
+            try:
+                character = VehicleType.objects.get(id=type_id).character or '●'
+            except VehicleType.DoesNotExist:
+                character = '❓'
+            results.append(character * count)
+        return ''.join(reversed(results))
 
 class CasualtyDistribution(models.Model):
     distribution = models.TextField(unique=True)
@@ -178,6 +190,26 @@ class CasualtyDistribution(models.Model):
             for i in range(count):
                 results.append((VehicleType.objects.get(id=type_id), severity_id))
         return results
+
+    def __str__(self):
+        results = []
+        ds = self.distribution.split(', ')
+        current_severity_id = None
+        for d in ds:
+            d, count = d.split(': ')
+            type_id, severity_id = d.split(' ')
+            type_id, severity_id, count = int(type_id), int(severity_id), int(count)
+            try:
+                character = VehicleType.objects.get(id=type_id).character or '●'
+            except VehicleType.DoesNotExist:
+                character = '❓'
+            if severity_id != current_severity_id:
+                if results:
+                    results.append(', ')
+                results.append({1: 'Fatal: ', 2: 'Serious: ', 3: 'Slight: '}[severity_id])
+                current_severity_id = severity_id
+            results.append(character * count)
+        return ''.join(results)
 
 
 class Accident(models.Model):

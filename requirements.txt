@@ -1,6 +1,8 @@
 astral
 psycopg2
 Django
+django-jinja
+django-widget-tweaks
 celery
 rdflib
 PyYAML

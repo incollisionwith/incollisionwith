@@ -38,10 +38,17 @@ MIDDLEWARE_CLASSES = [
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            # Match the template names ending in .html but not the ones in the admin folder.
+            "match_extension": ".html",
+            "match_regex": r"^(?!admin/).*",
+            "app_dirname": "templates",
+            'filters': {
+                'add_class': 'widget_tweaks.templatetags.widget_tweaks.add_class',
+            },
             'environment': 'icw.jinja2.environment',
             'context_processors': (
                 'django.contrib.auth.context_processors.auth',
