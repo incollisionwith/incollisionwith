@@ -69,7 +69,7 @@ def fetch_citation(pk):
     citation = models.Citation.objects.get(pk=pk)
 
     try:
-        response = requests.get(citation.href)
+        response = requests.get(citation.href, timeout=10)
         response.raise_for_status()
     except requests.ConnectionError:
         citation.status = '444'
