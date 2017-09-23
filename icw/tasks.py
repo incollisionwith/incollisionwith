@@ -45,7 +45,7 @@ def get_citation_description(doc, uri, og, graph, article):
 def get_citation_published(doc, uri, og, graph, article):
     try:
         yield dateutil.parser.parse(og.get('article:published_time'))
-    except ValueError:
+    except (TypeError, ValueError):
         pass
     if uri:
         published = graph.value(uri, SCHEMA.datePublished)
@@ -94,10 +94,10 @@ def fetch_citation(pk):
 
         uri = graph.value(None, SCHEMA.url, rdflib.URIRef(response.url))
 
-        citation.title = get_citation_title(doc, uri, og, graph, article)
-        citation.description = get_citation_description(doc, uri, og, graph, article)
-        citation.published = get_citation_published(doc, uri, og, graph, article)
-        citation.publisher = get_citation_publisher(doc, uri, og, graph, article)
+        citation.title = get_citation_title(doc, uri, og, graph, article) or ''
+        citation.description = get_citation_description(doc, uri, og, graph, article) or ''
+        citation.published = get_citation_published(doc, uri, og, graph, article) or ''
+        citation.publisher = get_citation_publisher(doc, uri, og, graph, article) or ''
 
         citation.image_url = og.get('og:image')
         citation.content = article.text or ''
