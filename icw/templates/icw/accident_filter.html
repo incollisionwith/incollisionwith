@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block article %}
+{% block content %}
 
     <div class="pure-g">
         <div class="pure-u-1">
@@ -23,7 +23,7 @@
                 <tbody>
                 {% for accident in object_list -%}
                     <tr>
-                        <td><a href="{{ url("accident-detail", args=(accident.id,)) }}">{{ accident.id }}</a></td>
+                        <td><a href="{{ url("accident-detail", accident.id) }}">{{ accident.id }}</a></td>
                         <td>{{ accident.dateTime if accident.dateTime else accident.date }}</td>
                         <td>{{ accident.number_of_vehicles }} {{ accident.vehicle_distribution.as_html|safe }}</td>
                         <td>{{ accident.number_of_casualties }} {{ accident.casualty_distribution.as_html|safe }}</td>

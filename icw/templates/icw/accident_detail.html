@@ -1,110 +1,113 @@
 {% extends "base.html" %}
 
-{% set description = description or "Incident" %}
+{% set annotation = object.annotation %}
 
-{% block article %}
+{% set title = annotation.title or 'Incident' %}
+{% set description = annotation.description or '' %}
+
+{% block container %}
 
 <h1 hidden>Incident</h1>
 
 {% if object.location -%}
-<div class="pure-g">
-  <div class="accident-map map pure-u-1" data-lon="{{ object.location.0 }}" data-lat="{{ object.location.1 }}"></div>
-</div>
-{% endif -%}
-
-<div class="pure-g">
-    <div class="pure-u-1 pure-u-md-1-2">
-        <table class="pure-table accident-detail">
-            <tbody>
-              <tr>
-                  <th>When</th>
-                  <td>{{ object.date_and_time if object.date_and_time else object.date }}</td>
-              </tr>
-              <tr>
-                  <th>Police attended?</th>
-                  <td>{{ "yes" if object.police_attended else "no" }}</td>
-              </tr>
-{% if object.solar_elevation -%}
-              <tr>
-                  <th>Solar elevation</th>
-                  <td>{{ object.solar_elevation|round|int }}° ({% if object.solar_elevation < -6 %}night{% elif object.solar_elevation < 0 %}dawn or dusk{% else %}day{% endif %})</td>
-              </tr>
-{% endif -%}
-              <tr>
-                  <th>Light conditions</th>
-                  <td>{{ object.light_conditions.label }}</td>
-              </tr>
-              <tr>
-                  <th>Weather</th>
-                  <td>{{ object.weather.label }}</td>
-              </tr>
-              <tr>
-                  <th>Road type</th>
-                  <td>{{ object.road_type.label }}</td>
-              </tr>
-              <tr>
-                  <th>Pedestrian crossing (human)?</th>
-                  <td>{{ object.pedestrian_crossing_human.label }}</td>
-              </tr>
-            </tbody>
-        </table>
+    <div class="pure-g">
+        <div class="accident-map map pure-u-1" data-lon="{{ object.location.0 }}" data-lat="{{ object.location.1 }}"></div>
     </div>
-    <div class="pure-u-1 pure-u-md-1-2">
-        <table class="pure-table accident-detail">
-            <tbody>
-              <tr>
-                  <th>Junction?</th>
-                  <td>{{ object.junction_detail.label }}{% if object.junction_control and object.junction_control.id != 0 %}<br>
-                      {{ object.junction_control.label }}{% endif %}
-                  </td>
-              </tr>
-              <tr>
-                  <th>Severity</th>
-                  <td>{{ object.severity.label }}</td>
-              </tr>
-              <tr>
-                  <th>Involved</th>
-                  <td>{{ object.number_of_vehicles }} vehicle{{ "s" if object.number_of_vehicles > 1 else "" }}, and {{ object.number_of_casualties }} casualt{{ "ies" if object.number_of_casualties > 1 else "y" }}</td>
-              </tr>
-              <tr>
-                  <th>Carriageway hazards</th>
-                  <td>{{ object.carriageway_hazards.label }}</td>
-              </tr>
-              <tr>
-                  <th>Special conditions at site</th>
-                  <td>{{ object.special_conditions.label }}</td>
-              </tr>
-              <tr>
-                  <th>Speed limit</th>
-                  <td>{% if object.speed_limit %}{{ object.speed_limit }} mph{% else %}unknown{% endif %}</td>
-              </tr>
-              <tr>
-                  <th>Pedestrian crossing (physical)?</th>
-                  <td>{{ object.pedestrian_crossing_physical.label }}</td>
-              </tr>
-            </tbody>
-        </table>
+{% endif -%}
+<div class="container">
+    <div class="pure-g">
+        <div class="pure-u-1 pure-u-md-1-2">
+            <table class="pure-table accident-detail">
+                <tbody>
+                <tr>
+                    <th>When</th>
+                    <td>{{ object.date_and_time if object.date_and_time else object.date }}</td>
+                </tr>
+                <tr>
+                    <th>Police attended?</th>
+                    <td>{{ "yes" if object.police_attended else "no" }}</td>
+                </tr>
+                {% if object.solar_elevation -%}
+                    <tr>
+                        <th>Solar elevation</th>
+                        <td>{{ object.solar_elevation|round|int }}° ({% if object.solar_elevation < -6 %}night{% elif object.solar_elevation < 0 %}dawn or dusk{% else %}day{% endif %})</td>
+                    </tr>
+                {% endif -%}
+                <tr>
+                    <th>Light conditions</th>
+                    <td>{{ object.light_conditions.label }}</td>
+                </tr>
+                <tr>
+                    <th>Weather</th>
+                    <td>{{ object.weather.label }}</td>
+                </tr>
+                <tr>
+                    <th>Road type</th>
+                    <td>{{ object.road_type.label }}</td>
+                </tr>
+                <tr>
+                    <th>Pedestrian crossing (human)?</th>
+                    <td>{{ object.pedestrian_crossing_human.label }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pure-u-1 pure-u-md-1-2">
+            <table class="pure-table accident-detail">
+                <tbody>
+                <tr>
+                    <th>Junction?</th>
+                    <td>{{ object.junction_detail.label }}{% if object.junction_control and object.junction_control.id != 0 %}<br>
+                        {{ object.junction_control.label }}{% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Severity</th>
+                    <td>{{ object.severity.label }}</td>
+                </tr>
+                <tr>
+                    <th>Involved</th>
+                    <td>{{ object.number_of_vehicles }} vehicle{{ "s" if object.number_of_vehicles > 1 else "" }}, and {{ object.number_of_casualties }} casualt{{ "ies" if object.number_of_casualties > 1 else "y" }}</td>
+                </tr>
+                <tr>
+                    <th>Carriageway hazards</th>
+                    <td>{{ object.carriageway_hazards.label }}</td>
+                </tr>
+                <tr>
+                    <th>Special conditions at site</th>
+                    <td>{{ object.special_conditions.label }}</td>
+                </tr>
+                <tr>
+                    <th>Speed limit</th>
+                    <td>{% if object.speed_limit %}{{ object.speed_limit }} mph{% else %}unknown{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Pedestrian crossing (physical)?</th>
+                    <td>{{ object.pedestrian_crossing_physical.label }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-<table class="vehicles pure-table pure-table-bordered">
-    <thead>
+    <table class="vehicles pure-table pure-table-bordered">
+        <thead>
         <tr>
             <th>N°</th>
             <th>Type</th>
             <th>Detail</th>
             <th>People</th>
         </tr>
-    </thead>
-    <tbody>{% for vehicle in object.vehicles.all() %}
+        </thead>
+        <tbody>{% for vehicle in object.vehicles.all() %}
         <tr class="vehicle">
             <th class="vehicle-ref">{{ vehicle.vehicle_ref }}</th>
             <td class="vehicle-type">
-{% if vehicle.type.fontAwesome -%}
-                <i title="{{ vehicle.type.label }}" class="fa fa-{{ vehicle.type.fontAwesome }} fa-2x"> </i>
-{% else -%}
-                {{ vehicle.type.label }}
-{% endif -%}
+                {% if vehicle.type.fontAwesome -%}
+                    <i title="{{ vehicle.type.label }}" class="fa fa-{{ vehicle.type.fontAwesome }} fa-2x"> </i>
+                {% else -%}
+                    {{ vehicle.type.label }}
+                {% endif -%}
             </td>
             <td class="vehicle-detail">
                 <table class="pure-table-bordered">
@@ -136,41 +139,41 @@
                         <th>1<sup>st</sup> point of impact</th>
                         <td>{{ vehicle.first_point_of_impact.label }}</td>
                     </tr>{% endif %}
-{% if ((vehicle.hit_object_in_carriageway and vehicle.hit_object_in_carriageway.id != 0) or
+                    {% if ((vehicle.hit_object_in_carriageway and vehicle.hit_object_in_carriageway.id != 0) or
        (vehicle.hit_object_off_carriageway and vehicle.hit_object_off_carriageway.id != 0)) -%}
-                    <tr>
-                        <th>Hit object?</th>
-                        <td>
-{% if vehicle.hit_object_in_carriageway and vehicle.hit_object_in_carriageway.id != 0 -%}
-                            {{ vehicle.hit_object_in_carriageway.label }}
-{% endif -%}
-{% if ((vehicle.hit_object_in_carriageway and vehicle.hit_object_in_carriageway.id != 0) and
+                        <tr>
+                            <th>Hit object?</th>
+                            <td>
+                                {% if vehicle.hit_object_in_carriageway and vehicle.hit_object_in_carriageway.id != 0 -%}
+                                    {{ vehicle.hit_object_in_carriageway.label }}
+                                {% endif -%}
+                                {% if ((vehicle.hit_object_in_carriageway and vehicle.hit_object_in_carriageway.id != 0) and
        (vehicle.hit_object_off_carriageway and vehicle.hit_object_off_carriageway.id != 0)) -%}<br>{% endif %}
-{% if vehicle.hit_object_off_carriageway and vehicle.hit_object_off_carriageway.id != 0 -%}
-                            {{ vehicle.hit_object_off_carriageway.label }}
-{% endif -%}                        </td>
-                    </tr>{% endif %}
+                                {% if vehicle.hit_object_off_carriageway and vehicle.hit_object_off_carriageway.id != 0 -%}
+                                    {{ vehicle.hit_object_off_carriageway.label }}
+                                {% endif -%}                        </td>
+                        </tr>{% endif %}
                 </table>
             </td>
             <td>
                 <table class="pure-table-bordered">
                     <thead>
-                        <tr>
-                            <th>N°</th>
-                            <th>Severity</th>
-                            <th>Class</th>
-                            <th>Sex</th>
-                            <th>Age</th>
-                            <th>Detail</th>
-                        </tr>
+                    <tr>
+                        <th>N°</th>
+                        <th>Severity</th>
+                        <th>Class</th>
+                        <th>Sex</th>
+                        <th>Age</th>
+                        <th>Detail</th>
+                    </tr>
                     </thead>
                     <tbody>
-{% set involvedDriver -%}
-{% for casualty in vehicle.casualties.all() -%}
-{% if casualty.casualty_class.id == 1 -%}1{% endif -%}
-{% endfor -%}
-                        {% endset %}
-{% if not involvedDriver -%}
+                    {% set involvedDriver -%}
+                    {% for casualty in vehicle.casualties.all() -%}
+                        {% if casualty.casualty_class.id == 1 -%}1{% endif -%}
+                    {% endfor -%}
+                    {% endset %}
+                    {% if not involvedDriver -%}
                         <tr>
                             <th></th>
                             <td>uninjured</td>
@@ -189,14 +192,14 @@
                             <td>{% if casualty.type.id == 0 %}
                                 <table>
                                     <tbody>
-                                        <tr>
-                                            <th>Pedestrian location</th>
-                                            <td>{{ casualty.pedestrian_location.label if casualty.pedestrian_location else '' }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Pedestrian movement</th>
-                                            <td>{{ casualty.pedestrian_movement.label if casualty.pedestrian_movement else '' }}</td>
-                                        </tr>
+                                    <tr>
+                                        <th>Pedestrian location</th>
+                                        <td>{{ casualty.pedestrian_location.label if casualty.pedestrian_location else '' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pedestrian movement</th>
+                                        <td>{{ casualty.pedestrian_movement.label if casualty.pedestrian_movement else '' }}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             {% endif %}</td>
@@ -205,21 +208,35 @@
                 </table>
             </td>
         </tr>
-    {% endfor %}</tbody>
-</table>
+        {% endfor %}</tbody>
+    </table>
 
-{% if citations %}
-<ul>{% for citation in citations %}
-    <li><a href="{{ citation.url }}" rel="nofollow">{{ citation.title or citation.url }}</a>
-        {% if citation.publisher %} — <i>{{ citation.publisher }}</i>{% endif %}
-        {% if citation.published %} ({{ citation.published }}){% endif %}
-        {% if citation.description %}<br>
-    {{ citation.description }}{% endif %}</li>
-{% endfor %}</ul>
-{% endif %}
+    <section id="citations">
+        <h2>References</h2>
+        {% if annotation.citations %}
+            <ul class="citations">{% for citation in annotation.citations.all() %}
+                {% include "icw/citation.html" %}
+            {% endfor %}</ul>
+        {% else %}
+            <p>There aren't yet any references listed for this incident.</p>
+            {% if not user.is_authenticated %}
+                <p><a href="{{ login_url }}?next={{ request.build_absolute_uri() }}%23citations">Log in</a> to add links to news articles.</p>
+            {% endif %}
+        {% endif %}
 
-<form method="post" action="{{ api_url }}citation">
-    <input type="hidden" name="accident_id" value="{{ id }}">
-    <label for="citation-url">URL:</label> <input type="url" id="citation-url" name="url"> <input type="submit">
-</form>
+        {% if user.is_authenticated %}
+            <form class="pure-form pure-form-stacked" method="post" action="{{ url('citation-create', accident_pk=accident.pk) }}">{% csrf_token %}
+                <fieldset>
+                    <legend>Add new reference</legend>
+                    {% for field in citation_form %}
+                        {{ field.label_tag() }}
+                        {{ field }}
+                    {% endfor %}
+                    <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                </fieldset>
+            </form>
+        {% endif %}
+
+    </section>
+</div>
 {% endblock %}

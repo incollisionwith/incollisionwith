@@ -1,13 +1,27 @@
 import collections
 from django.apps import apps
-from django.views.generic import DetailView, ListView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.views.generic import DetailView, ListView, TemplateView, UpdateView, CreateView
 from django_filters.views import FilterView
 
-from . import filters, models
+from . import filters, models, forms
 
 
 class IndexView(TemplateView):
     template_name = 'icw/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context.update({
+            'recent_citations': models.Citation.objects.exclude(status='').order_by('-created')[:10],
+            'earliest': models.Accident.objects.order_by('date')[0],
+            'latest': models.Accident.objects.order_by('-date')[0],
+            'fatality_count': models.Casualty.objects.filter(severity_id=1).count(),
+        })
+        return context
 
 
 class AccidentListView(FilterView):
@@ -24,10 +38,46 @@ class AccidentListView(FilterView):
                 data[model.__name__] = collections.OrderedDict([(instance.id, instance) for instance in model.objects.all()])
         return data
 
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context.update({
+# #            'referenceData': self.get_reference_data(),
+#         })
+#         print(context)
+#         return context
 
 
 class AccidentDetailView(DetailView):
     model = models.Accident
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'citation_form': forms.NewCitationForm(),
+        })
+        return context
+
+
+class CitationCreateView(LoginRequiredMixin, CreateView):
+    model = models.Citation
+    form_class = forms.NewCitationForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        annotation, _ = models.AccidentAnnotation.objects.get_or_create(
+            accident=get_object_or_404(models.Accident, pk=self.kwargs['accident_pk']))
+        kwargs['instance'] = models.Citation(created_by=self.request.user,
+                                             annotation=annotation)
+        return kwargs
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        annotation, _ = models.AccidentAnnotation.objects.get_or_create(accident_id=self.kwargs['accident_pk'])
+        annotation.citations.add(self.object)
+        return response
+
+    def get_success_url(self):
+        return reverse('accident-detail', kwargs={'pk': self.kwargs['accident_pk']}) + '#citations'
 
 
 class CasualtyDistributionListView(ListView):
@@ -40,3 +90,14 @@ class VehicleDistributionListView(ListView):
     model = models.VehicleDistribution
     paginate_by = 200
     ordering = ['-count']
+
+
+class ProfileView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = forms.ProfileForm
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return self.request.build_absolute_uri()

@@ -10,6 +10,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'very secret key')
 INTERNAL_IPS = ['127.0.0.1']
 
 INSTALLED_APPS = [
+    'icw',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -17,7 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'django_filters',
-    'icw',
+    'social_django',
 ]
 
 DATABASES = {
@@ -35,6 +36,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 try:
@@ -65,6 +71,19 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.static',
             ),
+            'extensions': [
+                "jinja2.ext.do",
+                "jinja2.ext.loopcontrols",
+                "jinja2.ext.with_",
+                "jinja2.ext.i18n",
+                "jinja2.ext.autoescape",
+                "django_jinja.builtins.extensions.CsrfExtension",
+                "django_jinja.builtins.extensions.CacheExtension",
+                "django_jinja.builtins.extensions.TimezoneExtension",
+                "django_jinja.builtins.extensions.UrlsExtension",
+                "django_jinja.builtins.extensions.StaticFilesExtension",
+                "django_jinja.builtins.extensions.DjangoFiltersExtension",
+            ]
         },
     },    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -83,3 +102,10 @@ TEMPLATES = [
 STATIC_URL = '/static/'
 STATIC_ROOT = os.environ.get('DJANGO_STATIC_ROOT')
 
+for key in os.environ:
+    if key.startswith('SOCIAL_AUTH_'):
+        locals()[key] = os.environ[key]
+
+LOGIN_REDIRECT_URL = '/profile/'
+LOGOUT_URL = '/logout/'
+LOGIN_URL = '/login/twitter/'

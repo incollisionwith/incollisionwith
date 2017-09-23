@@ -51,7 +51,7 @@ class Command(BaseCommand):
             self.cupdates[cd.id].add(accident.id)
 
             vd.count = self.vcounts[vdistribution]
-            cd.count = self.ccounts[vdistribution]
+            cd.count = self.ccounts[cdistribution]
 
             self.to_update.add(vd)
             self.to_update.add(cd)

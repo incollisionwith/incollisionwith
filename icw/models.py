@@ -1,6 +1,9 @@
+
+from django.conf import settings
 from django.contrib.gis.db.models import PointField
 from django.db import models
-
+from django.urls import reverse
+from django.utils.functional import cached_property
 
 
 class ReferenceModel(models.Model):
@@ -264,7 +267,15 @@ class Accident(models.Model):
     solar_elevation = models.FloatField(null=True, blank=True)
     moon_phase = models.SmallIntegerField(null=True)
 
+    @cached_property
+    def annotation(self):
+        try:
+            return self._annotation
+        except AccidentAnnotation.DoesNotExist:
+            return None
 
+    def get_absolute_url(self):
+        return reverse('accident-detail', args=(self.pk,))
 
 
 class Vehicle(models.Model):
@@ -318,3 +329,38 @@ class Casualty(models.Model):
         unique_together = (('accident', 'vehicle_ref', 'casualty_ref'),)
         ordering = ('accident', 'casualty_ref')
 
+
+class AccidentAnnotation(models.Model):
+    accident = models.OneToOneField(Accident, null=True, blank=True, related_name='_annotation')
+    date = models.DateField(null=True, blank=True)
+    location = PointField(null=True, blank=True)
+
+    title = models.TextField(blank=True)
+    description = models.TextField(blank=True)
+
+
+class Citation(models.Model):
+    annotation = models.ForeignKey(AccidentAnnotation, related_name='citations')
+    href = models.URLField(verbose_name='URL', max_length=1024)
+
+    status = models.CharField(max_length=3, blank=True)
+    title = models.TextField(blank=True)
+    description = models.TextField(blank=True)
+    image_url = models.URLField(blank=True, max_length=1024)
+    published = models.DateTimeField(null=True, blank=True)
+    publisher = models.URLField(blank=True, max_length=1024)
+    content = models.TextField()
+
+    created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
+    modified = models.DateTimeField(auto_now=True)
+    #moderation = models.NullBooleanField(default=None)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if not self.status:
+            from . import tasks
+            tasks.fetch_citation.delay(self.pk)
+
+    class Meta:
+        ordering = ('published', 'created')

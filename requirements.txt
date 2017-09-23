@@ -4,6 +4,9 @@ Django
 django-jinja
 django-widget-tweaks
 celery
+html5lib
+rdflib-jsonld
+newspaper3k
 rdflib
 PyYAML
 Shapely
@@ -11,3 +14,4 @@ SPARQLWrapper
 python-dateutil
 Jinja2
 django-filter
+social-auth-app-django

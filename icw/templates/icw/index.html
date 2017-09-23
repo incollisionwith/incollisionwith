@@ -1,28 +1,40 @@
 {% extends "base.html" %}
 {% set description = "UK road traffic incident injury data and statistics, cross-linked to news articles" %}
 
-{% block article %}
+{% block content %}
 
 
-<div class="pure-g">
-    <div class="pure-u-md-1-4"></div>
-    <div class="pure-u-1 pure-u-md-1-2">
-        <div class="box-padding">
-            <p><em>In Collision With</em> lets you browse national statistics about road traffic incidents that result
-                in injury. It differentiates itself by:</p>
-            <ul>
-                <li>linking to news articles about incidents, providing contextual information about what happened</li>
-                <li>exposing all its data through an API</li>
-                <li>being open-source — see our <a href="https://github.com/incollisionwith">repositories on GitHub</a>
-                </li>
-                <li>(soon) providing statistical views on the data</li>
+    <div class="pure-g">
+        <div class="pure-u-md-1-4"></div>
+        <div class="pure-u-1 pure-u-md-1-2">
+            <div class="box-padding">
+                <p>Between <strong>{{ earliest.date.year }}</strong> and <strong>{{ latest.date.year }}</strong>, <strong>{{ fatality_count }}</strong> people died on Britain's roads.</p>
+                <p><em>In Collision With</em> lets you browse national statistics about road traffic incidents that result
+                    in injury. It differentiates itself by:</p>
+                <ul>
+                    <li>linking to news articles about incidents, providing contextual information about what happened</li>
+                    <li>exposing all its data through an API</li>
+                    <li>being open-source — see our <a href="https://github.com/incollisionwith">repositories on GitHub</a>
+                    </li>
+                    <li>(soon) providing statistical views on the data</li>
+                </ul>
+                <p>It's still in its early stages, so please get in touch by <a
+                        href="mailto:hello@incollisionwith.uk">email</a>
+                    or on <a href="https://twitter.com/incollisionwith">Twitter</a> if you want to get involved!</p>
+            </div>
+
+        <section>
+            <h2>Recently added references</h2>
+            <ul class="citations">
+            {% with with_accident_link=true %}
+                {% for citation in recent_citations %}
+                    {% include "icw/citation.html" %}
+                {% endfor %}
+            {% endwith %}
             </ul>
-            <p>It's still in its early stages, so please get in touch by <a
-                    href="mailto:hello@incollisionwith.uk">email</a>
-                or on <a href="https://twitter.com/incollisionwith">Twitter</a> if you want to get involved!</p>
+        </section>
         </div>
+        <div class="pure-u-md-1-4"></div>
     </div>
-    <div class="pure-u-md-1-4"></div>
-</div>
 
 {% endblock %}

@@ -7,6 +7,6 @@ def environment(**kwargs):
     env = Environment(**kwargs)
     env.globals.update({
         'static_url': settings.STATIC_URL,
-        'url': reverse,
+        'login_url': settings.LOGIN_URL,
     })
     return env

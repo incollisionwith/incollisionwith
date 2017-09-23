@@ -17,8 +17,8 @@
 }
 */
 
-.vehicles.pure-table, .accident-detail.pure-table {
-    margin: 0 1em 1em 1em;
+.container .pure-table {
+    margin-bottom: 1em;
 }
 
 .vehicle-type {
@@ -41,7 +41,6 @@
 
 .accident-map {
     height: 250px;
-    margin-bottom: 1em;
 }
 
 .icw-header {
@@ -97,10 +96,30 @@ table.pure-table.accident-detail {
     color: #666666;
 }
 
-.box-padding {
-    padding:1em;
-}
-
 input[type='date'] {
     width: 8em;
+}
+
+.container {
+    box-sizing: content-box;
+    margin: 1em;
+}
+
+ul.citations {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+ul.citations li {
+    list-style: none;
+    margin-top: 0.5em;
+}
+
+ul.citations li:first-child {
+    margin-top: 0;
+}
+
+ul.citations p {
+    margin-top: 0;
+    margin-bottom: 0;
 }

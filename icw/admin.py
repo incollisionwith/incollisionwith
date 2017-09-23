@@ -38,8 +38,19 @@ class DistributionAdmin(admin.ModelAdmin):
         }
 
 
+class AccidentAnnotationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'accident_id', 'title')
+    readonly_fields = ('accident',)
+
+
+class CitationAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(models.Accident, AccidentAdmin)
 admin.site.register(models.Vehicle, VehicleAdmin)
 admin.site.register(models.Casualty, CasualtyAdmin)
 admin.site.register(models.CasualtyDistribution, DistributionAdmin)
 admin.site.register(models.VehicleDistribution, DistributionAdmin)
+admin.site.register(models.AccidentAnnotation, AccidentAnnotationAdmin)
+admin.site.register(models.Citation, CitationAdmin)
