@@ -99,7 +99,7 @@ def fetch_citation(pk):
         citation.published = get_citation_published(doc, uri, og, graph, article)
         citation.publisher = get_citation_publisher(doc, uri, og, graph, article) or ''
 
-        citation.image_url = og.get('og:image')
+        citation.image_url = og.get('og:image') or ''
         citation.content = article.text or ''
 
     citation.save()
