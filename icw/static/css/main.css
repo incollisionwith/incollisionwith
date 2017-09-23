@@ -112,14 +112,17 @@ ul.citations {
 
 ul.citations li {
     list-style: none;
+}
+
+.citations li {
     margin-top: 0.5em;
 }
 
-ul.citations li:first-child {
+.citations li:first-child {
     margin-top: 0;
 }
 
-ul.citations p {
+.citations li p {
     margin-top: 0;
     margin-bottom: 0;
 }

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+        <div class="pure-u-1-1">
+            <div class="box-padding">
+                <h1>References</h1>
+            </div>
+        </div>
+        <p>{{ paginator.count }} references found</p>
+        {% include "icw/pagination.html" -%}
+
+            <ol class="citations" start="{{ page_obj.start_index() }}">
+            {% with with_accident_link=true %}
+                {% for citation in object_list %}
+                    {% include "icw/citation.html" %}
+                {% endfor %}
+            {% endwith %}
+            </ol>
+        {% include "icw/pagination.html" -%}
+    </div>
+{% endblock %}

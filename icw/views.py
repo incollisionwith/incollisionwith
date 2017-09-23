@@ -92,6 +92,12 @@ class VehicleDistributionListView(ListView):
     ordering = ['-count']
 
 
+class CitationListView(ListView):
+    model = models.Citation
+    paginate_by = 200
+    ordering = ['-created']
+
+
 class ProfileView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = forms.ProfileForm
