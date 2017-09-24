@@ -24,7 +24,7 @@
                 {% for accident in object_list -%}
                     <tr>
                         <td><a href="{{ url("accident-detail", accident.id) }}">{{ accident.id }}</a></td>
-                        <td>{{ accident.dateTime if accident.dateTime else accident.date }}</td>
+                        <td>{{ accident.date_and_time if accident.date_and_time else accident.date }}</td>
                         <td>{{ accident.number_of_vehicles }} {{ accident.vehicle_distribution.as_html|safe }}</td>
                         <td>{{ accident.number_of_casualties }} {{ accident.casualty_distribution.as_html|safe }}</td>
                         <td>{{ accident.severity.label }}</td>
