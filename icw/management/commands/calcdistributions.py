@@ -20,7 +20,7 @@ class Command(BaseCommand):
         self.cdistributions = {cd.distribution: cd for cd in models.CasualtyDistribution.objects.all()}
 
         for i in range(0, models.Accident.objects.count(), 1000):
-            for accident in models.Accident.objects.all()[i:i+1000]:
+            for accident in models.Accident.objects.order_by('id').all()[i:i+1000]:
                 vdistribution = collections.defaultdict(int)
                 cdistribution = collections.defaultdict(int)
 
