@@ -1,3 +1,6 @@
+from html import escape
+from xml.sax.saxutils import quoteattr
+
 from django.contrib import admin
 
 from . import models
@@ -44,7 +47,16 @@ class AccidentAnnotationAdmin(admin.ModelAdmin):
 
 
 class CitationAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('id', 'get_abbreviated_href', 'title', 'published', 'publisher', 'created_by', 'status')
+    list_filter = ('publisher', 'status')
+
+    def get_abbreviated_href(self, instance):
+        href = instance.href
+        if len(href) > 52:
+            href = href[:25] + '…' + href[-25:]
+        return '<a href={}>{}</a>'.format(quoteattr(instance.href), escape(href))
+    get_abbreviated_href.allow_tags = True
+    get_abbreviated_href.short_description = 'URL'
 
 
 admin.site.register(models.Accident, AccidentAdmin)
