@@ -266,7 +266,7 @@ class Accident(models.Model):
 
     solar_elevation = models.FloatField(null=True, blank=True)
     moon_phase = models.SmallIntegerField(null=True)
-    citations = models.BooleanField(verbose_name='References?', default=False)
+    citations = models.BooleanField(verbose_name='References?', default=False, db_index=True)
 
     @cached_property
     def annotation(self):
