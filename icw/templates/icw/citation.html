@@ -3,7 +3,7 @@
     {% if citation.publisher or citation.published %}
         <p class="byline">
             {% if citation.publisher %}
-                <i>{{ citation.publisher|capfirst }}</i>
+                <i>{{ citation.publisher }}</i>
             {% endif %}
             {% if citation.publisher and citation.published %} — {% endif %}
             {% if citation.published %}
