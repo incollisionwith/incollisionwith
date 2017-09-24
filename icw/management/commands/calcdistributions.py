@@ -57,9 +57,6 @@ class Command(BaseCommand):
                 self.to_update.add(vd)
                 self.to_update.add(cd)
 
-                if (i % 10000) == 0:
-                    self.update_counts(i)
-
             self.update_counts(i)
 
     def update_counts(self, i):
