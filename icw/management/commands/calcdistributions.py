@@ -22,44 +22,45 @@ class Command(BaseCommand):
         self.vdistributions = {cd.distribution: cd for cd in models.VehicleDistribution.objects.all()}
         self.cdistributions = {cd.distribution: cd for cd in models.CasualtyDistribution.objects.all()}
 
-        for i, accident in enumerate(models.Accident.objects.all()):
-            vdistribution = collections.defaultdict(int)
-            cdistribution = collections.defaultdict(int)
+        for i in range(0, models.Accident.objects.count(), 1000):
+            for accident in models.Accident.objects.all()[i:i+1000]:
+                vdistribution = collections.defaultdict(int)
+                cdistribution = collections.defaultdict(int)
 
-            for vehicle in accident.vehicles.all():
-                vdistribution[vehicle.type_id or -1] += 1
-            for casualty in accident.casualties.all():
-                cdistribution[(casualty.type_id, casualty.severity_id)] += 1
+                for vehicle in accident.vehicles.all():
+                    vdistribution[vehicle.type_id or -1] += 1
+                for casualty in accident.casualties.all():
+                    cdistribution[(casualty.type_id, casualty.severity_id)] += 1
 
-            vdistribution = ', '.join('{}: {}'.format(k, v) for k, v in sorted(vdistribution.items()))
-            cdistribution = ', '.join('{} {}: {}'.format(k[0], k[1], v) for k, v in sorted(cdistribution.items()))
+                vdistribution = ', '.join('{}: {}'.format(k, v) for k, v in sorted(vdistribution.items()))
+                cdistribution = ', '.join('{} {}: {}'.format(k[0], k[1], v) for k, v in sorted(cdistribution.items()))
 
-            self.vcounts[vdistribution] += 1
-            self.ccounts[cdistribution] += 1
+                self.vcounts[vdistribution] += 1
+                self.ccounts[cdistribution] += 1
 
-            if vdistribution in self.vdistributions:
-                vd = self.vdistributions[vdistribution]
-            else:
-                vd = self.vdistributions[vdistribution] = models.VehicleDistribution.objects.create(distribution=vdistribution)
+                if vdistribution in self.vdistributions:
+                    vd = self.vdistributions[vdistribution]
+                else:
+                    vd = self.vdistributions[vdistribution] = models.VehicleDistribution.objects.create(distribution=vdistribution)
 
-            if cdistribution in self.cdistributions:
-                cd = self.cdistributions[cdistribution]
-            else:
-                cd = self.cdistributions[cdistribution] = models.CasualtyDistribution.objects.create(distribution=cdistribution)
+                if cdistribution in self.cdistributions:
+                    cd = self.cdistributions[cdistribution]
+                else:
+                    cd = self.cdistributions[cdistribution] = models.CasualtyDistribution.objects.create(distribution=cdistribution)
 
-            self.vupdates[vd.id].add(accident.id)
-            self.cupdates[cd.id].add(accident.id)
+                self.vupdates[vd.id].add(accident.id)
+                self.cupdates[cd.id].add(accident.id)
 
-            vd.count = self.vcounts[vdistribution]
-            cd.count = self.ccounts[cdistribution]
+                vd.count = self.vcounts[vdistribution]
+                cd.count = self.ccounts[cdistribution]
 
-            self.to_update.add(vd)
-            self.to_update.add(cd)
+                self.to_update.add(vd)
+                self.to_update.add(cd)
 
-            if (i % 10000) == 0:
-                self.update_counts(i)
+                if (i % 10000) == 0:
+                    self.update_counts(i)
 
-        self.update_counts(i)
+            self.update_counts(i)
 
     def update_counts(self, i):
         print(i, len(self.vcounts), len(self.ccounts))
