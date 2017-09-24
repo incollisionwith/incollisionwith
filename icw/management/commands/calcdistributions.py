@@ -37,22 +37,25 @@ class Command(BaseCommand):
 
                 if vdistribution in self.vdistributions:
                     vd = self.vdistributions[vdistribution]
+                    if accident.vehicle_distribution_id != vd.id:
+                        self.vupdates[vd.id].add(accident.id)
+                        self.to_update.add(vd)
                 else:
                     vd = self.vdistributions[vdistribution] = models.VehicleDistribution.objects.create(distribution=vdistribution)
+                    self.to_update.add(vd)
 
                 if cdistribution in self.cdistributions:
                     cd = self.cdistributions[cdistribution]
+                    if accident.casualty_distribution_id != cd.id:
+                        self.cupdates[cd.id].add(accident.id)
+                        self.to_update.add(cd)
                 else:
                     cd = self.cdistributions[cdistribution] = models.CasualtyDistribution.objects.create(distribution=cdistribution)
-
-                self.vupdates[vd.id].add(accident.id)
-                self.cupdates[cd.id].add(accident.id)
+                    self.to_update.add(cd)
 
                 vd.count = self.vcounts[vdistribution]
                 cd.count = self.ccounts[cdistribution]
 
-                self.to_update.add(vd)
-                self.to_update.add(cd)
 
             self.update_counts(i)
 
