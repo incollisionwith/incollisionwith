@@ -119,6 +119,10 @@
                         <th>Location</th>
                         <td>{{ vehicle.location.label }}</td>
                     </tr>{% endif %}
+                    {% if vehicle.towing_and_articulation and vehicle.towing_and_articulation.id != 0 %}<tr>
+                        <th>Towing and articulation</th>
+                        <td>{{ vehicle.towing_and_articulation.label }}</td>
+                    </tr>{% endif %}
                     {% if vehicle.junction_location and vehicle.junction_location.id != 0 %}<tr>
                         <th>Junction location</th>
                         <td>{{ vehicle.junction_location.label }}</td>
