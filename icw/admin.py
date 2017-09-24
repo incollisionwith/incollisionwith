@@ -47,7 +47,7 @@ class AccidentAnnotationAdmin(admin.ModelAdmin):
 
 
 class CitationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'get_abbreviated_href', 'title', 'published', 'publisher', 'created_by', 'status')
+    list_display = ('id', 'get_abbreviated_href', 'title', 'published', 'publisher', 'created', 'created_by', 'status')
     list_filter = ('publisher', 'status')
 
     def get_abbreviated_href(self, instance):
