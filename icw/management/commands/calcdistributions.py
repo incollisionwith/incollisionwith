@@ -10,9 +10,6 @@ from ...util import indexed, sex_indexed
 
 
 import logging
-logging.basicConfig(level=logging.DEBUG)
-logging.getLogger('django.db.backends').disabled = False
-logging.getLogger('django.db.backends').setLevel(logging.DEBUG)
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
