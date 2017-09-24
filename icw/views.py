@@ -38,14 +38,6 @@ class AccidentListView(FilterView):
                 data[model.__name__] = collections.OrderedDict([(instance.id, instance) for instance in model.objects.all()])
         return data
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context.update({
-# #            'referenceData': self.get_reference_data(),
-#         })
-#         print(context)
-#         return context
-
 
 class AccidentDetailView(DetailView):
     model = models.Accident
