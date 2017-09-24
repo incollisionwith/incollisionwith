@@ -16,7 +16,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context.update({
-            'recent_citations': models.Citation.objects.exclude(status='').order_by('-created')[:10],
+            'recent_citations': models.Citation.objects.filter(status='200').order_by('-created')[:10],
             'earliest': models.Accident.objects.order_by('date')[0],
             'latest': models.Accident.objects.order_by('-date')[0],
             'fatality_count': models.Casualty.objects.filter(severity_id=1).count(),

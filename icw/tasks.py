@@ -71,7 +71,7 @@ def fetch_citation(pk):
     try:
         response = requests.get(citation.href, timeout=10)
         response.raise_for_status()
-    except requests.ConnectionError:
+    except (requests.ConnectionError, requests.ReadTimeout):
         citation.status = '444'
     except requests.HTTPError as e:
         citation.status = str(e.response.status_code)[:3]
