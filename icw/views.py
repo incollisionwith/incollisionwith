@@ -56,17 +56,10 @@ class CitationCreateView(LoginRequiredMixin, CreateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        annotation, _ = models.AccidentAnnotation.objects.get_or_create(
-            accident=get_object_or_404(models.Accident, pk=self.kwargs['accident_pk']))
+        accident = get_object_or_404(models.Accident, pk=self.kwargs['accident_pk'])
         kwargs['instance'] = models.Citation(created_by=self.request.user,
-                                             annotation=annotation)
+                                             accident=accident)
         return kwargs
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        annotation, _ = models.AccidentAnnotation.objects.get_or_create(accident_id=self.kwargs['accident_pk'])
-        annotation.citations.add(self.object)
-        return response
 
     def get_success_url(self):
         return reverse('accident-detail', kwargs={'pk': self.kwargs['accident_pk']}) + '#citations'

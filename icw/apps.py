@@ -10,6 +10,6 @@ class ICWConfig(AppConfig):
         post_save.connect(self.citation_saved, models.Citation)
 
     def citation_saved(self, instance, created, **kwargs):
-        if created and instance.annotation.accident:
-            instance.annotation.accident.citations = True
-            instance.annotation.accident.save(force_update=True)
+        if created:
+            instance.accident.has_citations = True
+            instance.accident.save(force_update=True)

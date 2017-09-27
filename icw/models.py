@@ -266,7 +266,7 @@ class Accident(models.Model):
 
     solar_elevation = models.FloatField(null=True, blank=True)
     moon_phase = models.SmallIntegerField(null=True)
-    citations = models.BooleanField(verbose_name='References?', default=False, db_index=True)
+    has_citations = models.BooleanField(verbose_name='References?', default=False, db_index=True)
 
     @cached_property
     def annotation(self):
@@ -277,6 +277,9 @@ class Accident(models.Model):
 
     def get_absolute_url(self):
         return reverse('accident-detail', args=(self.pk,))
+
+    def __str__(self):
+        return self.id
 
 
 class Vehicle(models.Model):
@@ -341,7 +344,7 @@ class AccidentAnnotation(models.Model):
 
 
 class Citation(models.Model):
-    annotation = models.ForeignKey(AccidentAnnotation, related_name='citations')
+    accident = models.ForeignKey(Accident, related_name='citations')
     href = models.URLField(verbose_name='URL', max_length=1024)
 
     status = models.CharField(max_length=3, blank=True)

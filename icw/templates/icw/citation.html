@@ -1,5 +1,5 @@
 <li>
-    <p><a href="{{ citation.href }}" rel="nofollow">{{ citation.title or citation.href }}</a>{% if with_accident_link %} (<a href="{{ citation.annotation.accident.get_absolute_url() }}">incident</a>){% endif %}</p>
+    <p><a href="{{ citation.href }}" rel="nofollow">{{ citation.title or citation.href }}</a>{% if with_accident_link %} (<a href="{{ citation.accident.get_absolute_url() }}">incident</a>){% endif %}</p>
     {% if citation.publisher or citation.published %}
         <p class="byline">
             {% if citation.publisher %}

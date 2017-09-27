@@ -217,8 +217,8 @@
 
     <section id="citations">
         <h2>References</h2>
-        {% if annotation.citations %}
-            <ul class="citations">{% for citation in annotation.citations.all() %}
+        {% if object.citations %}
+            <ul class="citations">{% for citation in object.citations.all() %}
                 {% include "icw/citation.html" %}
             {% endfor %}</ul>
         {% else %}
