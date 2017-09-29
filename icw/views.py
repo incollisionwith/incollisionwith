@@ -31,12 +31,13 @@ class AccidentListView(FilterView):
     filterset_class = filters.AccidentFilter
     ordering = ['date', 'date_and_time']
 
-    def get_reference_data(self):
-        data = {}
-        for model in apps.get_models():
-            if issubclass(model, models.ReferenceModel) and not model._meta.abstract:
-                data[model.__name__] = collections.OrderedDict([(instance.id, instance) for instance in model.objects.all()])
-        return data
+
+class CasualtyListView(FilterView):
+    model = models.Casualty
+    queryset = models.Casualty.objects.select_related('accident', 'severity', 'type', 'sex', 'type', 'vehicle', 'vehicle__type', 'pedestrian_location')
+    paginate_by = 100
+    filterset_class = filters.CasualtyFilter
+    ordering = ['accident__date', 'accident__date_and_time']
 
 
 class AccidentDetailView(DetailView):

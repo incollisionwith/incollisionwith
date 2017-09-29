@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="pure-g">
+        <div class="pure-u-1">
+            <h1>Incidents</h1>
+        </div>
+        <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-4-5">
+            <p>{{ paginator.count }} casualties found</p>
+            {% include "icw/pagination.html" -%}
+            <table class="pure-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>When</th>
+                    <th>Type</th>
+                    <th>Age and sex</th>
+                    <th>Severity</th>
+                    <th>Pedestrian hit by</th>
+                    <th>Location</th>
+                    <th>References?</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for casualty in object_list -%}
+                    {% with accident=casualty.accident %}
+                    <tr>
+                        <td><a href="{{ url("accident-detail", accident.id) }}">{{ accident.id }}</a></td>
+                        <td>{{ accident.date_and_time|date("Y-m-d H:i") if accident.date_and_time else accident.date }}</td>
+                        <td><i class="fa fa-{{ casualty.type.font_awesome }}"> </i> {{ casualty.type.label }}</td>
+                        <td>{{ casualty.age or casualty.age_band.label }}, {{ casualty.sex.label }}</td>
+                        <td>{{ casualty.severity.label }}</td>
+                        <td>{{ casualty.vehicle.type.label if casualty.type_id == 0 else "" }}</td>
+                        <td>{{ casualty.pedestrian_location.label if casualty.type_id == 0 else casualty.vehicle.location.label }}</td>
+                        <td>{{ 'yes' if accident.has_citations else 'no' }}</td>
+                    </tr>
+                    {% endwith %}
+                {% endfor -%}
+                </tbody>
+            </table>
+            {% include "icw/pagination.html" -%}
+        </div>
+        <div class="pure-u-1 pure-u-md-1-4 pure-u-lg-1-5">
+
+            <h2>Filter</h2>
+            <form class="pure-form pure-form-stacked">
+                {% for field in filter.form %}
+                    <div{% if is_range_field(field) %} class="range-field"{% endif %}>
+                        {{ field.label_tag() }}
+                        {% if is_range_field(field) %}
+                            {{ field }}
+                        {% else %}
+                            {{ field|add_class("pure-input-1") }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="pure-button pure-button-primary">Filter</button>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

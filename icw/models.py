@@ -321,9 +321,9 @@ class Casualty(models.Model):
 
     casualty_class = models.ForeignKey(CasualtyClass, null=True, blank=True)
     sex = models.ForeignKey(Sex, null=True, blank=True)
-    severity = models.ForeignKey(CasualtySeverity, null=True, blank=True)
-    age_band = models.ForeignKey(AgeBand, null=True, blank=True)
-    type = models.ForeignKey(VehicleType, null=True, blank=True)
+    severity = models.ForeignKey(CasualtySeverity, db_index=True, null=True, blank=True)
+    age_band = models.ForeignKey(AgeBand, db_index=True, null=True, blank=True)
+    type = models.ForeignKey(VehicleType, db_index=True, null=True, blank=True)
     age = models.PositiveSmallIntegerField(null=True, blank=True)
 
     pedestrian_location = models.ForeignKey(PedestrianLocation, null=True, blank=True)

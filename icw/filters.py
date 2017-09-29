@@ -15,3 +15,8 @@ class AccidentFilter(django_filters.FilterSet):
         model = models.Accident
         fields = ['date', 'severity', 'has_citations', 'number_of_vehicles', 'number_of_casualties',
                   'casualty_distribution', 'vehicle_distribution']
+
+class CasualtyFilter(django_filters.FilterSet):
+    class Meta:
+        model = models.Casualty
+        fields = ['type', 'severity', 'age_band', 'vehicle__location', 'pedestrian_location']
