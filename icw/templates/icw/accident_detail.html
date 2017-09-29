@@ -218,7 +218,7 @@
 
     <section id="citations">
         <h2>References</h2>
-        {% if object.citations %}
+        {% if object.has_citations %}
             <ul class="citations">{% for citation in object.citations.all() %}
                 {% include "icw/citation.html" %}
             {% endfor %}</ul>

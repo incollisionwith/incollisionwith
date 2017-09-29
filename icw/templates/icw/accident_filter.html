@@ -28,7 +28,7 @@
                         <td>{{ accident.number_of_vehicles }} {{ accident.vehicle_distribution.as_html|safe }}</td>
                         <td>{{ accident.number_of_casualties }} {{ accident.casualty_distribution.as_html|safe }}</td>
                         <td>{{ accident.severity.label }}</td>
-                        <td>{{ 'yes' if accident.citations else 'no' }}</td>
+                        <td>{{ 'yes' if accident.has_citations else 'no' }}</td>
                     </tr>
                 {% endfor -%}
                 </tbody>
@@ -40,9 +40,13 @@
             <h2>Filter</h2>
             <form class="pure-form pure-form-stacked">
                 {% for field in filter.form %}
-                    <div>
+                    <div{% if is_range_field(field) %} class="range-field"{% endif %}>
                         {{ field.label_tag() }}
-                        {{ field|add_class("pure-input-1") }}
+                        {% if is_range_field(field) %}
+                            {{ field }}
+                        {% else %}
+                            {{ field|add_class("pure-input-1") }}
+                        {% endif %}
                     </div>
                 {% endfor %}
                 <button type="submit" class="pure-button pure-button-primary">Filter</button>
