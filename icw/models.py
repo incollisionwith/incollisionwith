@@ -1,9 +1,10 @@
-
+import reversion
 from django.conf import settings
 from django.contrib.gis.db.models import PointField
 from django.db import models
 from django.urls import reverse
 from django.utils.functional import cached_property
+from django.utils.timezone import now
 
 
 class ReferenceModel(models.Model):
@@ -368,3 +369,61 @@ class Citation(models.Model):
 
     class Meta:
         ordering = ('published', 'created')
+
+
+DATA_ERROR_CHOICES = (
+    (0, 'no'),
+    (1, 'possible'),
+    (2, 'likely'),
+    (3, 'definite'),
+)
+
+
+class TagManager(models.Manager):
+    def get_by_natural_key(self, tag):
+        return self.get(tag=tag)
+
+
+class Tag(models.Model):
+    tag = models.CharField(max_length=64, unique=True)
+    label = models.TextField(blank=True)
+    data_error = models.PositiveSmallIntegerField(default=0, choices=DATA_ERROR_CHOICES)
+    automated = models.BooleanField(default=False)
+    methodology = models.TextField()
+
+    accidents = models.ManyToManyField(Accident, blank=True, through='icw.Tagging', related_name='tags')
+    vehicles = models.ManyToManyField(Vehicle, blank=True, through='icw.Tagging', related_name='tags')
+    casualties = models.ManyToManyField(Casualty, blank=True, through='icw.Tagging', related_name='tags')
+
+    created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    objects = TagManager
+
+    def natural_key(self):
+        return self.tag
+
+    def __str__(self):
+        return self.tag
+
+class Tagging(models.Model):
+    tag = models.ForeignKey(Tag)
+    accident = models.ForeignKey(Accident, related_name='taggings')
+    vehicle = models.ForeignKey(Vehicle, null=True, blank=True, related_name='taggings')
+    casualty = models.ForeignKey(Casualty, null=True, blank=True, related_name='taggings')
+
+    created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.casualty:
+            self.vehicle = self.casualty.vehicle
+            self.accident = self.casualty.accident
+        elif self.vehicle:
+            self.accident = self.vehicle.accident
+        super().save(*args, **kwargs)
+
+reversion.register(AccidentAnnotation)
+reversion.register(Citation)

@@ -1,0 +1,23 @@
+- model: icw.Tag
+  fields:
+    tag: left-hook
+    label: Vehicle was hit by another vehicle turning left across its path
+    methodology: |
+        This tag is applied to vehicles which were going ahead when another vehicle collided with them by turning left,
+        where the first vehicle is not entering the main road, and where the second vehicle is mid-junction or leaving
+        the main road.
+    automated: true
+    created: 1970-01-01T00:00:00+00:00
+    modified: 1970-01-01T00:00:00+00:00
+- model: icw.Tag
+  fields:
+    tag: right-hook
+    label: Vehicle was hit by another vehicle turning right across its path
+    methodology: |
+        This tag is applied to vehicles which were going ahead when another vehicle collided with them by turning right,
+        where the first vehicle is not entering the main road, and where the second vehicle is mid-junction or leaving
+        the main road.
+    automated: true
+    created: 1970-01-01T00:00:00+00:00
+    modified: 1970-01-01T00:00:00+00:00
+

@@ -108,6 +108,7 @@
                 {% else -%}
                     {{ vehicle.type.label }}
                 {% endif -%}
+            {{ vehicle.tags.all() }}
             </td>
             <td class="vehicle-detail">
                 <table class="pure-table-bordered">
@@ -115,9 +116,9 @@
                         <th>Make{% if vehicle.model %} and model{% endif %}</th>
                         <td>{{ vehicle.make }}{% if vehicle.model %} {{ vehicle.model }}{% endif %}</td>
                     </tr>{% endif %}
-                    {% if vehicle.location and vehicle.location.id != 0 %}<tr>
+                    {% if vehicle.location %}<tr>
                         <th>Location</th>
-                        <td>{{ vehicle.location.label }}</td>
+                        <td>{{ vehicle.location.label }} {{ vehicle.location_id }}</td>
                     </tr>{% endif %}
                     {% if vehicle.towing_and_articulation and vehicle.towing_and_articulation.id != 0 %}<tr>
                         <th>Towing and articulation</th>
@@ -125,11 +126,11 @@
                     </tr>{% endif %}
                     {% if vehicle.junction_location and vehicle.junction_location.id != 0 %}<tr>
                         <th>Junction location</th>
-                        <td>{{ vehicle.junction_location.label }}</td>
+                        <td>{{ vehicle.junction_location.label }} {{ vehicle.junction_location_id }}</td>
                     </tr>{% endif %}
                     {% if vehicle.manoeuvre and vehicle.manoeuvre.id != 18 %}<tr>
                         <th>Manoeuvre</th>
-                        <td>{{ vehicle.manoeuvre.label }}</td>
+                        <td>{{ vehicle.manoeuvre.label }} {{ vehicle.manoeuvre_id }}</td>
                     </tr>{% endif %}
                     {% if vehicle.skidding_and_overturning and vehicle.skidding_and_overturning.id != 0 %}<tr>
                         <th>Skidding and overturning?</th>

@@ -2,6 +2,7 @@ astral
 psycopg2
 Django
 django-jinja
+django-reversion
 django-widget-tweaks
 celery
 html5lib
