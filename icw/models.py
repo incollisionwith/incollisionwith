@@ -328,6 +328,7 @@ class Casualty(models.Model):
 
     pedestrian_location = models.ForeignKey(PedestrianLocation, null=True, blank=True)
     pedestrian_movement = models.ForeignKey(PedestrianMovement, null=True, blank=True)
+    pedestrian_hit_by = models.ForeignKey(VehicleType, null=True, blank=True, related_name='hit_pedestrians')
 
     class Meta:
         unique_together = (('accident', 'vehicle_ref', 'casualty_ref'),)

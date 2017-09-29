@@ -25,6 +25,8 @@ class Command(BaseCommand):
             print(existing_id)
             casualty.id = existing_id
             casualty.vehicle_id = vehicle_refs[(casualty.accident_id, casualty.vehicle_ref)]
+            if casualty.type_id == 0:
+                casualty.pedestrian_hit_by_id = casualty.vehicle.type_id
             if existing_id:
                 casualty.save(force_update=True)
             else:
