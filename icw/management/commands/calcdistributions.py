@@ -11,6 +11,7 @@ from ...util import indexed, sex_indexed
 
 import logging
 
+
 class Command(BaseCommand):
     def handle(self, *args, **options):
         self.vcounts, self.ccounts = collections.defaultdict(int), collections.defaultdict(int)
