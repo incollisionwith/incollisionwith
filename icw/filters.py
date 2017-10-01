@@ -17,6 +17,10 @@ class AccidentFilter(django_filters.FilterSet):
                   'casualty_distribution', 'vehicle_distribution']
 
 class CasualtyFilter(django_filters.FilterSet):
+    date = django_filters.DateFromToRangeFilter(name='accident__date', label='Date range')
+    pedestrian_hit_by = django_filters.ModelChoiceFilter(queryset=models.VehicleType.objects.exclude(id=0))
+
     class Meta:
         model = models.Casualty
-        fields = ['type', 'severity', 'age_band', 'vehicle__location', 'pedestrian_location', 'pedestrian_hit_by']
+        fields = ['date', 'type', 'severity', 'age_band', 'vehicle__location', 'pedestrian_location',
+                  'pedestrian_hit_by']
