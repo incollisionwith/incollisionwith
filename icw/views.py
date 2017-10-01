@@ -1,8 +1,9 @@
-import collections
-from django.apps import apps
+import http.client
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
+from django.db import IntegrityError
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, TemplateView, UpdateView, CreateView
 from django_filters.views import FilterView
@@ -34,7 +35,9 @@ class AccidentListView(FilterView):
 
 class CasualtyListView(FilterView):
     model = models.Casualty
-    queryset = models.Casualty.objects.select_related('accident').prefetch_related('severity', 'vehicle', 'type', 'sex', 'type', 'vehicle', 'vehicle__type', 'pedestrian_location', 'vehicle__location')
+    queryset = models.Casualty.objects.select_related('accident').prefetch_related(
+        'severity', 'vehicle', 'type', 'sex', 'type', 'vehicle', 'vehicle__type', 'pedestrian_location',
+        'vehicle__location')
     paginate_by = 100
     filterset_class = filters.CasualtyFilter
     ordering = ['accident__date', 'accident__date_and_time']
@@ -61,6 +64,14 @@ class CitationCreateView(LoginRequiredMixin, CreateView):
         kwargs['instance'] = models.Citation(created_by=self.request.user,
                                              accident=accident)
         return kwargs
+
+    def form_valid(self, form):
+        try:
+            return super().form_valid(form)
+        except IntegrityError:
+            return render(self.request, 'icw/citation_already_exists.html', context={
+                'accident_pk': self.kwargs['accident_pk']
+            }, status=http.client.CONFLICT)
 
     def get_success_url(self):
         return reverse('accident-detail', kwargs={'pk': self.kwargs['accident_pk']}) + '#citations'

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="pure-u-1-1">
+        <div class="box-padding">
+            <h1>Reference already exists</h1>
+        </div>
+    </div>
+    <p>The URL you submitted has already been submitted against this incident.</p>
+
+    <p><a href="{{ url('accident-detail', pk=accident_pk) }}">Go back…</a></p>
+    </div>
+{% endblock %}

@@ -369,3 +369,4 @@ class Citation(models.Model):
 
     class Meta:
         ordering = ('published', 'created')
+        unique_together = ('accident', 'href')
