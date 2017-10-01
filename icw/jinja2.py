@@ -13,5 +13,6 @@ def environment(**kwargs):
         'login_url': settings.LOGIN_URL,
         'other_page_url': other_page_url,
         'is_range_field': lambda field: isinstance(field, RangeField),
+        'widthratio': lambda value, max_value, max_width: int(value / max_value * max_width),
     })
     return env

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% set description = "UK road traffic incident injury data and statistics, cross-linked to news articles" %}
+
+{% block content %}
+
+
+    <h1>Reference progress</h1>
+
+    {% for year_counts in counts %}
+        <h2>{{ year_counts.label }}</h2>
+        <table class="pure-table">
+        <thead>
+        <tr>
+            <th>Year</th>
+            <th>Progress</th>
+            <th>Referenced</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>{% for year, counts in year_counts.counts %}
+        <tr>
+            <td>{{ year }}</td>
+            <td>
+                <div class="meter">
+  <span style="width: {{ widthratio(counts.yes, counts.total, 100) }}%"></span>
+</div>
+            </td>
+        <td>{{ counts.yes }}</td>
+            <td>{{ counts.total }}</td>
+        </tr>{% endfor %}
+        </table>
+    {% endfor %}
+
+{% endblock %}

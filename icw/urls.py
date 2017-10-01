@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^incident/(?P<accident_pk>[A-Z0-9]{13})/citation/new/$', views.CitationCreateView.as_view(), name='citation-create'),
     url(r'^admin/', admin.site.urls),
     url(r'^reference/$', views.CitationListView.as_view(), name='citation-list'),
+    url(r'^reference-progress/$', views.ReferenceProgressView.as_view(), name='reference-progress'),
     url(r'', include('social_django.urls', namespace='social')),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
     url(r'^profile/$', views.ProfileView.as_view(), name='profile'),
