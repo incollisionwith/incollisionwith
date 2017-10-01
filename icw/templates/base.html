@@ -48,7 +48,7 @@
         {% if user.is_authenticated %}
             <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("logout") }}">Logout (@{{ user.username }})</a></li></li>
         {% else %}
-            <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("social:begin", backend="twitter") }}">Log in with Twitter</a></li></li>
+            <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("social:begin", backend="twitter") }}">Log in with Twitter</a></li>
         {% endif %}
     </ul>
 </div></header>

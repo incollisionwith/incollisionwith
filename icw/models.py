@@ -25,6 +25,8 @@ class PoliceForce(ReferenceModel):
     logo_url = models.TextField()
     dbpedia = models.TextField()
 
+    class Meta:
+        ordering = ('label',)
 
 class Severity(ReferenceModel):
     pass
@@ -81,6 +83,8 @@ class UrbanRural(ReferenceModel):
 class HighwayAuthority(ReferenceModel):
     id = models.CharField(max_length=20, primary_key=True)
 
+    class Meta:
+        ordering = ('label',)
 
 
 class AgeBand(ReferenceModel):

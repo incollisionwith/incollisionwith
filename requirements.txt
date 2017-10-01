@@ -8,6 +8,7 @@ html5lib
 rdflib-jsonld
 newspaper3k
 rdflib
+plotly
 PyYAML
 Shapely
 SPARQLWrapper

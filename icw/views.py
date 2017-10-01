@@ -1,3 +1,5 @@
+import operator
+
 import collections
 import http.client
 
@@ -8,7 +10,10 @@ from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, TemplateView, UpdateView, CreateView
+from django.views.generic.edit import ProcessFormView, FormView
 from django_filters.views import FilterView
+import plotly.offline as opy
+import plotly.graph_objs as go
 
 from . import filters, models, forms
 
@@ -141,3 +146,52 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return self.request.build_absolute_uri()
+
+
+class PlotView(TemplateView):
+    template_name = 'icw/plot.html'
+    form_class = forms.PlotForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        form = context['form'] = self.form_class(self.request.GET)
+        if not form.is_valid():
+            return context
+
+        queryset = models.Accident.objects.all()
+        filter = context['filter'] = filters.AccidentFilter(self.request.GET, queryset)
+        queryset = filter.qs
+
+
+        if form.cleaned_data['x'] == 'year':
+            x = ('year',)
+            queryset = queryset.extra(select={'year': 'EXTRACT(year FROM date)'})
+        elif form.cleaned_data['x'] == 'month':
+            x = ('year', 'month')
+            queryset = queryset.extra(select={'year': 'EXTRACT(year FROM date)', 'month': 'EXTRACT(month FROM date)'})
+        elif form.cleaned_data['x'] == 'month-of-year':
+            x = ('month',)
+            queryset = queryset.extra(select={'month': 'EXTRACT(month FROM date)'})
+
+        queryset = queryset.values(*x).annotate(count=Count('*'))
+
+        xs, ys = [], []
+        get_x = operator.itemgetter(*x)
+        for result in sorted(queryset, key=lambda item: get_x(item)):
+            xs.append(get_x(result))
+            ys.append(result['count'])
+
+        print(xs, ys)
+
+        trace1 = go.Bar(x=xs, y=ys, marker={'color': 'red', },
+                             name='1st Trace')
+
+        data=go.Data([trace1])
+        layout=go.Layout(title="Meine Daten", xaxis={'title':'x1', 'range': [0, None]}, yaxis={'title':'x2', 'range': [0, max(ys)]})
+        figure=go.Figure(data=data,layout=layout)
+        div = opy.plot(figure, auto_open=False, output_type='div')
+
+        context['graph'] = div
+
+        return context
