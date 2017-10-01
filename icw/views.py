@@ -121,7 +121,7 @@ class ReferenceProgressView(TemplateView):
                 value['total'] = value['yes'] + value['no']
             counts.append({
                 'label': label,
-                'counts': sorted(category_counts.items()),
+                'counts': sorted(category_counts.items(), reverse=True),
             })
         return {'counts': counts}
 
