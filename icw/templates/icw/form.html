@@ -1,0 +1,10 @@
+{% for field in form %}
+    <div{% if is_range_field(field) %} class="range-field"{% endif %}>
+        {{ field.label_tag() }}
+        {% if is_range_field(field) %}
+            {{ field }}
+        {% else %}
+            {{ field|add_class("pure-input-1") }}
+        {% endif %}
+    </div>
+{% endfor %}

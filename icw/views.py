@@ -156,42 +156,40 @@ class PlotView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         form = context['form'] = self.form_class(self.request.GET)
-        if not form.is_valid():
-            return context
 
         queryset = models.Accident.objects.all()
         filter = context['filter'] = filters.AccidentFilter(self.request.GET, queryset)
         queryset = filter.qs
 
+        if form.is_valid():
+            if form.cleaned_data['x'] == 'year':
+                x = ('year',)
+                queryset = queryset.extra(select={'year': 'EXTRACT(year FROM date)'})
+            elif form.cleaned_data['x'] == 'month':
+                x = ('year', 'month')
+                queryset = queryset.extra(select={'year': 'EXTRACT(year FROM date)', 'month': 'EXTRACT(month FROM date)'})
+            elif form.cleaned_data['x'] == 'month-of-year':
+                x = ('month',)
+                queryset = queryset.extra(select={'month': 'EXTRACT(month FROM date)'})
 
-        if form.cleaned_data['x'] == 'year':
-            x = ('year',)
-            queryset = queryset.extra(select={'year': 'EXTRACT(year FROM date)'})
-        elif form.cleaned_data['x'] == 'month':
-            x = ('year', 'month')
-            queryset = queryset.extra(select={'year': 'EXTRACT(year FROM date)', 'month': 'EXTRACT(month FROM date)'})
-        elif form.cleaned_data['x'] == 'month-of-year':
-            x = ('month',)
-            queryset = queryset.extra(select={'month': 'EXTRACT(month FROM date)'})
+            queryset = queryset.values(*x).annotate(count=Count('*'))
 
-        queryset = queryset.values(*x).annotate(count=Count('*'))
+            xs, ys = [], []
+            get_x = operator.itemgetter(*x)
+            for result in sorted(queryset, key=lambda item: get_x(item)):
+                xs.append(get_x(result))
+                ys.append(result['count'])
 
-        xs, ys = [], []
-        get_x = operator.itemgetter(*x)
-        for result in sorted(queryset, key=lambda item: get_x(item)):
-            xs.append(get_x(result))
-            ys.append(result['count'])
+            print(xs, ys)
 
-        print(xs, ys)
+            trace1 = go.Bar(x=xs, y=ys, marker={'color': 'red', },
+                                 name='1st Trace')
 
-        trace1 = go.Bar(x=xs, y=ys, marker={'color': 'red', },
-                             name='1st Trace')
+            data=go.Data([trace1])
+            layout=go.Layout(title="Meine Daten", xaxis={'title':'x1', 'range': [0, None]}, yaxis={'title':'x2', 'range': [0, max(ys)]})
+            figure=go.Figure(data=data,layout=layout)
+            div = opy.plot(figure, auto_open=False, output_type='div')
 
-        data=go.Data([trace1])
-        layout=go.Layout(title="Meine Daten", xaxis={'title':'x1', 'range': [0, None]}, yaxis={'title':'x2', 'range': [0, max(ys)]})
-        figure=go.Figure(data=data,layout=layout)
-        div = opy.plot(figure, auto_open=False, output_type='div')
-
-        context['graph'] = div
+            context['graph'] = div
 
         return context

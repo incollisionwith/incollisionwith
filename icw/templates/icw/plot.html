@@ -3,4 +3,15 @@
 
 {% block content %}
 {{ graph|safe }}
+
+    <form method="GET" class="pure-form pure-form-stacked">
+    <h2>Filter</h2>
+                {% with form=filter.form %}
+                    {% include "icw/form.html" %}
+                {% endwith %}
+    <h2>Plot</h2>
+    {% include "icw/form.html" %}
+
+                <button type="submit" class="pure-button pure-button-primary">Plot!</button>
+    </form>
 {% endblock %}
