@@ -152,19 +152,23 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
 class PlotView(TemplateView):
     template_name = 'icw/plot.html'
-    form_class = forms.PlotForm
+    model = None
+    form_class = None
+    filter_class = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         form = context['form'] = self.form_class(self.request.GET)
 
-        queryset = models.Accident.objects.all()
-        filter = context['filter'] = filters.AccidentFilter(self.request.GET, queryset)
+        filter = context['filter'] = self.filter_class(self.request.GET,
+                                                       self.model.objects.order_by())
         queryset = filter.qs
         x_rename = lambda x: x
 
         if form.is_valid():
+            if self.model != models.Accident:
+                queryset = queryset.extra(tables=['icw_accident'], where=['icw_casualty.accident_id = icw_accident.id'])
             if not form.cleaned_data.get('x') or form.cleaned_data['x'] == 'year':
                 x = ('year',)
                 x_title = 'Year'
@@ -206,3 +210,16 @@ class PlotView(TemplateView):
             context['graph'] = div
 
         return context
+
+
+class AccidentPlotView(PlotView):
+    model = models.Accident
+    form_class = forms.PlotForm
+    filter_class = filters.AccidentFilter
+
+
+class CasualtyPlotView(PlotView):
+    model = models.Casualty
+    form_class = forms.PlotForm
+    filter_class = filters.CasualtyFilter
+
