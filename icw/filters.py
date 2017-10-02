@@ -18,6 +18,7 @@ class AccidentFilter(django_filters.FilterSet):
                   'carriageway_hazards', 'vehicles__hit_object_in_carriageway', 'vehicles__hit_object_off_carriageway',
                   'casualty_distribution', 'vehicle_distribution']
 
+
 class CasualtyFilter(django_filters.FilterSet):
     date = django_filters.DateFromToRangeFilter(name='accident__date', label='Date range')
     pedestrian_hit_by = django_filters.ModelChoiceFilter(queryset=models.VehicleType.objects.exclude(id=0))
@@ -25,4 +26,5 @@ class CasualtyFilter(django_filters.FilterSet):
     class Meta:
         model = models.Casualty
         fields = ['date', 'type', 'severity', 'age_band', 'vehicle__location', 'pedestrian_location',
-                  'pedestrian_hit_by', 'accident__has_citations']
+                  'pedestrian_hit_by', 'accident__police_force', 'accident__highway_authority',
+                  'accident__has_citations']
