@@ -28,4 +28,5 @@ X_CHOICES = (
 
 
 class PlotForm(forms.Form):
-    x = forms.ChoiceField(choices=X_CHOICES)
+    title = forms.CharField(required=False)
+    x = forms.ChoiceField(choices=X_CHOICES, required=False)

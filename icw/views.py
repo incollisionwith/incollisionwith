@@ -1,3 +1,5 @@
+import calendar
+
 import operator
 
 import collections
@@ -160,24 +162,33 @@ class PlotView(TemplateView):
         queryset = models.Accident.objects.all()
         filter = context['filter'] = filters.AccidentFilter(self.request.GET, queryset)
         queryset = filter.qs
+        x_rename = lambda x: x
 
         if form.is_valid():
-            if form.cleaned_data['x'] == 'year':
+            if not form.cleaned_data.get('x') or form.cleaned_data['x'] == 'year':
                 x = ('year',)
+                x_title = 'Year'
                 queryset = queryset.extra(select={'year': 'EXTRACT(year FROM date)'})
             elif form.cleaned_data['x'] == 'month':
                 x = ('year', 'month')
+                x_title = 'Month'
                 queryset = queryset.extra(select={'year': 'EXTRACT(year FROM date)', 'month': 'EXTRACT(month FROM date)'})
             elif form.cleaned_data['x'] == 'month-of-year':
                 x = ('month',)
+                x_title = 'Month of year'
                 queryset = queryset.extra(select={'month': 'EXTRACT(month FROM date)'})
+                x_rename = lambda month_number: calendar.month_abbr[int(month_number)]
+            elif form.cleaned_data['x'] == 'police-force':
+                x = ('police_force_id',)
+                x_title = 'Police force'
+                x_rename = {p.id: p.label for p in models.PoliceForce.objects.all()}.get
 
             queryset = queryset.values(*x).annotate(count=Count('*'))
 
             xs, ys = [], []
             get_x = operator.itemgetter(*x)
             for result in sorted(queryset, key=lambda item: get_x(item)):
-                xs.append(get_x(result))
+                xs.append(x_rename(get_x(result)))
                 ys.append(result['count'])
 
             print(xs, ys)
@@ -186,7 +197,9 @@ class PlotView(TemplateView):
                                  name='1st Trace')
 
             data=go.Data([trace1])
-            layout=go.Layout(title="Meine Daten", xaxis={'title':'x1', 'range': [0, None]}, yaxis={'title':'x2', 'range': [0, max(ys)]})
+            layout=go.Layout(title=form.cleaned_data.get('title', 'Plot'),
+                             xaxis={'title': x_title},
+                             yaxis={'title': 'Count', 'range': [0, max(ys)]})
             figure=go.Figure(data=data,layout=layout)
             div = opy.plot(figure, auto_open=False, output_type='div')
 
