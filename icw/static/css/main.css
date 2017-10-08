@@ -170,3 +170,9 @@ ul.citations li {
   position: relative;
   overflow: hidden;
 }
+
+
+.help-tooltip {
+    cursor: help;
+    color: #017A4B;
+}

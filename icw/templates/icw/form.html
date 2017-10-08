@@ -1,6 +1,9 @@
 {% for field in form %}
     <div{% if is_range_field(field) %} class="range-field"{% endif %}>
         {{ field.label_tag() }}
+    {% if field.help_text %}
+    <i class="fa fa-question-circle help-tooltip" title="{{ field.help_text }}"> </i>
+    {% endif %}
         {% if is_range_field(field) %}
             {{ field }}
         {% else %}
