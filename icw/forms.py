@@ -26,7 +26,21 @@ X_CHOICES = (
     ('police-force', 'police force'),
 )
 
+SUBPLOT_CHOICES = (
+    ('', '-' * 8),
+    ('severity', 'severity'),
+)
+
+LAYOUT_CHOICES = (
+    ('', '-' * 8),
+    ('group', 'group'),
+    ('stack', 'stack'),
+    ('relative', 'relative'),
+)
+
 
 class PlotForm(forms.Form):
     title = forms.CharField(required=False)
     x = forms.ChoiceField(choices=X_CHOICES, required=False)
+    subplot = forms.ChoiceField(choices=SUBPLOT_CHOICES, required=False)
+    layout = forms.ChoiceField(choices=LAYOUT_CHOICES, required=False)

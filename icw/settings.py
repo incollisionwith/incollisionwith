@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'django_filters',
+    'rest_framework',
     'social_django',
 ]
 
@@ -61,7 +62,7 @@ TEMPLATES = [
         'OPTIONS': {
             # Match the template names ending in .html but not the ones in the admin folder.
             "match_extension": ".html",
-            "match_regex": r"^(?!(admin|debug_toolbar)/).*",
+            "match_regex": r"^(?!(admin|debug_toolbar|rest_framework|django_filters)/).*",
             "app_dirname": "templates",
             'filters': {
                 'add_class': 'widget_tweaks.templatetags.widget_tweaks.add_class',
@@ -109,3 +110,9 @@ for key in os.environ:
 LOGIN_REDIRECT_URL = '/profile/'
 LOGOUT_URL = '/logout/'
 LOGIN_URL = '/login/twitter/'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 200,
+}

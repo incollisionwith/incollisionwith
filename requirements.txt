@@ -2,6 +2,7 @@ astral
 psycopg2
 Django
 django-jinja
+djangorestframework
 django-widget-tweaks
 celery
 html5lib

@@ -2,11 +2,15 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
+from rest_framework.routers import DefaultRouter
 
-from . import views
+from . import api, views
 
 admin.autodiscover()
 
+router = DefaultRouter()
+router.register('accident', api.AccidentViewSet)
+router.register('citation', api.CitationViewSet)
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
@@ -26,6 +30,8 @@ urlpatterns = [
     url(r'', include('social_django.urls', namespace='social')),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
     url(r'^profile/$', views.ProfileView.as_view(), name='profile'),
+
+    url(r'^api/', include(router.get_urls(), 'api')),
 ]
 
 

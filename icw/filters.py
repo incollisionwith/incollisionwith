@@ -1,4 +1,7 @@
+from html import escape
+
 import django_filters
+from django_filters import rest_framework as filters
 from django.contrib.gis.geos import Polygon
 from django import forms
 from django.core.exceptions import ValidationError
@@ -32,7 +35,7 @@ class PointFilter(django_filters.Filter):
         return qs
 
 
-class AccidentFilter(django_filters.FilterSet):
+class AccidentFilter(filters.FilterSet):
     date = django_filters.DateFromToRangeFilter(label='Date range')
     casualty_distribution = django_filters.ModelMultipleChoiceFilter(queryset=models.CasualtyDistribution.objects.order_by('-count'))
     vehicle_distribution = django_filters.ModelMultipleChoiceFilter(queryset=models.VehicleDistribution.objects.order_by('-count'))
@@ -40,7 +43,7 @@ class AccidentFilter(django_filters.FilterSet):
     number_of_vehicles = django_filters.RangeFilter()
     number_of_casualties = django_filters.RangeFilter()
     bbox = PointFilter(name='location',
-                       help_text='The coordinate values of two opposite corners of a bounding box, as "<SW lng>,<SW lat>,<NE lng>,<NE lat>"')
+                       help_text=escape('The coordinate values of two opposite corners of a bounding box, as "<SW lng>,<SW lat>,<NE lng>,<NE lat>"'))
 
     class Meta:
         model = models.Accident
@@ -50,7 +53,7 @@ class AccidentFilter(django_filters.FilterSet):
                   'casualty_distribution', 'vehicle_distribution', 'bbox']
 
 
-class CasualtyFilter(django_filters.FilterSet):
+class CasualtyFilter(filters.FilterSet):
     date = django_filters.DateFromToRangeFilter(name='accident__date', label='Date range')
     pedestrian_hit_by = django_filters.ModelChoiceFilter(queryset=models.VehicleType.objects.exclude(id=0))
 
