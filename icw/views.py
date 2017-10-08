@@ -223,3 +223,11 @@ class CasualtyPlotView(PlotView):
     form_class = forms.PlotForm
     filter_class = filters.CasualtyFilter
 
+
+class MapView(TemplateView):
+    template_name = 'icw/map.html'
+
+    def get_context_data(self, **kwargs):
+        return {
+            'form': filters.AccidentFilter().form,
+        }

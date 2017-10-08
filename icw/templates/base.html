@@ -29,19 +29,23 @@
     <link rel="stylesheet" href="{{ static_url }}lib/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">
 
     <link rel="stylesheet" type="text/css" href="{{ static_url }}css/main.css">
-
+    {% block extra_head %}{% endblock %}
 </head>
-<body>{% block body %}
+<body class="{{ body_class }}">{% block body %}
     <header class="icw-header"><div class="pure-menu pure-menu-horizontal">
         <a class="pure-menu-heading" href="/">In Collision With</a>
         <ul class="pure-menu-list">
             <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("accident-list") }}">Incidents</a></li>
             <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("casualty-list") }}">Casualties</a></li>
+            <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("map") }}">Map</a></li>
             <!--
         <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("vehicle-distribution-list") }}">Vehicle distributions</a></li>
         <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("casualty-distribution-list") }}">Casualty distributions</a></li>
         -->
             <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("api:api-root") }}">API</a></li>
+        <!--
+            <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("faq") }}">Caveats</a></li>
+            -->cd ..
             <!--
                                 <li class="pure-menu-item"><a class="pure-menu-link" href="/reporting">Reporting</a></li>
                                 <li class="pure-menu-item"><a class="pure-menu-link" href="/statistics">Statistics</a></li>
@@ -63,11 +67,13 @@
         {% endblock %}
     </article>
 
-    <div class="footer">
-        <a class="twitter" href="https://twitter.com/incollisionwith" title="Twitter"><i class="fa fa-twitter fa-2x"> </i></a>
-        <a class="github" href="https://github.com/incollisionwith" title="GitHub"><i class="fa fa-github fa-2x"> </i></a>
+    {% block footer %}
+        <div class="footer">
+            <a class="twitter" href="https://twitter.com/incollisionwith" title="Twitter"><i class="fa fa-twitter fa-2x"> </i></a>
+            <a class="github" href="https://github.com/incollisionwith" title="GitHub"><i class="fa fa-github fa-2x"> </i></a>
 
-    </div>
+        </div>
+    {% endblock footer %}
 {% endblock %}
 <script src="{{ static_url }}js/main.js"></script>
 {% if google_analytics_tracking_id -%}

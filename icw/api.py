@@ -1,9 +1,10 @@
 from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
 from django_filters import rest_framework as filters
+from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 
 from icw.filters import AccidentFilter
-from . import models, serializers
+from . import models, renderers, serializers
 
 
 class AccidentViewSet(viewsets.ReadOnlyModelViewSet):
@@ -11,6 +12,12 @@ class AccidentViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.AccidentSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filter_class = AccidentFilter
+
+    renderer_classes = (
+        JSONRenderer,
+        BrowsableAPIRenderer,
+        renderers.GeoJSONRenderer,
+    )
 
 
 class CitationViewSet(viewsets.ReadOnlyModelViewSet):
