@@ -2,7 +2,7 @@
     <div{% if is_range_field(field) %} class="range-field"{% endif %}>
         {{ field.label_tag() }}
     {% if field.help_text %}
-    <i class="fa fa-question-circle help-tooltip" title="{{ field.help_text }}"> </i>
+    <i class="fa fa-question-circle help-tooltip" title="{{ field.help_text|safe }}"> </i>
     {% endif %}
         {% if is_range_field(field) %}
             {{ field }}
