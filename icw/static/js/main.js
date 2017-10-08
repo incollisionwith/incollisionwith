@@ -38,7 +38,8 @@
             function onEachFeature(feature, layer) {
                 // does this feature have a property named popupContent?
                 if (feature.properties && feature.properties.name) {
-                    layer.bindPopup(feature.properties.name);
+                    var content = feature.properties.name + '<br><a href="' + feature.properties.url + '">View…</a>';
+                    layer.bindPopup(content);
                 }
             }
             var url = mapElem.dataset.url;
