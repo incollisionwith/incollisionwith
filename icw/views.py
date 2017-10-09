@@ -36,7 +36,7 @@ class IndexView(TemplateView):
         recent_leaderboard = sorted(recent_leaderboard.items(), key=lambda i: -i[1])[:10]
 
         context.update({
-            'recent_citations': models.Citation.objects.filter(status='200').order_by('-created')[:10],
+            'recent_citations': models.Citation.objects.filter(status='200').order_by('-created')[:5],
             'earliest': models.Accident.objects.order_by('date')[0],
             'latest': models.Accident.objects.order_by('-date')[0],
             'fatality_count': models.Casualty.objects.filter(severity_id=1).count(),
