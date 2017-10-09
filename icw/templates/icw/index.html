@@ -40,8 +40,8 @@
             <div class="pure-g">
                 <div class="pure-u-1-2 pad-right-half">
                     <h3>All time</h3>
-                    <ol>{% for profile in full_leaderboard %}
-                        <li>{{ profile.user.username }} ({{ profile.points_pending }})</li>{% endfor %}
+                    <ol>{% for profile in full_leaderboard %}{% if profile.points_pending %}
+                        <li>{{ profile.user.username }} ({{ profile.points_pending }})</li>{% endif %}{% endfor %}
                     </ol>
                     </div>
                 <div class="pure-u-1-2 pad-left-half">
