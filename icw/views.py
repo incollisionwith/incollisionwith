@@ -5,12 +5,14 @@ import operator
 import collections
 import http.client
 
+from datetime import timedelta
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.utils.timezone import now
 from django.views.generic import DetailView, ListView, TemplateView, UpdateView, CreateView
 from django.views.generic.edit import ProcessFormView, FormView
 from django_filters.views import FilterView
@@ -24,12 +26,22 @@ class IndexView(TemplateView):
     template_name = 'icw/index.html'
 
     def get_context_data(self, **kwargs):
+        import icw.rewards.models
         context = super().get_context_data()
+
+        recent_leaderboard = collections.defaultdict(int)
+        for points_award in icw.rewards.models.PointsReward.objects.filter(
+                created__gte=now()-timedelta(7)).select_related('action', 'user'):
+            recent_leaderboard[points_award.user] += points_award.action.value
+        recent_leaderboard = sorted(recent_leaderboard.items(), key=lambda i: -i[1])
+
         context.update({
             'recent_citations': models.Citation.objects.filter(status='200').order_by('-created')[:10],
             'earliest': models.Accident.objects.order_by('date')[0],
             'latest': models.Accident.objects.order_by('-date')[0],
             'fatality_count': models.Casualty.objects.filter(severity_id=1).count(),
+            'full_leaderboard': icw.rewards.models.Profile.objects.order_by('-points_pending')[:10],
+            'recent_leaderboard': recent_leaderboard,
         })
         return context
 
@@ -165,6 +177,7 @@ class PlotView(TemplateView):
                                                        self.model.objects.order_by())
         queryset = filter.qs
         x_rename = lambda x: x
+        subplot_rename = lambda x: x
 
         if form.is_valid():
             if self.model != models.Accident:
@@ -187,23 +200,35 @@ class PlotView(TemplateView):
                 x_title = 'Police force'
                 x_rename = {p.id: p.label for p in models.PoliceForce.objects.all()}.get
 
-            queryset = queryset.values(*x).annotate(count=Count('*'))
+            if form.cleaned_data['subplot'] == 'severity':
+                subplot = ('severity_id',)
+                subplot_rename = {s.id: s.label for s in models.Severity.objects.all()}.get
+            else:
+                subplot = ()
 
-            xs, ys = [], []
+            queryset = queryset.values(*x, *subplot).annotate(count=Count('*'))
+            print(queryset.query)
+            xs, yss = [], collections.defaultdict(list)
+            get_subplot = operator.itemgetter(*subplot) if subplot else lambda result: 'count'
             get_x = operator.itemgetter(*x)
             for result in sorted(queryset, key=lambda item: get_x(item)):
+                subplot = get_subplot(result)
                 xs.append(x_rename(get_x(result)))
-                ys.append(result['count'])
+                yss[subplot].append(result['count'])
 
-            print(xs, ys)
+            import pprint
+            pprint.pprint((xs, yss))
 
-            trace1 = go.Bar(x=xs, y=ys, marker={'color': 'red', },
-                                 name='1st Trace')
+            traces = []
+            for y_key, ys in sorted(yss.items()):
+                trace = go.Bar(x=xs, y=ys, name=subplot_rename(y_key))
+                traces.append(trace)
 
-            data=go.Data([trace1])
+            data=go.Data(traces)
             layout=go.Layout(title=form.cleaned_data.get('title', 'Plot'),
                              xaxis={'title': x_title},
-                             yaxis={'title': 'Count', 'range': [0, max(ys)]})
+                             yaxis={'title': 'Count'},
+                             barmode=form.cleaned_data.get('layout', 'group'))
             figure=go.Figure(data=data,layout=layout)
             div = opy.plot(figure, auto_open=False, output_type='div')
 

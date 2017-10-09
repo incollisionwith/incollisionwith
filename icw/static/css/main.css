@@ -188,3 +188,16 @@ body.map-view .accident-list-map {
     top: 35px;
     bottom: 0;
 }
+
+span.points-total {
+    font-size: 70%;
+    font-weight: bold;
+    background-color: #bbc;
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: #555555 1px 1px 1px;
+    padding: 3px;
+    text-align: center;
+    min-width: 3em;
+    color: black;
+}

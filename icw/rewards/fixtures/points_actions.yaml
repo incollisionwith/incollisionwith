@@ -1,0 +1,18 @@
+- model: rewards.PointsAction
+  pk: moderate-subject
+  fields:
+    text: "{user} moderated {subject}"
+    font_awesome: certificate
+    points: 1
+- model: rewards.PointsAction
+  pk: moderate
+  fields:
+    text: "{user} did some moderation"
+    font_awesome: certificate
+    points: 1
+- model: rewards.PointsAction
+  pk: add-citation
+  fields:
+    text: "{user} added a reference to {citation.accident}"
+    font_awesome: newspaper-o
+    points: 2

@@ -43,16 +43,18 @@
         <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("casualty-distribution-list") }}">Casualty distributions</a></li>
         -->
             <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("api:api-root") }}">API</a></li>
-        <!--
-            <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("faq") }}">Caveats</a></li>
-            -->
-            <!--
-                                <li class="pure-menu-item"><a class="pure-menu-link" href="/reporting">Reporting</a></li>
-                                <li class="pure-menu-item"><a class="pure-menu-link" href="/statistics">Statistics</a></li>
-                                <li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li>
-                -->
+
             {% if user.is_authenticated %}
-                <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("logout") }}">Logout (@{{ user.username }})</a></li></li>
+                <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                    <a href="{{ url("profile") }}" id="menuLink1" class="pure-menu-link">
+                        {{ user.username }}
+                        <span class="points-total">{{ user.rewards_profile.points_confirmed }}</span>
+                    </a>
+                    <ul class="pure-menu-children">
+                        <li class="pure-menu-item"><a href="{{ url("logout") }}" class="pure-menu-link">Log out</a></li>
+                    </ul>
+                </li>
+                <li></li>
             {% else %}
                 <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("social:begin", backend="twitter") }}">Log in with Twitter</a></li>
             {% endif %}
