@@ -33,7 +33,7 @@ class IndexView(TemplateView):
         for points_award in icw.rewards.models.PointsReward.objects.filter(
                 created__gte=now()-timedelta(7)).select_related('action', 'user'):
             recent_leaderboard[points_award.user] += points_award.action.value
-        recent_leaderboard = sorted(recent_leaderboard.items(), key=lambda i: -i[1])
+        recent_leaderboard = sorted(recent_leaderboard.items(), key=lambda i: -i[1])[:10]
 
         context.update({
             'recent_citations': models.Citation.objects.filter(status='200').order_by('-created')[:10],
