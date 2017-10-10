@@ -339,15 +339,6 @@ class Casualty(models.Model):
         ordering = ('accident', 'casualty_ref')
 
 
-class AccidentAnnotation(models.Model):
-    accident = models.OneToOneField(Accident, null=True, blank=True, related_name='_annotation')
-    date = models.DateField(null=True, blank=True)
-    location = PointField(null=True, blank=True)
-
-    title = models.TextField(blank=True)
-    description = models.TextField(blank=True)
-
-
 class Citation(models.Model):
     accident = models.ForeignKey(Accident, related_name='citations')
     href = models.URLField(verbose_name='URL', max_length=1024)

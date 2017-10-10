@@ -1,0 +1,70 @@
+# Offences
+# http://www.cps.gov.uk/legal/p_to_r/road_traffic_offences/
+
+- model: annotation.Offence
+  pk: careless-driving
+  fields:
+    label: careless driving
+- model: annotation.Offence
+  pk: dangerous-driving
+  fields:
+    label: dangerous driving
+    alternative_verdicts: [careless-driving]
+- model: annotation.Offence
+  pk: furious-or-wanton-driving
+  fields:
+    label: furious or wanton driving
+- model: annotation.Offence
+  pk: death-by-careless-driving
+  fields:
+    label: death by careless driving
+- model: annotation.Offence
+  pk: death-by-dangerous-driving
+  fields:
+    label: death by dangerous driving
+    alternative_verdicts: [death-by-careless-driving]
+- model: annotation.Offence
+  pk: inconsiderate-driving
+  fields:
+    label: inconsiderate driving
+- model: annotation.Offence
+  pk: failing-to-stop
+  fields:
+    label: failing to stop
+- model: annotation.Offence
+  pk: driving-while-disqualified
+  fields:
+    label: driving while disqualified
+- model: annotation.Offence
+  pk: using-a-vehicle-without-insurance
+  fields:
+    label: using a vehicle without insurance
+- model: annotation.Offence
+  pk: dangerous-cycling
+  fields:
+    label: dangerous cycling
+- model: annotation.Offence
+  pk: driving-drink-drugs
+  fields:
+    label: driving or attempting to drive while unfit through drink or drugs
+- model: annotation.Offence
+  pk: driving-excess-alcohol
+  fields:
+    label: driving or attempting to drive with excess alcohol in breath, blood or urine
+- model: annotation.Offence
+  pk: manslaughter
+  fields:
+    label: manslaughter
+
+
+# Person types
+
+- model: annotation.PersonType
+  pk: director
+  fields:
+    label: director of vehicle operator
+- model: annotation.PersonType
+  pk: mechanic
+  fields:
+    label: person with responsibility for vehicle roadworthiness
+
