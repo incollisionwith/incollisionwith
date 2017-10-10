@@ -45,11 +45,22 @@ class Person(models.Model):
 
     prosecution_started = models.NullBooleanField(default=False)
 
+
 class Prosecution(models.Model):
     organization = models.ForeignKey(Organization, null=True, blank=True)
     person = models.ForeignKey(Person, null=True, blank=True)
     private = models.BooleanField(default=False)
 
+    sentence_known = models.NullBooleanField(default=False)
+
+    sentence_custodial = models.DurationField(null=True, blank=True)
+    sentence_suspended_for = models.DurationField(null=True, blank=True)
+    sentence_driving_ban = models.DurationField(null=True, blank=True)
+    sentence_community = models.DurationField(null=True, blank=True)
+
+    sentence_fine = models.PositiveIntegerField(null=True, blank=True)
+    sentence_costs = models.PositiveIntegerField(null=True, blank=True)
+    sentence_victim_surcharge = models.PositiveIntegerField(null=True, blank=True)
 
 class ProsecutionOutcome(models.Model):
     id = models.SlugField(primary_key=True)
