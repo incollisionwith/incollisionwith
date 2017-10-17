@@ -18,20 +18,20 @@ class NewCitationForm(forms.ModelForm):
         model = models.Citation
         fields = ('href',)
 
-X_CHOICES = (
+MAIN_PLOT_CHOICES = (
     ('year', 'year'),
     ('month', 'month'),
     ('month-of-year', 'month of year'),
     ('hour-of-day', 'hour of day'),
     ('police-force', 'police force'),
-    ('pedestrian-hit-by', 'vehicle type that hit pedestrian'),
+    ('pedestrian-hit-by', 'pedestrian hit by'),
+    ('pedestrian-location', 'pedestrian location'),
+    ('severity', 'severity'),
 )
 
-SUBPLOT_CHOICES = (
+SUB_PLOT_CHOICES = (
     ('', '-' * 8),
-    ('severity', 'severity'),
-    ('pedestrian-hit-by', 'vehicle type that hit pedestrian'),
-)
+) + MAIN_PLOT_CHOICES
 
 LAYOUT_CHOICES = (
     ('', '-' * 8),
@@ -43,6 +43,6 @@ LAYOUT_CHOICES = (
 
 class PlotForm(forms.Form):
     title = forms.CharField(required=False)
-    x = forms.ChoiceField(choices=X_CHOICES, required=False)
-    subplot = forms.ChoiceField(choices=SUBPLOT_CHOICES, required=False)
+    main = forms.ChoiceField(label='X', choices=MAIN_PLOT_CHOICES, required=False)
+    sub = forms.ChoiceField(label='Subplot', choices=SUB_PLOT_CHOICES, required=False)
     layout = forms.ChoiceField(choices=LAYOUT_CHOICES, required=False)
