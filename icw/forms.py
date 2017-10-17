@@ -24,11 +24,13 @@ X_CHOICES = (
     ('month-of-year', 'month of year'),
     ('hour-of-day', 'hour of day'),
     ('police-force', 'police force'),
+    ('pedestrian-hit-by', 'vehicle type that hit pedestrian'),
 )
 
 SUBPLOT_CHOICES = (
     ('', '-' * 8),
     ('severity', 'severity'),
+    ('pedestrian-hit-by', 'vehicle type that hit pedestrian'),
 )
 
 LAYOUT_CHOICES = (

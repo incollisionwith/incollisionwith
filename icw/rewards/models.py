@@ -13,6 +13,9 @@ class Profile(models.Model):
         help_text="Points that would be accrued if everything were moderated")
 
 
+#class PointsLevel(models.Model)
+
+
 class PointsAction(models.Model):
     id = models.SlugField(primary_key=True)
     text = models.TextField(blank=True)

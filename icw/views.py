@@ -198,11 +198,21 @@ class PlotView(TemplateView):
             elif form.cleaned_data['x'] == 'police-force':
                 x = ('police_force_id',)
                 x_title = 'Police force'
+                queryset = queryset.extra(select={'police_force_id': 'icw_accident.police_force_id'})
                 x_rename = {p.id: p.label for p in models.PoliceForce.objects.all()}.get
+            elif form.cleaned_data['x'] == 'pedestrian-hit-by':
+                x = ('pedestrian_hit_by_id',)
+                x_title = 'Vehicle type that hit pedestrian'
+                queryset = queryset.filter(pedestrian_hit_by__isnull=False)
+                x_rename = {s.id: s.label for s in models.VehicleType.objects.all()}.get
 
             if form.cleaned_data['subplot'] == 'severity':
                 subplot = ('severity_id',)
                 subplot_rename = {s.id: s.label for s in models.Severity.objects.all()}.get
+            elif form.cleaned_data['subplot'] == 'pedestrian-hit-by':
+                subplot = ('pedestrian_hit_by_id',)
+                queryset = queryset.filter(pedestrian_hit_by__isnull=False)
+                subplot_rename = {s.id: s.label for s in models.VehicleType.objects.all()}.get
             else:
                 subplot = ()
 

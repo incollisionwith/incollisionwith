@@ -62,6 +62,7 @@ class Prosecution(models.Model):
     sentence_costs = models.PositiveIntegerField(null=True, blank=True)
     sentence_victim_surcharge = models.PositiveIntegerField(null=True, blank=True)
 
+
 class ProsecutionOutcome(models.Model):
     id = models.SlugField(primary_key=True)
     label = models.CharField(max_length=128)
@@ -72,3 +73,4 @@ class Charge(models.Model):
     outcome = models.ForeignKey(ProsecutionOutcome)
     charged_offence = models.ForeignKey(Offence, related_name='charged')
     verdict_offence = models.ForeignKey(Offence, null=True, blank=True, related_name='verdict')
+    offence_against_person = models.ForeignKey(Person, null=True, blank=True)
