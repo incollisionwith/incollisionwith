@@ -11,6 +11,7 @@ INTERNAL_IPS = ['127.0.0.1']
 
 INSTALLED_APPS = [
     'icw',
+    'icw.annotation',
     'icw.rewards',
     'django.contrib.admin',
     'django.contrib.auth',

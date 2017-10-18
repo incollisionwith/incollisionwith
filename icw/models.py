@@ -274,6 +274,7 @@ class Accident(models.Model):
 
     @cached_property
     def annotation(self):
+        from icw.annotation.models import Annotation
         try:
             return self._annotation
         except AccidentAnnotation.DoesNotExist:
