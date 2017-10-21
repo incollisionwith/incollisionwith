@@ -1,6 +1,7 @@
 astral
 psycopg2
 Django
+django-fsm
 django-jinja
 djangorestframework
 django-widget-tweaks

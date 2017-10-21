@@ -1,4 +1,4 @@
-
+import django_fsm
 from django.conf import settings
 from django.contrib.gis.db.models import PointField
 from django.db import models
@@ -229,8 +229,18 @@ class CasualtyDistribution(models.Model):
         return self.as_text
 
 
+class AccidentRecordState(models.Model):
+    id = models.PositiveSmallIntegerField(primary_key=True)
+    label = models.CharField(max_length=128)
+    description = models.TextField(blank=True)
+    official = models.BooleanField(default=False)
+    reliable = models.BooleanField(default=False)
+    pre_release = models.BooleanField(default=False)
+
+
 class Accident(models.Model):
     id = models.CharField(max_length=13, primary_key=True)
+    record_state = django_fsm.FSMKeyField(AccidentRecordState, default=0)
     location = PointField(db_index=True, null=True)
     police_force = models.ForeignKey(PoliceForce)
     severity = models.ForeignKey(CasualtySeverity)
