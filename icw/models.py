@@ -240,7 +240,7 @@ class AccidentRecordState(models.Model):
 
 class Accident(models.Model):
     id = models.CharField(max_length=13, primary_key=True)
-    record_state = django_fsm.FSMKeyField(AccidentRecordState, default=0)
+    record_state = django_fsm.FSMKeyField(AccidentRecordState, default=0, db_index=True)
     location = PointField(db_index=True, null=True)
     police_force = models.ForeignKey(PoliceForce)
     severity = models.ForeignKey(CasualtySeverity)

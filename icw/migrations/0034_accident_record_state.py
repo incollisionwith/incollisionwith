@@ -56,6 +56,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='accident',
             name='record_state',
-            field=django_fsm.FSMKeyField(default=0, on_delete=django.db.models.deletion.CASCADE, to='icw.AccidentRecordState'),
+            field=django_fsm.FSMKeyField(default=0, on_delete=django.db.models.deletion.CASCADE,
+                                         to='icw.AccidentRecordState', db_index=True),
         ),
     ]
