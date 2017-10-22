@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^incident/(?P<accident_pk>[A-Z0-9]{13})/citation/new/$', views.CitationCreateView.as_view(), name='citation-create'),
     url(r'^admin/', admin.site.urls),
     url(r'^reference/$', views.CitationListView.as_view(), name='citation-list'),
-    url(r'^reference-progress/$', views.ReferenceProgressView.as_view(), name='reference-progress'),
+    url(r'^reference-progress/$', views.CitationProgressView.as_view(), name='citation-progress'),
 
     url(r'^incident/plot/$', views.AccidentPlotView.as_view(), name='accident-plot'),
     url(r'^casualty/plot/$', views.CasualtyPlotView.as_view(), name='casualty-plot'),
