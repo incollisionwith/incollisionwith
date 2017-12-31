@@ -40,6 +40,9 @@
                 <a class="pure-menu-link" href="{{ url("accident-list") }}">Incidents</a>
                 <ul class="pure-menu-children">
                     <li class="pure-menu-item"><a href="{{ url("accident-plot") }}" class="pure-menu-link" title="Create graphs of accident data">Incident graphs</a></li>
+                    {% if user.has_perm("icw.moderate_accident") %}
+                        <li class="pure-menu-item"><a href="{{ url("edited-accident-list") }}" class="pure-menu-link">Moderate incidents</a></li>
+                    {% endif %}
                     {% if user.has_perm("icw.add_accident") %}
                         <li class="pure-menu-item"><a href="{{ url("accident-create") }}" class="pure-menu-link" title="Add a new incident record">Add incident</a></li>
                     {% endif %}
