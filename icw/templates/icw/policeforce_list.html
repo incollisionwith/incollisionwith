@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% set title = "Police force areas" %}
+
+{% block content %}
+
+    <div class="pure-u-1-1">
+        <div class="box-padding">
+            <h1>Police force areas</h1>
+        </div>
+    </div>
+
+    <ol>
+        {% for police_force in object_list %}
+            <li><a href="{{ police_force.get_absolute_url() }}">{{ police_force }}</a></li>
+        {% endfor %}
+    </ol>
+{% endblock %}

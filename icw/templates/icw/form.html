@@ -1,13 +1,20 @@
 {% for field in form %}
-    <div{% if is_range_field(field) %} class="range-field"{% endif %}>
+    {% if field.is_hidden %}
+    {{ field }}
+    {% else %}
+    <div class="field-group {% if is_range_field(field) %} range-field{% endif %}">
         {{ field.label_tag() }}
-    {% if field.help_text %}
-    <i class="fa fa-question-circle help-tooltip" title="{{ field.help_text|safe }}"> </i>
-    {% endif %}
+        {% if field.help_text %}
+            <i class="fa fa-question-circle help-tooltip" title="{{ field.help_text|safe }}"> </i>
+            {% endif %}
+            {% if field.errors %}
+                {{ field.errors }}
+            {% endif %}
         {% if is_range_field(field) %}
             {{ field }}
         {% else %}
             {{ field|add_class("pure-input-1") }}
         {% endif %}
     </div>
+    {% endif %}
 {% endfor %}

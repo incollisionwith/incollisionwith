@@ -15,3 +15,4 @@ def other_page_url(request, page_num):
         query.pop('page')
     query.update({'page': page_num})
     return '?' + query.urlencode()
+

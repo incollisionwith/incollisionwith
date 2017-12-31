@@ -13,9 +13,9 @@ def insert_accident_record_states(apps, schema_editor):
         AccidentRecordState(id=0, label='STATS19',
                             official=True, reliable=True, pre_release=False,
                             description='Official STATS19 record'),
-        AccidentRecordState(id=1, label='User submitted, pending moderation',
-                            official=False, reliable=False, pre_release=False,
-                            description='Added by a user, but not yet moderated by another user'),
+        AccidentRecordState(id=1, label='STATS19, with corrections',
+                            official=False, reliable=True, pre_release=False,
+                            description='Official STATS19 record, but with user-submitted corrections'),
         AccidentRecordState(id=2, label='User submitted, pre-release',
                             official=False, reliable=True, pre_release=True,
                             description='An unofficial record added before official data are released'),
@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='accident',
             name='record_state',
-            field=django_fsm.FSMKeyField(default=0, on_delete=django.db.models.deletion.CASCADE,
-                                         to='icw.AccidentRecordState', db_index=True),
+            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE,
+                                    to='icw.AccidentRecordState', db_index=True),
         ),
     ]

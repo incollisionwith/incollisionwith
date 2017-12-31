@@ -1,71 +1,105 @@
 - id: 1
   dbpedia: Metropolitan_Police_Service
+  kml: metropolitan
 - id: 3
   dbpedia: Cumbria_Constabulary
+  kml: cumbria
 - id: 4
   dbpedia: Lancashire_Constabulary
+  kml: lancashire
 - id: 5
   dbpedia: Merseyside_Police
+  kml: merseyside
 - id: 6
   dbpedia: Greater_Manchester_Police
+  kml: greater-manchester
 - id: 7
   dbpedia: Cheshire_Constabulary
+  kml: cheshire
 - id: 10
   dbpedia: Northumbria_Police
+  kml: northumbria
 - id: 11
   dbpedia: Durham_Constabulary
+  kml: durham
 - id: 12
   dbpedia: North_Yorkshire_Police
+  kml: north-yorkshire
 - id: 13
   dbpedia: West_Yorkshire_Police
+  kml: west-yorkshire
 - id: 14
   dbpedia: South_Yorkshire_Police
+  kml: south-yorkshire
 - id: 16
   dbpedia: Humberside_Police
+  kml: humberside
 - id: 17
   dbpedia: Cleveland_Police
+  kml: cleveland
 - id: 20
   dbpedia: West_Midlands_Police
+  kml: west-midlands
 - id: 21
   dbpedia: Staffordshire_Police
+  kml: staffordshire
 - id: 22
   dbpedia: West_Mercia_Police
+  kml: west-mercia
 - id: 23
   dbpedia: Warwickshire_Police
+  kml: warwickshire
 - id: 30
   dbpedia: Derbyshire_Constabulary
+  kml: derbyshire
 - id: 31
   dbpedia: Nottinghamshire_Police
+  kml: nottinghamshire
 - id: 32
   dbpedia: Lincolnshire_Police
+  kml: lincolnshire
 - id: 33
   dbpedia: Leicestershire_Police
+  kml: leicestershire
 - id: 34
   dbpedia: Northamptonshire_Police
+  kml: northamptonshire
 - id: 35
   dbpedia: Cambridgeshire_Constabulary
+  kml: cambridgeshire
 - id: 36
   dbpedia: Norfolk_Constabulary
+  kml: norfolk
 - id: 37
   dbpedia: Suffolk_Constabulary
+  kml: suffolk
 - id: 40
   dbpedia: Bedfordshire_Police
+  kml: bedfordshire
 - id: 41
   dbpedia: Hertfordshire_Constabulary
+  kml: hertfordshire
 - id: 42
   dbpedia: Essex_Police
+  kml: essex
 - id: 43
   dbpedia: Thames_Valley_Police
+  kml: thames-valley
 - id: 44
   dbpedia: Hampshire_Constabulary
+  kml: hampshire
 - id: 45
   dbpedia: Surrey_Police
+  kml: surrey
 - id: 46
   dbpedia: Kent_Police
+  kml: kent
 - id: 47
   dbpedia: Sussex_Police
+  kml: sussex
 - id: 48
   dbpedia: City_of_London_Police
+  kml: city-of-london
 - id: 50
   dbpedia: Devon_and_Cornwall_Police
 - id: 52
@@ -86,18 +120,55 @@
   dbpedia: Dyfed-Powys_Police
 - id: 91
   dbpedia: Northern_Constabulary
+  authorities:
+  - S12000017
+  - S12000013
+  - S12000023
+  - S12000027
 - id: 92
   dbpedia: Grampian_Police
+  authorities:
+  - S12000033
+  - S12000034
+  - S12000020
 - id: 93
   dbpedia: Tayside_Police
+  authorities:
+  - S12000041
+  - S12000042
+  - S12000024
 - id: 94
   dbpedia: Fife_Constabulary
+  authorities:
+  - S12000015
 - id: 95
   dbpedia: Lothian_and_Borders_Police
+  authorities:
+  - S12000036
+  - S12000010
+  - S12000019
 - id: 96
   dbpedia: Central_Scotland_Police
+  authorities:
+  - S12000030
+  - S12000014
+  - S12000005
 - id: 97
   dbpedia: Strathclyde_Police
+  authorities:
+  - S12000035
+  - S12000043
+  - S12000008
+  - S12000009
+  - S12000011
+  - S12000018
+  - S12000021
+  - S12000044
+  - S12000038
+  - S12000028
+  - S12000029
+  - S12000039
 - id: 98
   dbpedia: Dumfries_and_Galloway_Constabulary
-
+  authorities:
+  - S12000006

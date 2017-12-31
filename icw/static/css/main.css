@@ -56,6 +56,22 @@
     color: #B8E1D1;
 }
 
+
+.icw-header li.pure-menu-has-children ul.pure-menu-children {
+    background-color: #017A4B;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.icw-header li.pure-menu-item a:hover {
+    background-color: #004A2D;
+}
+
+.icw-header ul.pure-menu-children li:last-child > a:hover {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
 table.pure-table.accident-detail {
     border: 0;
 }
@@ -129,9 +145,9 @@ ul.citations li {
 
 @media (min-width: 48em) {
     .padding-right-md {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
         padding-right: 1em;
     }
 }
@@ -140,35 +156,35 @@ ul.citations li {
 /* https://css-tricks.com/css3-progress-bars/ */
 
 .meter {
-	height: 10px;  /* Can be anything */
-	position: relative;
-	background: #555;
-	-moz-border-radius: 25px;
-	-webkit-border-radius: 25px;
-	border-radius: 25px;
-	padding: 0;
-	box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+    height: 10px;  /* Can be anything */
+    position: relative;
+    background: #555;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    padding: 0;
+    box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
     width: 300px
 }
 
 .meter > span {
-  display: block;
-  height: 100%;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  background-color: rgb(43,194,83);
-  background-image: linear-gradient(
-    center bottom,
-    rgb(43,194,83) 37%,
-    rgb(84,240,84) 69%
-  );
-  box-shadow:
-    inset 0 2px 9px  rgba(255,255,255,0.3),
-    inset 0 -2px 6px rgba(0,0,0,0.4);
-  position: relative;
-  overflow: hidden;
+    display: block;
+    height: 100%;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: rgb(43,194,83);
+    background-image: linear-gradient(
+            center bottom,
+            rgb(43,194,83) 37%,
+            rgb(84,240,84) 69%
+    );
+    box-shadow:
+            inset 0 2px 9px  rgba(255,255,255,0.3),
+            inset 0 -2px 6px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
 }
 
 
@@ -182,7 +198,7 @@ body.map-view {
     scroll: none;
 }
 
-body.map-view .accident-list-map {
+.map-fullscreen {
     position: fixed;
     width: 100%;
     top: 35px;
@@ -200,4 +216,48 @@ span.points-total {
     text-align: center;
     min-width: 3em;
     color: black;
+}
+
+
+form div.leaflet-container {
+    height: 300px;
+}
+
+div.field-group {
+    break-inside: avoid-column;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+@media (min-width: 24em) {
+    div.columnated-form {
+        column-count: 2;
+    }
+}
+@media (min-width: 48em) {
+    div.columnated-form {
+        column-count: 3;
+    }
+}
+
+ul.errorlist {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.1em 0;
+}
+
+ul.errorlist li {
+    color: #aa0000;
+    font-size: 90%;
+    font-weight: bold;
+}
+
+ul.errorlist li:before {
+    content: '\f06a';
+    margin-right: 0.2em;
+    font-family: FontAwesome;
+}
+
+.pure-form label {
+    margin-top: 0;
 }

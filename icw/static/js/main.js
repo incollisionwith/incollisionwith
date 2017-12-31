@@ -74,15 +74,21 @@
                     onEachFeature: onEachFeature
                 });
                 layer.addTo(map);
+
+                if (mapElem.dataset.refreshable != 'yes') {
+                    map.fitBounds(layer.getBounds());
+                }
                 existingLayer = layer;
             });
             xhr.send();
         }
 
-        if (mapElem.classList.contains("accident-list-map")) {
-            map.addEventListener("zoomend", loadData);
-            map.addEventListener("moveend", loadData);
-            map.addEventListener("load", loadData);
+        if (mapElem.dataset.url) {
+            if (mapElem.dataset.refreshable == 'yes') {
+                map.addEventListener("zoomend", loadData);
+                map.addEventListener("moveend", loadData);
+            }
+            loadData();
         }
     }
 })();

@@ -3,7 +3,13 @@ psycopg2
 Django
 django-fsm
 django-jinja
+django-leaflet
 djangorestframework
+django-material
+django-moderation
+django-sequences
+django-viewflow
+django-waffle
 django-widget-tweaks
 celery
 html5lib
@@ -18,3 +24,4 @@ python-dateutil
 Jinja2
 django-filter
 social-auth-app-django
+ujson

@@ -222,6 +222,7 @@
   pk: S12000009
   fields:
     label: East Dunbartonshire
+    mapit_id: S12000045
 - model: icw.HighwayAuthority
   pk: S12000010
   fields:
@@ -266,10 +267,12 @@
   pk: E08000020
   fields:
     label: Gateshead
+    mapit_id: E08000037
 - model: icw.HighwayAuthority
   pk: S12000043
   fields:
     label: Glasgow City
+    mapit_id: S12000046
 - model: icw.HighwayAuthority
   pk: E10000013
   fields:

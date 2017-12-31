@@ -4,13 +4,9 @@
 {% set description = "UK road traffic incident injury data and statistics, cross-linked to news articles" %}
 {% set body_class = "map-view" %}
 
-{% block extra_head %}
-{{ super() }}
-<script src="{{ STATIC_URL }}lib/leaflet.ugeojson/leaflet.uGeoJSON.js" type="text/javascript"></script>
-{% endblock %}
 
 {% block container %}
-    <div class="map accident-list-map" data-url="{{ url("api:accident-list") }}{% if request.GET %}?{{ request.GET.urlencode() }}{% endif %}"></div>
+    <div class="map map-fullscreen" data-refreshable="yes" data-url="{{ url("api:accident-list") }}{% if request.GET %}?{{ request.GET.urlencode() }}{% endif %}"></div>
 {% endblock %}
 
 

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% set title = object.label %}
+
+{% block content %}
+
+    <div class="pure-u-1-1">
+        <div class="box-padding">
+            <h1>{{ title }}</h1>
+        </div>
+
+        <img src="{{ object.logo_url }}" alt="Force logo" style="max-width: 200px; max-height: 200px">
+
+        <a href="{{ object.homepage }}">{{ object.homepage }}</a>
+
+        <div class="map" style="width: 300px; height: 300px;" data-url="{{ url("api:policeforce-detail", object.pk) }}{% if request.GET %}?{{ request.GET.urlencode() }}{% endif %}"></div>
+
+    </div>
+
+{% endblock %}

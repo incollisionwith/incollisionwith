@@ -23,3 +23,14 @@ class AccidentViewSet(viewsets.ReadOnlyModelViewSet):
 class CitationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Citation.objects.all()
     serializer_class = serializers.CitationSerializer
+
+
+class PoliceForceViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = models.PoliceForce.objects.all()
+    serializer_class = serializers.PoliceForceSerializer
+
+    renderer_classes = (
+        JSONRenderer,
+        BrowsableAPIRenderer,
+        renderers.GeoJSONRenderer,
+    )

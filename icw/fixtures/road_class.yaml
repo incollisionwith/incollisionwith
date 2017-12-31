@@ -31,4 +31,4 @@
   pk: 6
   fields:
     label: Unclassified
-
+    pattern: unclassified

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% if object %}
+{% set title %}Modify incident {{ object.id }}{% endset %}
+{% else %}
+{% set title = "Add incident" %}
+{% endif %}
+
+{% block extra_head %}
+    {{ super() }}
+    {% for url in leaflet_js(plugins="forms").PLUGINS_JS %}
+        <script type="text/javascript" src="{{ url }}"></script>
+    {% endfor %}
+    {% for url in leaflet_css(plugins="forms").PLUGINS_JS %}
+        <link rel="stylesheet" type="text/css"href="{{ url }}">
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    <p>Before filling in this form, you should read through
+        <a href="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/230596/stats20-2011.pdf">STATS20</a>
+        (<cite>Instructions for the Completion of Road Accident Reports from non-CRASH Sources</cite>) and be aware of
+        how each field should be coded. If in doubt, consult the instructions.</p>
+
+    <form class="pure-form pure-form-stacked" method="post">{% csrf_token %}
+        <section>
+            <h2>Citations</h2>
+            <p>Every accident record needs to be attested by at least one reputable source.</p>
+            {{ citation_formset.management_form }}
+        {{ citation_formset.non_form_errors() }}
+                <div class="columnated-form">
+            {% for form in citation_formset %}
+                    {% include "icw/form.html" %}
+
+            {% endfor %}
+                </div>
+
+        </section>
+
+        <section>
+            <h2>Incident details</h2>
+            <div class="columnated-form">
+                {{ form.non_field_errors() }}
+                {% include "icw/form.html" %}
+            </div>
+        </section>
+
+        <section>
+            <h2>Vehicles</h2>
+            {{ vehicle_formset.management_form }}
+                {{ vehicle_formset.non_form_errors() }}
+
+            {% for form in vehicle_formset %}
+                <h3>Vehicle {{ loop.index }}</h3>
+                <div class="columnated-form">
+                    {% include "icw/form.html" %}
+
+                </div>
+            {% endfor %}
+        </section>
+
+        <section>
+            <h2>Casualties</h2>
+            {{ casualty_formset.management_form }}
+        {{ casualty_formset.non_form_errors() }}
+            {% for form in casualty_formset %}
+                <h3>Casualty {{ loop.index }}</h3>
+                <div class="columnated-form">
+                    {% include "icw/form.html" %}
+
+                </div>
+            {% endfor %}
+        </section>
+
+
+        <input class="pure-button pure-button-primary" type="submit" value="Submit incident">
+    </form>
+{% endblock %}

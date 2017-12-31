@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="pure-g">
+        <div class="pure-u-1">
+            <h1>Incidents</h1>
+        </div>
+        <div class="pure-u-1 pure-u-md-3-4 pure-u-lg-4-5 padding-right-md">
+            <p>{{ paginator.count }} moderation incidents found</p>
+            {% include "icw/pagination.html" -%}
+            <table class="pure-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Current</th>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Severity</th>
+                    <th>Moderation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for editedaccident in object_list -%}
+                    {%- set accident = editedaccident.to_accident() -%}
+                    <tr>
+                        <td><a href="{{ editedaccident.get_absolute_url() }}">{{ editedaccident.id }}</a></td>
+                        <td>{% if accident.id %}<a href="{{ accident.get_absolute_url() }}">{{ accident.id }}</a>{% endif %}</td>
+                        <td>{{ editedaccident.created_by }}</td>
+                        <td>{{ accident.date_and_time|date("Y-m-d H:i") if accident.date_and_time else accident.date }}</td>
+                        <td>{{ accident.severity.label }}</td>
+                        <td>{{ editedaccident.get_moderation_status_display() }}</td>
+                    </tr>
+                {% endfor -%}
+                </tbody>
+            </table>
+            {% include "icw/pagination.html" -%}
+        </div>
+        <div class="pure-u-1 pure-u-md-1-4 pure-u-lg-1-5">
+
+            <h2>Filter</h2>
+            <form class="pure-form pure-form-stacked">
+                {% with form=filter.form %}
+                    {% include "icw/form.html" %}
+                {% endwith %}
+                <button type="submit" class="pure-button pure-button-primary">Filter</button>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

@@ -50,6 +50,7 @@ class Command(BaseCommand):
 
         return dict(
             id=row.get('Accident_Index') or row['\ufeffAccident_Index'],
+            record_state=0,  # STATS19
             location=location,
             police_force_id=row['Police_Force'],
             severity_id=row['Accident_Severity'],

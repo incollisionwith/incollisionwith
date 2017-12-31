@@ -1,9 +1,14 @@
 import django_fsm
 from django.conf import settings
-from django.contrib.gis.db.models import PointField
+from django.contrib.gis.db.models import PointField, GeometryField
+from django.contrib.postgres.fields import JSONField
+from django.core import serializers
 from django.db import models
 from django.urls import reverse
 from django.utils.functional import cached_property
+#from moderation.db import ModeratedModel
+#from viewflow.models import Process
+from sequences import get_next_value
 
 
 class ReferenceModel(models.Model):
@@ -21,15 +26,16 @@ class ReferenceModel(models.Model):
 class PoliceForce(ReferenceModel):
     uri = models.URLField(db_index=True)
     comment = models.TextField()
-    homepage =models.TextField()
+    homepage = models.TextField()
     logo_url = models.TextField()
     dbpedia = models.TextField()
+    geometry = GeometryField(null=True, blank=True, db_index=True)
+
+    def get_absolute_url(self):
+        return reverse('police-force-detail', args=(self.id,))
 
     class Meta:
         ordering = ('label',)
-
-class Severity(ReferenceModel):
-    pass
 
 
 class JunctionControl(ReferenceModel):
@@ -82,6 +88,8 @@ class UrbanRural(ReferenceModel):
 
 class HighwayAuthority(ReferenceModel):
     id = models.CharField(max_length=20, primary_key=True)
+    mapit_id = models.CharField(max_length=20, blank=True)
+    geometry = GeometryField(null=True, blank=True, db_index=True)
 
     class Meta:
         ordering = ('label',)
@@ -237,10 +245,18 @@ class AccidentRecordState(models.Model):
     reliable = models.BooleanField(default=False)
     pre_release = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.label
+
+    class Meta:
+        ordering = ('id',)
+
 
 class Accident(models.Model):
     id = models.CharField(max_length=13, primary_key=True)
-    record_state = django_fsm.FSMKeyField(AccidentRecordState, default=0, db_index=True)
+    record_state = models.ForeignKey(AccidentRecordState, default=0, db_index=True)
+    description = models.TextField(null=True, blank=True)
+
     location = PointField(db_index=True, null=True)
     police_force = models.ForeignKey(PoliceForce)
     severity = models.ForeignKey(CasualtySeverity)
@@ -255,10 +271,10 @@ class Accident(models.Model):
 
     date = models.DateField(db_index=True)
     date_and_time = models.DateTimeField(db_index=True, null=True, blank=True)
-    police_attended = models.BooleanField()
+    police_attended = models.NullBooleanField()
 
     speed_limit = models.SmallIntegerField(null=True, blank=True)
-    road_1_class = models.ForeignKey(RoadClass, related_name='accidents_1')
+    road_1_class = models.ForeignKey(RoadClass, related_name='accidents_1', null=True, blank=True)
     road_1_number = models.SmallIntegerField(null=True, blank=True)
     road_1 = models.CharField(max_length=10)
     road_2_class = models.ForeignKey(RoadClass, null=True, blank=True, related_name='accidents_2')
@@ -345,6 +361,11 @@ class Casualty(models.Model):
     pedestrian_movement = models.ForeignKey(PedestrianMovement, null=True, blank=True)
     pedestrian_hit_by = models.ForeignKey(VehicleType, null=True, blank=True, related_name='hit_pedestrians')
 
+    def save(self, *args, **kwargs):
+        if self.vehicle_id is None:
+            self.vehicle = Vehicle.objects.get(accident=self.accident, vehicle_ref=self.vehicle_ref)
+        return super().save(*args, **kwargs)
+
     class Meta:
         unique_together = (('accident', 'vehicle_ref', 'casualty_ref'),)
         ordering = ('accident', 'casualty_ref')
@@ -376,3 +397,90 @@ class Citation(models.Model):
     class Meta:
         ordering = ('published', 'created')
         unique_together = ('accident', 'href')
+
+
+MODERATION_STATUS_CHOICES = (
+    (None, 'pending'),
+    (False, 'rejected'),
+    (True, 'approved'),
+)
+
+
+class EditedAccident(models.Model):
+    accident_id = models.CharField(max_length=13, db_index=True, blank=True)
+    accident = models.TextField()
+    vehicles = models.TextField()
+    casualties = models.TextField()
+    citations = models.TextField()
+
+    created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_edited_accidents')
+    modified = models.DateTimeField(auto_now=True)
+    modified_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='modified_edited_accidents')
+    moderated = models.DateTimeField(null=True, blank=True)
+    moderation_status = models.NullBooleanField(default=None, choices=MODERATION_STATUS_CHOICES)
+    moderated_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True,
+                                     related_name='moderated_edited_accidents')
+
+    version = models.PositiveSmallIntegerField(default=0)
+
+    def get_absolute_url(self):
+        return reverse('edited-accident-detail', args=(self.pk,))
+
+    def save(self, *args, **kwargs):
+        if self.moderation_status is True:
+            accident = next(serializers.deserialize('json', self.accident)).object
+
+            if not self.accident_id:
+                year = accident.date.year
+                self.accident_id = accident.id = 'ICW{:4}{:006}'.format(year,
+                                                                        get_next_value('user-accident-{}'.format(year)))
+
+            Casualty.objects.filter(accident_id=self.accident_id).delete()
+            Vehicle.objects.filter(accident_id=self.accident_id).delete()
+            Accident.objects.filter(id=self.accident_id).delete()
+
+            accident.save()
+
+            vehicles = [dso.object for dso in serializers.deserialize('json', self.vehicles)]
+            for i, vehicle in enumerate(vehicles, 1):
+                vehicle.vehicle_ref = i
+                vehicle.accident_id = accident.id
+            Vehicle.objects.bulk_create(vehicles)
+
+            casualties = [dso.object for dso in serializers.deserialize('json', self.casualties)]
+            for i, casualty in enumerate(casualties, 1):
+                casualty.casualty_ref = i
+                casualty.vehicle_id = vehicles[casualty.vehicle_ref-1].pk
+                casualty.accident_id = accident.id
+            Casualty.objects.bulk_create(casualties)
+
+            citations = [dso.object for dso in serializers.deserialize('json', self.citations)]
+            existing_citation_hrefs = \
+                set(Citation.objects.filter(accident_id=accident.id).values_list('href', flat=True))
+            for citation in citations:
+                citation.accident_id = accident.id
+            Citation.objects.bulk_create([c for c in citations if c.href not in existing_citation_hrefs])
+
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def from_accident(cls, accident):
+        json_serializer = serializers.get_serializer("json")()
+        return cls(
+            accident=json_serializer.serialize([accident]),
+            vehicles=json_serializer.serialize(accident.vehicles.all()),
+            casualties=json_serializer.serialize(accident.casualties.all()),
+        )
+
+    def to_accident(self):
+        accident = next(serializers.deserialize('json', self.accident)).object
+        accident.all_vehicles = [dso.object for dso in serializers.deserialize('json', self.vehicles)]
+        accident.all_casualties = [dso.object for dso in serializers.deserialize('json', self.casualties)]
+        accident.all_citations = [dso.object for dso in serializers.deserialize('json', self.citations)]
+        for vehicle in accident.all_vehicles:
+            vehicle.all_casualties = []
+            for casualty in accident.all_casualties:
+                if casualty.vehicle_ref == vehicle.vehicle_ref:
+                    vehicle.all_casualties.append(casualty)
+        return accident

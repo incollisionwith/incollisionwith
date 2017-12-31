@@ -22,6 +22,7 @@
     <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
             integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
             crossorigin="anonymous"></script>
+    <script src="{{ STATIC_URL }}lib/leaflet.ugeojson/leaflet.uGeoJSON.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
           integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css"
@@ -35,8 +36,22 @@
     <header class="icw-header"><div class="pure-menu pure-menu-horizontal">
         <a class="pure-menu-heading" href="/">In Collision With</a>
         <ul class="pure-menu-list">
-            <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("accident-list") }}">Incidents</a></li>
-            <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("casualty-list") }}">Casualties</a></li>
+            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                <a class="pure-menu-link" href="{{ url("accident-list") }}">Incidents</a>
+                <ul class="pure-menu-children">
+                    <li class="pure-menu-item"><a href="{{ url("accident-plot") }}" class="pure-menu-link" title="Create graphs of accident data">Incident graphs</a></li>
+                    {% if user.has_perm("icw.add_accident") %}
+                        <li class="pure-menu-item"><a href="{{ url("accident-create") }}" class="pure-menu-link" title="Add a new incident record">Add incident</a></li>
+                    {% endif %}
+                </ul>
+
+            </li>
+            <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                <a class="pure-menu-link" href="{{ url("casualty-list") }}">Casualties</a>
+                <ul class="pure-menu-children">
+                    <li class="pure-menu-item"><a href="{{ url("casualty-plot") }}" class="pure-menu-link" title="Create graphs of casualty data">Casualty graphs</a></li>
+                </ul>
+            </li>
             <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("map") }}">Map</a></li>
             <!--
         <li class="pure-menu-item"><a class="pure-menu-link" href="{{ url("vehicle-distribution-list") }}">Vehicle distributions</a></li>
@@ -51,6 +66,9 @@
                         <span class="points-total">{{ user.rewards_profile.points_confirmed }}</span>
                     </a>
                     <ul class="pure-menu-children">
+                        {% if user.is_staff %}
+                        <li class="pure-menu-item"><a href="{{ url("admin:index") }}" class="pure-menu-link">Admin</a></li>
+                            {% endif %}
                         <li class="pure-menu-item"><a href="{{ url("logout") }}" class="pure-menu-link">Log out</a></li>
                     </ul>
                 </li>

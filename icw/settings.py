@@ -18,10 +18,18 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.gis',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
     'django_filters',
+    'leaflet',
     'rest_framework',
+    'sequences.apps.SequencesConfig',
     'social_django',
+    # 'material',
+    # 'material.frontend',
+    # 'viewflow',
+    # 'viewflow.frontend',
+    'waffle',
 ]
 
 DATABASES = {
@@ -39,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'waffle.middleware.WaffleMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -64,7 +73,7 @@ TEMPLATES = [
         'OPTIONS': {
             # Match the template names ending in .html but not the ones in the admin folder.
             "match_extension": ".html",
-            "match_regex": r"^(?!(admin|debug_toolbar|rest_framework|django_filters)/).*",
+            "match_regex": r"^(?!(admin|debug_toolbar|rest_framework|django_filters|leaflet|viewflow)/).*",
             "app_dirname": "templates",
             'filters': {
                 'add_class': 'widget_tweaks.templatetags.widget_tweaks.add_class',
@@ -86,6 +95,7 @@ TEMPLATES = [
                 "django_jinja.builtins.extensions.UrlsExtension",
                 "django_jinja.builtins.extensions.StaticFilesExtension",
                 "django_jinja.builtins.extensions.DjangoFiltersExtension",
+                'waffle.jinja.WaffleExtension',
             ]
         },
     },    {
@@ -93,10 +103,11 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': (
+            'context_processors': [
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.request',
                 'django.template.context_processors.static',
-            ),
+            ],
         },
     },
 ]
