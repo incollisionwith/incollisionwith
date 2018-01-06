@@ -86,10 +86,6 @@ class AccidentEditView(PermissionRequiredMixin, View):
             if isinstance(context[k], (ModelForm, BaseFormSet)):
                 is_valid = context[k].is_valid() and is_valid
         if is_valid:
-            if not context['form'].instance.id:
-                year = context['form'].cleaned_data['date'].year
-                context['form'].instance.id = 'ICW{:4}{:006}'.format(year,
-                                                                     get_next_value('user-accident-{}'.format(year)))
             context['form'].instance.number_of_vehicles = len(get_formset_objects(context['vehicle_formset']))
             context['form'].instance.number_of_casualties = len(get_formset_objects(context['casualty_formset']))
             context['form'].instance.severity_id = min(
