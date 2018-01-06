@@ -18,7 +18,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.gis',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.staticfiles',
     'django_filters',
     'leaflet',
